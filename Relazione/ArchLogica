@@ -1,0 +1,52 @@
+gerarchia di tipi:
+
+calcolabileAstratto:
+
+ contiene metodi astratti basilari necessari alla creazione
+ di elemento della classe
+ come somma ,uguaglianza ,disuguaglianza, differenza
+
+ contiene metodi:
+ ->somma tra 2 calcolabili
+ ->differenza tra 2 calcolabili
+ ->ugualglianza tra 2 calcolabili
+
+VettoreAstratto
+
+ Vettore sottotipo di calcolabile
+
+ contiene metodi astratti di  calcolo propri di ogni Vettore 
+
+ contiene metodi:
+ -> prodotto per scalare
+ -> divisione per scalare
+ -> prodotto (virtuale)
+
+VettoreConcreto<T>
+
+ implementazione concreta e templatizzata di metodi appartenenti a vettoreAstratto
+ implementazione metodo aggiuntivo sumOfAll -> somma di ogni elemento appartenente al vettore
+ implementazione metodo aggiuntivo ProductOfAll -> prodotto di ogni elemento appartenente al vettore
+
+contieneMetodi:
+ sumOfAll
+ productOfAll
+
+MatriceAstratta
+
+ matrice sottotipo di VettoreAstratto
+
+ contiene metodi astratti di calcolo propri di ogni matrice
+
+ contiene metodi:
+ -> prodotto (virtuale puro ,override di metodo appartenente a supertipo)
+
+
+MatriceConcreta
+
+implementazione concreta e templatizzata appartente a MatriceAstratta
+
+ 
+
+
+
