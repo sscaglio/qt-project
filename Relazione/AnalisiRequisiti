@@ -1,0 +1,10 @@
+ANALISI_REQUISITI
+
+1.separazione GUI / IMPLEMENTAZIONE
+-> creazione separata di gerarchia TIPI
+
+2.numero di tipi dato disponibili : 3
+-> Vettore
+-> Matrice
+-> Polinomio
+-> Insieme
