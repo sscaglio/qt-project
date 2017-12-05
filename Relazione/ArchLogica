@@ -1,52 +1,118 @@
 gerarchia di tipi:
 
-calcolabileAstratto:
+calcolabileAstratto:// NECESSARIO?
 
- contiene metodi astratti basilari necessari alla creazione
- di elemento della classe
- come somma ,uguaglianza ,disuguaglianza, differenza
+contiene metodi astratti indipendenti dal tipo di calcolabile
 
- contiene metodi:
- ->somma tra 2 calcolabili
- ->differenza tra 2 calcolabili
- ->ugualglianza tra 2 calcolabili
+contiene metodi:
+-> getTotalElement(virtuale,puro) -> ritorna il numero di elementi di calcolabile
 
 VettoreAstratto
 
- Vettore sottotipo di calcolabile
+Vettore sottotipo di calcolabile
 
- contiene metodi astratti di  calcolo propri di ogni Vettore 
+contiene metodi astratti di calcolo propri di ogni Vettore 
 
- contiene metodi:
- -> prodotto per scalare
- -> divisione per scalare
- -> prodotto (virtuale)
+contiene metodi:
+-> somma tra 2 vettori(virtuale,puro) -> somma tra vettori
+-> differenza tra 2 vettori(virtuale,puro) -> differenza tra vettori
+-> prodotto (virtuale,puro) -> ritorna vettore prodotto di vettori passati
+-> getTotalElement(virtuale) -> ritorna il numero di elementi di vettore
+-> getRow (virtuale) -> ritorna numero elementi appartenenti al vettore  
+-> uguaglianza tra 2 vettori  (virtuale,puro) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 vettori  (virtuale,puro) -> negazione di uguaglianza
+
 
 VettoreConcreto<T>
 
- implementazione concreta e templatizzata di metodi appartenenti a vettoreAstratto
- implementazione metodo aggiuntivo sumOfAll -> somma di ogni elemento appartenente al vettore
- implementazione metodo aggiuntivo ProductOfAll -> prodotto di ogni elemento appartenente al vettore
+implementazione concreta e templatizzata di metodi appartenenti a vettoreAstratto
+implementazione metodo aggiuntivo sumOfAll 
+implementazione metodo aggiuntivo ProductOfAll 
 
 contieneMetodi:
- sumOfAll
- productOfAll
+-> somma tra 2 vettori(virtuale) -> somma tra vettori
+-> differenza tra 2 vettori(virtuale) -> differenza tra vettori
+-> prodotto (virtuale) -> ritorna vettore prodotto di vettori passati
+-> getTotalElement(virtuale) -> ritorna il numero di elementi di vettore
+-> getRow (virtuale) -> ritorna numero elementi appartenenti al vettore
+-> sumOfAll -> ritorna tipo T risultato di somma di ogni elemento appartenente al vettore
+-> productOfAll -> ritorna tipo T risultato di prodotto di ogni elemento appartenente al vettore
+-> uguaglianza tra 2 vettori  (virtuale) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 vettori  (virtuale) -> negazione di uguaglianza
+
 
 MatriceAstratta
 
- matrice sottotipo di VettoreAstratto
+matrice sottotipo di VettoreAstratto
 
- contiene metodi astratti di calcolo propri di ogni matrice
+contiene metodi astratti di calcolo propri di ogni matrice
 
- contiene metodi:
- -> prodotto (virtuale puro ,override di metodo appartenente a supertipo)
+contiene metodi:
+
+-> somma tra 2 matrici(virtuale,puro) -> somma tra matrici
+-> differenza tra 2 matrici(virtuale,puro) -> differenza tra matrici
+-> prodotto  (virtuale,puro) -> ritorna matrice risultato del prodotto tra le matrici passate
+-> trasposta  (virtuale,puro) -> ritorna matrice trasposta rispetto alla matrice originale
+-> getTotalElement(virtuale) -> ritorna il numero di elementi di matrice
+-> getRow (virtuale) -> ritorna il numero di righe che compongono matrice
+-> getColumn (virtuale)-> ritorna il numero di colonne che compongono matrice
+-> uguaglianza tra 2 matrice  (virtuale,puro) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 matrici  (virtuale,puro) -> negazione di uguaglianza
 
 
-MatriceConcreta
+MatriceConcreta<T>
 
-implementazione concreta e templatizzata appartente a MatriceAstratta
+implementazione concreta e templtatizzata di metodi appartenenti a supertipo
+implementazione metodo aggiuntivo sumOfAll 
+implementazione metodo aggiuntivo productOfAll
 
- 
+contiene metodi:
 
+-> somma tra 2 matrici(virtuale) -> somma tra matrici
+-> differenza tra 2 matrici(virtuale) -> differenza tra matrici
+-> prodotto  (virtuale) -> ritorna matrice risultato del prodotto tra le matrici passate
+-> trasposta  (virtuale) -> ritorna matrice trasposta rispetto alla matrice originale
+-> getTotalElement (virtuale)-> ritorna il numero di elementi di matrice
+-> getRow (virtuale) -> ritorna il numero di righe che compongono matrice
+-> getColumn -> ritorna il numero di colonne che compongono matrice
 
+-> sumOfAll (virtuale) -> ritorna valore T somma di ogni elemento appartente a matrice
+-> productOfAll (virtuale) -> ritorna T prodotto di ogni elemento appartenente a matrice
+-> uguaglianza tra 2 matrici  (virtuale) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 matrici  (virtuale) -> negazione di uguaglianza
 
+PolinomioAstratto
+
+Polinomio sottotipo di Calcolabile
+
+contiene metodi astratti propri di ogni polinomio
+
+contiene metodi:
+-> somma (virtuale,puro) -> ritorna polinomio somma di polinomi passati
+-> differenza (virtuale,puro) -> ritorna polinomio differenza di polinomi passati
+-> prodotto (virtuale,puro) -> ritorna polinomio prodotto di polinomi passati
+-> divisione (virtuale,puro) -> ritorna polinomio divisione di polinomi passati
+-> first (virtuale) -> ritorna primo elemento di polinomio
+-> rest(virtuale) -> ritorna resto degli elemento di polinomio
+-> getTotalElement (virtuale)-> ritorna il numero di elementi di polinomio
+-> uguaglianza tra 2 polinomi  (virtuale,puro) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 polinomi  (virtuale,puro) -> negazione di uguaglianza
+
+PolinomioConcreto<T>
+
+PolinomioConcreto sottotipo di PolinomioAstratto
+
+implementazione concreta e templatizzata di metodi supertipo
+implementazione metodo aggiuntivi sumOfAll 
+implementazione metodo aggiuntivi productOfAll
+
+contieneMetodi:
+-> somma  (virtuale) -> ritorna polinomio somma di polinomi passati
+-> differenza (virtuale) -> ritorna polinomio differenza di polinomi passati
+-> prodotto  (virtuale) -> ritorna polinomio prodotto di polinomi passati
+-> divisione (virtuale) -> ritorna polinomio divisione di polinomi passati
+-> sumOfAll (virtuale) -> somma di ogni coefficiente appartenente a radice
+-> productOfAll (virtuale) -> prodotto di ogni coefficiente appartenente a radice
+-> getTotalElement (virtuale)-> ritorna il numero di elementi di polinomio
+-> uguaglianza tra 2 polinomio  (virtuale) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> disuguaglianza tra 2 polinomi  (virtuale) -> negazione di uguaglianza

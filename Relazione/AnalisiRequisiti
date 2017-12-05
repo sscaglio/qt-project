@@ -1,7 +1,7 @@
 ANALISI_REQUISITI
 
 1.separazione GUI / IMPLEMENTAZIONE
--> Model - View
+-> deve implementare Model - View (vedi documentazione Qt)
 -> creazione separata di gerarchia TIPI
 -> DESIDERABILE:calcolatrice a riga di comando
 
@@ -25,7 +25,8 @@ DESIDERABILE :-> Insieme
  con template per vettori e matrici)
 
 4.JAVA:gerarchia tipi calcolabili dev'essere implementata in java
-Gerarchia di tipi ancora da definire in C++
+-> necessario metodo main a dimostrazione delle funzionalita' offerte da gerarchia
+(Gerarchia di tipi ancora da definire in C++)
 
 5.GUI Qt deve permettere accesso a tutte le operazioni di calcolo possibili
 
@@ -34,4 +35,3 @@ Gerarchia di tipi ancora da definire in C++
    -> errori matematici(underflow,overflow,divisione per 0)
    -> errori input(input vuoto/null scorretto)
       -> necessario creare parser per dati inseriti
-
