@@ -339,33 +339,9 @@ Operazioni Proprie
 BLACK BOX ARCH
 
 
-VettoreConcreto<T>
+Calcolabile
 
-VettoreConcreto<T>::Calcolabile::Operazioni Ulteriori
-
-metodi :
-
--> isEmpty(virtuale,puro,parametrico,statico) 
--> addConsistent(virtuale,puro,parametrico,statico)
--> subConsistent(virtuale,puro,parametrico,statico) 
--> mulConsistent(virtuale,puro,parametrico,statico) 
--> divConsistent(virtuale,puro,parametrico,statico) 
-
-enumInput isEmpty(virtuale,puro,parametrico,statico)
-
-Sia A input
-
-dim A= 0 :
-impossibile
-
-dim A= 1 :
-A <-> null -> T
-A <-> a -> F
-
-dim A > 1 :
-impossibile
-
-enumInput addConsistent(virtuale,puro,parametrico,statico)
+addConsistent(virtuale,puro,parametrico,statico)
 
 sia A,B input
 
@@ -375,8 +351,8 @@ dim A = 0 , B = 1:
 impossibile
 
 dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
+A is null -> F
+B is null -> F
 (A > 0 , B > 0), A + B > LIMITE_SUP -> F
 (A < 0 , B < 0), A + B < LIMITE_INF -> F
 T ALTRIMENTI
@@ -384,7 +360,7 @@ T ALTRIMENTI
 dim A > 1,B > 1 :
 impossibile
 
-enumInput subConsistent(virtuale,puro,parametrico,statico)
+subConsistent(virtuale,puro,parametrico,statico)
 
 sia A,B input
 
@@ -404,7 +380,7 @@ T ALTRIMENTI
 dim A > 1,B > 1 :
 impossibile
 
-enumInput mulConsistent(virtuale,puro,parametrico,statico)
+mulConsistent(virtuale,puro,parametrico,statico)
 
 sia A,B input
 
@@ -427,7 +403,7 @@ dim A > 1,B > 1 :
 impossibile 
 
 //DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
-enumInput divConsistent(virtuale,puro,parametrico,statico)
+divConsistent(virtuale,puro,parametrico,statico)
 
 sia A,B input
 
@@ -451,6 +427,127 @@ dim A > 1,B > 1 :
 impossibile
 
 
+VettoreConcreto<T>
+
+VettoreConcreto<T>::Calcolabile::Operazioni Ulteriori
+
+metodi :
+
+-> isEmpty(virtuale,puro,parametrico,statico) 
+-> addConsistent(virtuale,puro,parametrico,statico)
+-> subConsistent(virtuale,puro,parametrico,statico) 
+-> mulConsistent(virtuale,puro,parametrico,statico) 
+-> divConsistent(virtuale,puro,parametrico,statico) 
+
+isEmpty(virtuale,puro,parametrico,statico)
+
+Sia A input
+
+dim A= 0 :
+impossibile
+
+dim A = 1 :
+A is null -> eccezione
+A is !null -> n |
+  n e' il numero di elementi del vettore
+
+
+dim A > 1 :
+impossibile
+
+addConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+
+(A > 0 , B > 0), A + B  > LIMITE_SUP -> F
+(A < 0 , B < 0), A + B  < LIMITE_INF -> F
+       
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+subConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+(A > 0 , B > 0), A - B < LIMITE_INF -> F
+(A < 0 , B > 0), A - B < LIMITE_INF -> F
+(A > 0 , B < 0), A - B < LIMITE_SUP -> F
+
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+mulConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+
+(A > 0 , B > 0), A * B > LIMITE_SUP -> F
+(A < 0 , B < 0), A * B > LIMITE_SUP -> F
+(A > 0 , B < 0), A * B < LIMITE_INF -> F
+(A < 0 , B > 0), A * B < LIMITE_INF -> F
+
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile 
+
+//DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
+divConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+B = 0 -> F
+
+(A > 0 , B > 0), A / B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A / B > LIMITE_SUP -> F
+(A > 0 , B < 0), A / B < LIMITE_INF -> F
+(A < 0 , B > 0), A / B < LIMITE_INF -> F
+
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile
+
+
 VettoreConcreto<T>::Operazioni Algebriche
 
 
@@ -463,7 +560,7 @@ metodi
 -> operator/ (virtuale,puro,parametrico)
 
 
-enumInput operator+ (virtuale,puro,parametrico) 
+operator+ (virtuale,puro,parametrico) 
 
 Sia A,B input
 
@@ -477,7 +574,8 @@ dim A = 1, B = 1:
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
     addConsistent = F -> eccezione
-    addConsistent = T -> somma A,B
+    addConsistent = T -> somma |
+    		  somma e' somma di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -485,7 +583,7 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-enumInput operator- (virtuale,puro,parametrico)
+operator- (virtuale,puro,parametrico)
 
 Sia A,B input
 
@@ -499,7 +597,8 @@ dim A = 1, B = 1:
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
     subConsistent = F -> eccezione
-    subConsistent = T -> differenza A,B 
+    subConsistent = T -> differenza |
+    		  differenza e' differenza tra A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -507,7 +606,7 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-enumInput operator* (virtuale,puro,parametrico)
+operator* (virtuale,puro,parametrico)
 
 Sia A,B input
 
@@ -521,7 +620,8 @@ dim A = 1, B = 1:
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
     mulConsistent = F -> eccezione
-    mulConsistent = T -> prodotto A,B
+    mulConsistent = T -> prodotto |
+    		  prodotto e' prodotto tra A e B
     
 dim A > 1, B qualsiasi:
     impossibile
@@ -529,7 +629,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-enumInput operator* scalare (virtuale,puro,parametrico)
+operator* scalare (virtuale,puro,parametrico)
 
 Sia A,B input
 
@@ -543,7 +643,8 @@ dim A = 1, B = 1:
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
     mulConsistent = F -> eccezione
-    mulConsistent = T -> prodotto A,B
+    mulConsistent = T -> prodotto |
+    		  prodotto e' prodotto tra A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -552,7 +653,7 @@ dim A qualsiasi , B > 1:
 
 
 
-enumInput operator/ scalare (virtuale,puro,parametrico)
+operator/ scalare (virtuale,puro,parametrico)
 
 Sia A,B input
 
@@ -566,7 +667,8 @@ dim A = 1, B = 1:
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
     divConsistent = F -> eccezione
-    divConsistent = T -> divisione A,B
+    divConsistent = T -> quoziente |
+    		  quoziente e' divisione tra A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -602,9 +704,502 @@ dim A isEmpty = T , B = 1:
     eccezione
 
 dim A = 1, dimB = 1:
-    A == B -> T
+    A == B -> T 
     !(A == B) -> F
 
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator!= (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A != B -> T
+    !(A != B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<  (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A < B -> T
+    !(A < B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<= (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A <= B -> T
+    !(A <= B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator> (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, dimB = 1:
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB 
+    A > B -> T
+    !(A > B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>= (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A >= B -> T
+    !(A >= B) -> F
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+VettoreConcreto<T>::Operazioni Ulteriori
+
+Sia A input
+
+metodi:
+-> getRowNumber (virtuale)
+
+getRowNumber(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isEmpty -> 0
+    !(A is Empty) -> n |
+    	n e' numero elementi di Vettore
+
+dim A > 1:
+    -> impossibile
+
+VettoreConcreto<T>::Operazioni Proprie
+
+sia A input
+
+metodi:
+-> (T = Razionale) reduceAll
+-> (T = Intero) powerAll 
+-> (T = Double) fractionalAll
+
+reduceAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isEmpty -> eccezione
+    !(A isEmpty) -> A' |
+    A' <-> A ridotto ai minimo per ogni suo elemento
+
+dim A > 2:
+    impossibile:
+
+powerAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isEmpty -> 0
+    !(A isEmpty) -> potenza |
+    	potenza e' somma di ogni elemento di A elevato al quadrato,
+	potenza < LIMITE_SUP
+	se potenza >= LIMITE_SUP -> eccezione
+
+dim A > 2:
+    impossibile
+
+
+fractionalAll(virtuale)
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isEmpty -> 0
+    !(A isEmpty) -> fractional |
+    	fractional e' somma di parte frazionaria di ogni
+	elemento di A,
+	fractional e' < LIMITE_SUP
+	se fractional >= LIMITE_SUP -> eccezione // improbabile
+
+dim A > 1 :
+    impossibile
+
+
+FINE OPERAZIONI VETTORE CONCRETO
+
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+
+
+MatriceConcreta<T>
+
+
+
+MatriceConcreta<T>
+
+MatriceConcreta<T>::Calcolabile::Operazioni Ulteriori
+
+metodi :
+
+-> isEmpty(virtuale,puro,parametrico,statico) 
+-> addConsistent(virtuale,puro,parametrico,statico)
+-> subConsistent(virtuale,puro,parametrico,statico) 
+-> mulConsistent(virtuale,puro,parametrico,statico) 
+-> divConsistent(virtuale,puro,parametrico,statico) 
+
+isEmpty(virtuale,puro,parametrico,statico)
+
+Sia A input
+
+dim A = 0 :
+impossibile
+
+dim A = 1 :
+A <-> null -> T
+A <-> a -> F
+
+dim A > 1 :
+impossibile
+
+addConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A + B > LIMITE_SUP -> F
+(A < 0 , B < 0), A + B < LIMITE_INF -> F
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+subConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A - B < LIMITE_INF -> F
+(A < 0 , B > 0), A - B < LIMITE_INF -> F
+(A > 0 , B < 0), A - B < LIMITE_SUP -> F
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+mulConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A * B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A * B > LIMITE_SUP -> F
+(A > 0 , B < 0), A * B < LIMITE_INF -> F
+(A < 0 , B > 0), A * B < LIMITE_INF -> F
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile 
+
+//DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
+divConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+B = 0 -> F
+(A > 0 , B > 0), A / B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A / B > LIMITE_SUP -> F
+(A > 0 , B < 0), A / B < LIMITE_INF -> F
+(A < 0 , B > 0), A / B < LIMITE_INF -> F
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile
+
+
+MatriceConcreta<T>::Operazioni Algebriche
+
+
+metodi
+
+-> operator+(virtuale,puro,parametrico) 
+-> operator-(virtuale,puro,parametrico) 
+-> operator* (virtuale,puro,parametrico)
+-> operator* monomio (virtuale,puro,parametrico)
+-> operator/ (virtuale,puro,parametrico)
+
+
+operator+ (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    addConsistent = F -> eccezione
+    addConsistent = T -> somma A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+operator- (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    subConsistent = F -> eccezione
+    subConsistent = T -> differenza A,B 
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+operator* (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    mulConsistent = F -> eccezione
+    mulConsistent = T -> prodotto A,B
+    
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator* scalare (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    mulConsistent = F -> eccezione
+    mulConsistent = T -> prodotto A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+operator/ scalare (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    divConsistent = F -> eccezione
+    divConsistent = T -> divisione A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+MatriceConcreta<T>::Operazioni Booleane
+
+Sia A,B input
+
+metodi:
+-> operator==(virtuale,puro,parametrico)
+-> operator!=(virtuale,puro,parametrico) 
+-> operator<  (virtuale,puro,parametrico) 
+-> operator<= (virtuale,puro,parametrico) 
+-> operator> (virtuale,puro,parametrico) 
+-> operator>= (virtuale,puro,parametrico)
+
+
+operator== (virtuale,puro,parametrico) 
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A == B -> T 
+    !(A == B) -> F
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -748,4 +1343,152 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-  
+MatriceConcreta<T>::Operazioni Ulteriori
+
+
+metodi:
+-> transpose  (virtuale,puro) 
+-> getRowNumber (virtuale) 
+-> getColumnNumber (virtuale)
+-> getElementNumber(virtuale)
+-> isSquare 
+-> isIdentity 
+-> isUpperTriangular 
+-> isLowerTriangular
+
+
+transpose
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> A' |
+      A' e' trasposta di A
+
+dim A > 1 :
+    impossibile
+
+
+getRowNumber(virtuale)
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero righe di A
+
+dim A > 1 :
+    impossibile
+
+
+getColumnNumber:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero colonne di A
+
+dim A > 1 :
+    impossibile
+
+
+getElementNumber:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero colonne * numero di righe di A
+
+dim A > 1 :
+    impossibile
+
+
+isSquare:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null), A getRowNumber == A getColumnNumber -> T,
+    F altrimenti 
+
+dim A > 1 :
+    impossibile
+
+
+isIdentity:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null),
+      (A isUpperTriangular), (A isLowerTriangular),
+      (ogni elemento su diagonale = 1) -> T,
+    F altrimenti
+      
+
+dim A > 1 :
+    impossibile
+
+
+isUpperTriangular:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null),
+    A isSquare, ogni elemento sotto diagonale principale = 0 -> T
+    F altrimenti
+
+dim A > 1 :
+    impossibile
+
+isLowerTriangular:
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null),
+    A isSquare, ogni elemento sopra diagonale principale = 0 -> T,
+    F altrimenti
