@@ -1,0 +1,337 @@
+gerarchia di tipi:
+
+CalcolabileAstratto<T>
+
+contiene metodi astratti indipendenti dal tipo di calcolabile
+
+contiene metodi:
+
+Operazioni Ulteriori
+
+-> distruttore (virtuale) -> rende distruttori in gerarchia virtuale
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+
+
+VettoreAstratto<T>
+
+Vettore sottotipo di Calcolabile
+
+contiene metodi astratti di calcolo propri di ogni Vettore 
+
+contiene metodi:
+
+Operazioni Algebriche
+
+-> operator+ (virtuale,puro,parametrico) -> somma tra 2 vettori
+-> operator- (virtuale,puro,parametrico) -> differenza tra 2 vettori
+-> operator* (virtuale,puro,parametrico) -> prodotto di 2 vettori 
+-> operator* scalare (virtuale,puro,parametrico) -> prodotto di scalare per Vettore
+-> operator/ scalare (virtuale,puro,parametrico) -> divisione di Vettore per scalare
+
+Operazioni Booleane
+
+-> operator== (virtuale,puro,parametrico) -> true sse
+   2 vettori sono uguali , false altrimenti
+-> operator!= (virtuale,puro,parametrico) -> true sse
+   2 vettori sono diversi , false altrimenti
+-> operator<  (virtuale,puro,parametrico) -> true sse
+   primo vettore minore del secondo, false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> true sse
+   primo vettore minore o uguale del secondo ,false altrimenti
+-> operator> (virtuale,puro,parametrico) -> true sse
+   primo vettore maggiore di secondo ,false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> true sse
+   primo vettore maggiore o uguale di secondo,false altrimenti 
+
+
+Operazioni Ulteriori
+
+-> getRowNumber (virtuale) -> numero righe appartenenti al vettore  
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+
+VettoreConcreto<T>
+
+T = Razionale,Intero,Double 
+
+implementazione concreta e templatizzata di metodi appartenenti a vettoreAstratto
+
+implementazione metodo aggiuntivo reduceAll(T = Razionale) 
+implementazione metodo aggiuntivo powerAll(T = intero) 
+implementazione metodo aggiuntivo fractionalAll(T = double)
+
+contieneMetodi:
+
+Operazioni Algebriche
+
+
+-> operator+ (virtuale,puro,parametrico) -> somma tra 2 vettori
+-> operator- (virtuale,puro,parametrico) -> differenza tra 2 vettori
+-> operator* (virtuale,puro,parametrico) -> prodotto di 2 vettori 
+-> operator* scalare (virtuale,puro,parametrico) -> prodotto di scalare per Vettore
+-> operator/ scalare (virtuale,puro,parametrico) -> divisione di Vettore per scalare
+
+Operazioni Booleane
+
+-> operator== (virtuale,puro,parametrico) -> true sse
+   2 vettori sono uguali , false altrimenti
+-> operator!= (virtuale,puro,parametrico) -> true sse
+   2 vettori sono diversi , false altrimenti
+-> operator<  (virtuale,puro,parametrico) -> true sse
+   primo vettore minore del secondo, false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> true sse
+   primo vettore minore o uguale del secondo ,false altrimenti
+-> operator> (virtuale,puro,parametrico) -> true sse
+   primo vettore maggiore di secondo ,false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> true sse
+   primo vettore maggiore o uguale di secondo,false altrimenti 
+
+   
+Operazioni Ulteriori
+
+-> getRowNumber (virtuale) -> ritorna numero righe appartenenti al vettore  
+
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+Operazioni Proprie
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Vettore
+-> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
+-> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria di ogni elemento di Vettore 
+
+MatriceAstratta<T>
+
+matrice sottotipo di Calcolabile
+
+contiene metodi astratti di calcolo propri di ogni matrice
+
+contiene metodi:
+
+-> operator+ (virtuale,puro,parametrico) -> somma tra 2 vettori
+-> operator- (virtuale,puro,parametrico) -> differenza tra 2 vettori
+-> operator* (virtuale,puro,parametrico) -> prodotto di 2 vettori 
+-> operator* scalare (virtuale,puro,parametrico) -> prodotto di scalare per Vettore
+-> operator/ scalare (virtuale,puro,parametrico) -> divisione di Vettore per scalare
+
+Operazioni Booleane
+
+-> operator== (virtuale,puro,parametrico) -> true sse
+   2 vettori sono uguali , false altrimenti
+-> operator!= (virtuale,puro,parametrico) -> true sse
+   2 vettori sono diversi , false altrimenti
+-> operator<  (virtuale,puro,parametrico) -> true sse
+   primo matrice minore del secondo, false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> true sse
+   primo matrice minore o uguale del secondo ,false altrimenti
+-> operator> (virtuale,puro,parametrico) -> true sse
+   primo matrice maggiore di secondo ,false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> true sse
+   primo matrice maggiore o uguale di secondo,false altrimenti 
+
+Operazioni Ulteriori
+
+-> transpose  (virtuale,puro) -> ritorna matrice trasposta rispetto alla matrice originale
+-> getRowNumber (virtuale) -> ritorna il numero di righe che compongono matrice
+-> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
+-> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
+-> isSquare -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
+-> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
+-> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
+-> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+
+MatriceConcreta<T>
+
+T = Razionale,Intero,Double
+
+implementazione concreta e templatizzata di metodi appartenenti a supertipo
+
+implementazione metodo aggiuntivo reduceAll(T = Razionale) 
+implementazione metodo aggiuntivo powerAll(T = intero) 
+implementazione metodo aggiuntivo fractionalAll(T = double)
+
+contiene metodi:
+
+Operazioni Algebriche
+
+-> operator+ (virtuale,puro,parametrico) -> somma tra 2 matrici
+-> operator-(virtuale,puro,parametrico) -> differenza tra 2 matrici
+-> operator* (virtuale,puro,parametrico) -> ritorna matrice risultato del prodotto tra le matrici passate
+-> operator* scalare (virtuale,puro,parametrico) -> ritorna Matrice ottenuto da
+   prodotto di scalare per Matrice
+-> operator/(virtuale,puro,parametrico) -> ritorna Matrice ottenuto da
+   divisione per scalare di Matrice
+
+Operazioni Booleane
+
+-> operator==(virtuale,puro,parametrico) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> operator!=(virtuale,puro,parametrico) -> negazione di uguaglianza
+
+-> operator<  (virtuale,puro,parametrico) -> ritorna true sse primo matrice < secondo , false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> ritorna true sse primo matrice <= secondo , false altrimenti
+
+-> operator> (virtuale,puro,parametrico) -> ritorna true sse primo matrice > secondo , false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> ritorna true sse primo matrice >= secondo , false altrimenti
+
+Operazioni Ulteriori
+
+-> transpone  (virtuale,puro) -> ritorna matrice trasposta rispetto alla matrice originale
+-> getRowNumber (virtuale) -> ritorna il numero di righe che compongono matrice
+-> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
+-> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
+
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+Operazioni Proprie
+
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
+-> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento
+   appartenente a vettore
+-> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria
+   di ogni elemento di Vettore
+
+
+PolinomioAstratto<T>
+
+Polinomio sottotipo di Calcolabile
+
+contiene metodi astratti propri di ogni polinomio
+
+contiene metodi:
+
+Operazioni Algebriche
+
+-> operator+(virtuale,puro,parametrico) -> ritorna polinomio somma di 2 polinomi passati
+-> operator-(virtuale,puro,parametrico) -> ritorna polinomio differenza di 2 polinomi passati
+-> operator* (virtuale,puro,parametrico) -> ritorna polinomio prodotto di 2 polinomi passati
+
+-> operator* monomio (virtuale,puro,parametrico) -> ritorna polinomio dato da Polinomio e Monomio passato
+-> operator/ (virtuale,puro,parametrico) -> ritorna polinomio divisione di 2 polinomi passati
+
+Operazioni Booleani
+
+-> operator== (virtuale,puro,parametrico) -> ritorna true sse oggetti sono
+   uguali per ogni elemento che li compone ,false altrimenti
+-> operator!=  (virtuale,puro,parametrico) -> negazione di uguaglianza
+
+-> operator<  (virtuale,puro,parametrico) -> ritorna true sse primo polinomio < secondo , false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio <= secondo , false altrimenti
+
+-> operator> (virtuale,puro,parametrico) -> ritorna true sse primo polinomio > secondo , false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio >= secondo , false altrimenti
+
+
+Operazioni Ulteriori
+
+-> first (virtuale) -> ritorna primo elemento di polinomio
+-> rest(virtuale) -> ritorna resto degli elemento di polinomio
+
+-> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
+-> maxDegree(virtuale) -> ritorna il grado massimo del polinomio
+
+-> derivative -> ritorna derivata prima di polinomio
+
+PolinomioConcreto<T>
+
+T = Razionale,Intero
+
+PolinomioConcreto sottotipo di PolinomioAstratto
+
+implementazione concreta e templatizzata di metodi supertipo
+
+implementazione metodo aggiuntivo (T = intero) powerAll
+implementazione metodo aggiuntivo (T = razionale) reduceAll
+
+
+Operazioni Algebriche
+
+-> operator+(virtuale,puro,parametrico) -> ritorna polinomio somma di 2 polinomi passati
+-> operator-(virtuale,puro,parametrico) -> ritorna polinomio differenza di 2 polinomi passati
+-> operator* (virtuale,puro,parametrico) -> ritorna polinomio prodotto di 2 polinomi passati
+
+-> operator* monomio (virtuale,puro,parametrico) -> ritorna polinomio dato da Polinomio e Monomio passato
+-> operator/ (virtuale,puro,parametrico) -> ritorna polinomio divisione di 2 polinomi passati
+
+Operazioni Booleani
+
+-> operator== (virtuale,puro,parametrico) -> ritorna true sse oggetti sono
+   uguali per ogni elemento che li compone ,false altrimenti
+-> operator!=  (virtuale,puro,parametrico) -> negazione di uguaglianza
+
+-> operator<  (virtuale,puro,parametrico) -> ritorna true sse primo polinomio < secondo , false altrimenti
+-> operator<= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio <= secondo , false altrimenti
+
+-> operator> (virtuale,puro,parametrico) -> ritorna true sse primo polinomio > secondo , false altrimenti
+-> operator>= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio >= secondo , false altrimenti
+
+
+Operazioni Ulteriori
+
+-> first (virtuale) -> ritorna primo elemento di polinomio
+-> rest(virtuale) -> ritorna resto degli elemento di polinomio
+
+-> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
+-> maxDegree (virtuale) -> ritorna il grado massimo del polinomio
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
+Operazioni Proprie
+
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
+-> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
+
