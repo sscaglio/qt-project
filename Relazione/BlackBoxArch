@@ -1,6 +1,6 @@
 gerarchia di tipi:
 
-calcolabileAstratto:
+CalcolabileAstratto<T>
 
 contiene metodi astratti indipendenti dal tipo di calcolabile
 
@@ -9,9 +9,20 @@ contiene metodi:
 Operazioni Ulteriori
 
 -> distruttore (virtuale) -> rende distruttori in gerarchia virtuale
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
 
 
-VettoreAstratto
+
+VettoreAstratto<T>
 
 Vettore sottotipo di Calcolabile
 
@@ -46,6 +57,16 @@ Operazioni Booleane
 Operazioni Ulteriori
 
 -> getRowNumber (virtuale) -> numero righe appartenenti al vettore  
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
 
 
 VettoreConcreto<T>
@@ -89,12 +110,23 @@ Operazioni Ulteriori
 
 -> getRowNumber (virtuale) -> ritorna numero righe appartenenti al vettore  
 
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
 Operazioni Proprie
 -> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Vettore
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
 -> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria di ogni elemento di Vettore 
 
-MatriceAstratta
+MatriceAstratta<T>
 
 matrice sottotipo di Calcolabile
 
@@ -133,6 +165,18 @@ Operazioni Ulteriori
 -> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
 -> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
 -> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
 
 MatriceConcreta<T>
 
@@ -174,6 +218,17 @@ Operazioni Ulteriori
 -> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
 -> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
 
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
+
 Operazioni Proprie
 
 -> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
@@ -183,8 +238,7 @@ Operazioni Proprie
    di ogni elemento di Vettore
 
 
-
-PolinomioAstratto
+PolinomioAstratto<T>
 
 Polinomio sottotipo di Calcolabile
 
@@ -265,8 +319,433 @@ Operazioni Ulteriori
 
 -> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
 -> maxDegree (virtuale) -> ritorna il grado massimo del polinomio
+-> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+   passato e' nullo
+-> addConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di somma, false altrimenti
+-> subConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di sottrazione,false altrimenti
+-> mulConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di prodotto,false altrimenti
+-> divConsistent(virtuale,puro,parametrico,statico) -> true sse
+   elementi passati sono consistenti con operazione di divisione,false altrimenti
 
 Operazioni Proprie
 
 -> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
+
+
+BLACK BOX ARCH
+
+
+VettoreConcreto<T>
+
+VettoreConcreto<T>::Calcolabile::Operazioni Ulteriori
+
+metodi :
+
+-> isEmpty(virtuale,puro,parametrico,statico) 
+-> addConsistent(virtuale,puro,parametrico,statico)
+-> subConsistent(virtuale,puro,parametrico,statico) 
+-> mulConsistent(virtuale,puro,parametrico,statico) 
+-> divConsistent(virtuale,puro,parametrico,statico) 
+
+enumInput isEmpty(virtuale,puro,parametrico,statico)
+
+Sia A input
+
+dim A= 0 :
+impossibile
+
+dim A= 1 :
+A <-> null -> T
+A <-> a -> F
+
+dim A > 1 :
+impossibile
+
+enumInput addConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A + B > LIMITE_SUP -> F
+(A < 0 , B < 0), A + B < LIMITE_INF -> F
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+enumInput subConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A - B < LIMITE_INF -> F
+(A < 0 , B > 0), A - B < LIMITE_INF -> F
+(A > 0 , B < 0), A - B < LIMITE_SUP -> F
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+enumInput mulConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+(A > 0 , B > 0), A * B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A * B > LIMITE_SUP -> F
+(A > 0 , B < 0), A * B < LIMITE_INF -> F
+(A < 0 , B > 0), A * B < LIMITE_INF -> F
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile 
+
+//DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
+enumInput divConsistent(virtuale,puro,parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A <-> null -> F
+B <-> null -> F
+B = 0 -> F
+(A > 0 , B > 0), A / B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A / B > LIMITE_SUP -> F
+(A > 0 , B < 0), A / B < LIMITE_INF -> F
+(A < 0 , B > 0), A / B < LIMITE_INF -> F
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile
+
+
+VettoreConcreto<T>::Operazioni Algebriche
+
+
+metodi
+
+-> operator+(virtuale,puro,parametrico) 
+-> operator-(virtuale,puro,parametrico) 
+-> operator* (virtuale,puro,parametrico)
+-> operator* monomio (virtuale,puro,parametrico)
+-> operator/ (virtuale,puro,parametrico)
+
+
+enumInput operator+ (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    addConsistent = F -> eccezione
+    addConsistent = T -> somma A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+enumInput operator- (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    subConsistent = F -> eccezione
+    subConsistent = T -> differenza A,B 
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+enumInput operator* (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    mulConsistent = F -> eccezione
+    mulConsistent = T -> prodotto A,B
+    
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+enumInput operator* scalare (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    mulConsistent = F -> eccezione
+    mulConsistent = T -> prodotto A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+enumInput operator/ scalare (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty = T, B isEmpty = T -> eccezione
+    dim A = 1, B isEmpty = T -> eccezione
+    A isEmpty = T , B = 1 -> eccezione
+    divConsistent = F -> eccezione
+    divConsistent = T -> divisione A,B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+VettoreConcreto<T>::Operazioni Booleane
+
+Sia A,B input
+
+metodi:
+-> operator==(virtuale,puro,parametrico)
+-> operator!=(virtuale,puro,parametrico) 
+-> operator<  (virtuale,puro,parametrico) 
+-> operator<= (virtuale,puro,parametrico) 
+-> operator> (virtuale,puro,parametrico) 
+-> operator>= (virtuale,puro,parametrico)
+
+
+operator== (virtuale,puro,parametrico) 
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A == B -> T
+    !(A == B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator!= (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A != B -> T
+    !(A != B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<  (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A < B -> T
+    !(A < B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<= (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A <= B -> T
+    !(A <= B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator> (virtuale,puro,parametrico) 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, dimB = 1:
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB 
+    A > B -> T
+    !(A > B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>= (virtuale,puro,parametrico)
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A >= B -> T
+    !(A >= B) -> F
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+  
