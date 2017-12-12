@@ -410,9 +410,10 @@ Sia A input
 
 metodi:
 
+-> isEmpty(virtuale) 
 -> getRowNumber (virtuale)
--> isEmpty(virtuale,parametrico) 
-
+-> getElementNumber(virtuale) 
+-> isNull(virtual)
 
 isEmpty(virtuale)
 
@@ -422,10 +423,9 @@ dim A= 0 :
 impossibile
 
 dim A = 1 :
-A is null -> eccezione
-A is !null -> n |
-  n e' il numero di elementi del vettore
-
+A isNull -> eccezione
+A !isNull, numero elementi > 0 -> F
+A !isNull, numero elementi == 0 -> T
 
 dim A > 1 :
 impossibile
@@ -438,12 +438,31 @@ dim A = 0:
     impossibile
 
 dim A = 1:
+    A isNull -> eccezione
     A isEmpty -> 0
     !(A is Empty) -> n |
     	n e' numero elementi di Vettore
 
 dim A > 1:
     -> impossibile
+
+
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+/////// DEFINIRE BB BOX DA QUI
+
+
+
+
+getElementNumber(virtuale) 
+
+isNull(virtual)
 
 
 VettoreConcreto::Operazioni Proprie
