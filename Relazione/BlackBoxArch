@@ -1,9 +1,17 @@
 BLACK BOX ARCH
 
 
-Calcolabile
+BoundChecker<T>
 
-addConsistent(virtuale,puro,parametrico,statico)
+metodi:
+
+-> addConsistent(virtuale,puro,parametrico)
+-> subConsistent(virtuale,puro,parametrico)
+-> mulConsistent(virtuale,puro,parametrico)
+-> divConsistent(virtuale,puro,parametrico)
+
+
+addConsistent(virtuale,puro,parametrico)
 
 sia A,B input
 
@@ -22,7 +30,7 @@ T ALTRIMENTI
 dim A > 1,B > 1 :
 impossibile
 
-subConsistent(virtuale,puro,parametrico,statico)
+subConsistent(virtuale,puro,parametrico)
 
 sia A,B input
 
@@ -42,7 +50,7 @@ T ALTRIMENTI
 dim A > 1,B > 1 :
 impossibile
 
-mulConsistent(virtuale,puro,parametrico,statico)
+mulConsistent(virtuale,puro,parametrico)
 
 sia A,B input
 
@@ -65,7 +73,7 @@ dim A > 1,B > 1 :
 impossibile 
 
 //DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
-divConsistent(virtuale,puro,parametrico,statico)
+divConsistent(virtuale,puro,parametrico)
 
 sia A,B input
 
@@ -95,13 +103,10 @@ VettoreConcreto<T>::Calcolabile::Operazioni Ulteriori
 
 metodi :
 
--> isEmpty(virtuale,puro,parametrico,statico) 
--> addConsistent(virtuale,puro,parametrico,statico)
--> subConsistent(virtuale,puro,parametrico,statico) 
--> mulConsistent(virtuale,puro,parametrico,statico) 
--> divConsistent(virtuale,puro,parametrico,statico) 
+-> isEmpty(virtuale,parametrico) 
 
-isEmpty(virtuale,puro,parametrico,statico)
+
+isEmpty(virtuale,puro,parametrico)
 
 Sia A input
 
@@ -117,109 +122,17 @@ A is !null -> n |
 dim A > 1 :
 impossibile
 
-addConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A is null -> F
-B is null -> F
-
-(A > 0 , B > 0), A + B  > LIMITE_SUP -> F
-(A < 0 , B < 0), A + B  < LIMITE_INF -> F
-       
-T ALTRIMENTI
-
-dim A > 1,B > 1 :
-impossibile
-
-subConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A is null -> F
-B is null -> F
-(A > 0 , B > 0), A - B < LIMITE_INF -> F
-(A < 0 , B > 0), A - B < LIMITE_INF -> F
-(A > 0 , B < 0), A - B < LIMITE_SUP -> F
-
-T ALTRIMENTI
-
-dim A > 1,B > 1 :
-impossibile
-
-mulConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A is null -> F
-B is null -> F
-
-(A > 0 , B > 0), A * B > LIMITE_SUP -> F
-(A < 0 , B < 0), A * B > LIMITE_SUP -> F
-(A > 0 , B < 0), A * B < LIMITE_INF -> F
-(A < 0 , B > 0), A * B < LIMITE_INF -> F
-
-T ALTRIMENTI
-
-
-dim A > 1,B > 1 :
-impossibile 
-
-//DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
-divConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
-B = 0 -> F
-
-(A > 0 , B > 0), A / B > LIMITE_SUP -> F  
-(A < 0 , B < 0), A / B > LIMITE_SUP -> F
-(A > 0 , B < 0), A / B < LIMITE_INF -> F
-(A < 0 , B > 0), A / B < LIMITE_INF -> F
-
-T ALTRIMENTI
-
-
-dim A > 1,B > 1 :
-impossibile
-
 
 VettoreConcreto<T>::Operazioni Algebriche
 
 
 metodi
 
--> operator+(virtuale,puro,parametrico) 
--> operator-(virtuale,puro,parametrico) 
--> operator* (virtuale,puro,parametrico)
--> operator* monomio (virtuale,puro,parametrico)
--> operator/ (virtuale,puro,parametrico)
+-> operator+(virtuale,parametrico) 
+-> operator-(virtuale,parametrico) 
+-> operator* (virtuale,parametrico)
+-> operator* monomio (virtuale,parametrico)
+-> operator/ (virtuale,parametrico)
 
 
 operator+ (virtuale,puro,parametrico) 
@@ -235,7 +148,8 @@ dim A = 1, B = 1:
     A isEmpty = T, B isEmpty = T -> eccezione
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
-    addConsistent = F -> eccezione
+    esiste coppia (a,b) in A,B |
+    	   (a,b) addConsistent = F -> eccezione
     addConsistent = T -> somma |
     		  somma e' somma di A e B
 
@@ -258,7 +172,8 @@ dim A = 1, B = 1:
     A isEmpty = T, B isEmpty = T -> eccezione
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
-    subConsistent = F -> eccezione
+    esiste coppia (a,b) in A,B |
+    	   (a,b) subConsistent = F -> eccezione
     subConsistent = T -> differenza |
     		  differenza e' differenza tra A e B
 
@@ -281,7 +196,8 @@ dim A = 1, B = 1:
     A isEmpty = T, B isEmpty = T -> eccezione
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
-    mulConsistent = F -> eccezione
+    esiste coppia (a,b) in A,B |
+    	   (a,b) mulConsistent = F -> eccezione
     mulConsistent = T -> prodotto |
     		  prodotto e' prodotto tra A e B
     
@@ -304,7 +220,8 @@ dim A = 1, B = 1:
     A isEmpty = T, B isEmpty = T -> eccezione
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
-    mulConsistent = F -> eccezione
+    esiste coppia (a,b) in A,B |
+    	   (a,b) mulConsistent = F -> eccezione
     mulConsistent = T -> prodotto |
     		  prodotto e' prodotto tra A e B
 
@@ -328,7 +245,8 @@ dim A = 1, B = 1:
     A isEmpty = T, B isEmpty = T -> eccezione
     dim A = 1, B isEmpty = T -> eccezione
     A isEmpty = T , B = 1 -> eccezione
-    divConsistent = F -> eccezione
+    esiste coppia (a,b) in A,B |
+    	   (a,b) divConsistent = F -> eccezione
     divConsistent = T -> quoziente |
     		  quoziente e' divisione tra A e B
 
@@ -343,12 +261,12 @@ VettoreConcreto<T>::Operazioni Booleane
 Sia A,B input
 
 metodi:
--> operator==(virtuale,puro,parametrico)
--> operator!=(virtuale,puro,parametrico) 
--> operator<  (virtuale,puro,parametrico) 
--> operator<= (virtuale,puro,parametrico) 
--> operator> (virtuale,puro,parametrico) 
--> operator>= (virtuale,puro,parametrico)
+-> operator==(virtuale,parametrico)
+-> operator!=(virtuale,parametrico) 
+-> operator<  (virtuale,parametrico) 
+-> operator<= (virtuale,parametrico) 
+-> operator> (virtuale,parametrico) 
+-> operator>= (virtuale,parametrico)
 
 
 operator== (virtuale,puro,parametrico) 
@@ -515,9 +433,12 @@ VettoreConcreto<T>::Operazioni Ulteriori
 Sia A input
 
 metodi:
+
 -> getRowNumber (virtuale)
 
+
 getRowNumber(virtuale)
+
 
 dim A = 0:
     impossibile
@@ -529,6 +450,7 @@ dim A = 1:
 
 dim A > 1:
     -> impossibile
+
 
 VettoreConcreto<T>::Operazioni Proprie
 
@@ -603,13 +525,9 @@ MatriceConcreta<T>::Calcolabile::Operazioni Ulteriori
 
 metodi :
 
--> isEmpty(virtuale,puro,parametrico,statico) 
--> addConsistent(virtuale,puro,parametrico,statico)
--> subConsistent(virtuale,puro,parametrico,statico) 
--> mulConsistent(virtuale,puro,parametrico,statico) 
--> divConsistent(virtuale,puro,parametrico,statico) 
+-> isEmpty(virtuale,parametrico) 
 
-isEmpty(virtuale,puro,parametrico,statico)
+isEmpty(virtuale,puro,parametrico)
 
 Sia A input
 
@@ -623,102 +541,16 @@ A <-> a -> F
 dim A > 1 :
 impossibile
 
-addConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
-(A > 0 , B > 0), A + B > LIMITE_SUP -> F
-(A < 0 , B < 0), A + B < LIMITE_INF -> F
-T ALTRIMENTI
-
-dim A > 1,B > 1 :
-impossibile
-
-subConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
-(A > 0 , B > 0), A - B < LIMITE_INF -> F
-(A < 0 , B > 0), A - B < LIMITE_INF -> F
-(A > 0 , B < 0), A - B < LIMITE_SUP -> F
-T ALTRIMENTI
-
-dim A > 1,B > 1 :
-impossibile
-
-mulConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
-(A > 0 , B > 0), A * B > LIMITE_SUP -> F  
-(A < 0 , B < 0), A * B > LIMITE_SUP -> F
-(A > 0 , B < 0), A * B < LIMITE_INF -> F
-(A < 0 , B > 0), A * B < LIMITE_INF -> F
-T ALTRIMENTI
-
-
-dim A > 1,B > 1 :
-impossibile 
-
-//DIPENDE DA TIPO (consistenza divisione tra razionali diversa da altri)!
-divConsistent(virtuale,puro,parametrico,statico)
-
-sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-impossibile
-
-dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
-B = 0 -> F
-(A > 0 , B > 0), A / B > LIMITE_SUP -> F  
-(A < 0 , B < 0), A / B > LIMITE_SUP -> F
-(A > 0 , B < 0), A / B < LIMITE_INF -> F
-(A < 0 , B > 0), A / B < LIMITE_INF -> F
-T ALTRIMENTI
-
-
-dim A > 1,B > 1 :
-impossibile
-
-
 MatriceConcreta<T>::Operazioni Algebriche
 
 
 metodi
 
--> operator+(virtuale,puro,parametrico) 
--> operator-(virtuale,puro,parametrico) 
--> operator* (virtuale,puro,parametrico)
--> operator* monomio (virtuale,puro,parametrico)
--> operator/ (virtuale,puro,parametrico)
+-> operator+(virtuale,parametrico) 
+-> operator-(virtuale,parametrico) 
+-> operator* (virtuale,parametrico)
+-> operator* monomio (virtuale,parametrico)
+-> operator/ (virtuale,parametrico)
 
 
 operator+ (virtuale,puro,parametrico) 
@@ -837,12 +669,12 @@ MatriceConcreta<T>::Operazioni Booleane
 Sia A,B input
 
 metodi:
--> operator==(virtuale,puro,parametrico)
--> operator!=(virtuale,puro,parametrico) 
--> operator<  (virtuale,puro,parametrico) 
--> operator<= (virtuale,puro,parametrico) 
--> operator> (virtuale,puro,parametrico) 
--> operator>= (virtuale,puro,parametrico)
+-> operator==(virtuale,parametrico)
+-> operator!=(virtuale,parametrico) 
+-> operator<  (virtuale,parametrico) 
+-> operator<= (virtuale,parametrico) 
+-> operator> (virtuale,parametrico) 
+-> operator>= (virtuale,parametrico)
 
 
 operator== (virtuale,puro,parametrico) 
@@ -1019,7 +851,8 @@ metodi:
 -> isLowerTriangular
 
 
-transpose
+
+transpose(virtuale,puro)
 
 Sia A input
 
@@ -1053,7 +886,7 @@ dim A > 1 :
     impossibile
 
 
-getColumnNumber:
+getColumnNumber(virtuale):
 
 Sia A input
 
