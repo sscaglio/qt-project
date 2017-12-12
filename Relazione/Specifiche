@@ -1,3 +1,16 @@
+
+
+///
+SPOSTARE METODI ALGEBRICI E BOOLEANI IN SOTTOCLASSI CONCRETE
+SPOSTARE METODI ULTERIORI IN CLASSI ASTRATTE(DECIDERE CASO PER CASO)
+-> SPOSTARE SE OVERRIDABILI IN SOTTOCLASSI SENZA SUBTYPING
+-> THIS PUO' ACCEDERE A CAMPI DATI DEL TIPO DINAMICO A CUI PUNTA
+
+ELIMINARE PARAMETRIZZAZIONE DA TIPI ASTRATTI E CONCRETE PER LE OPERAZIONI BOOLEANE E ALGEBRICHE
+-> IMPOSSIBILE FARE OVERRDING DI METODO TEMPLATIZZATO
+///
+
+
 gerarchia di tipi:
 
 Calcolabile
@@ -46,7 +59,7 @@ Operazioni Booleane
 Operazioni Ulteriori
 
 -> getRowNumber (virtuale) -> numero righe appartenenti al vettore  
--> isEmpty(virtuale,puro,parametrico,statico) -> true sse elemento
+-> isEmpty(virtuale) -> true sse elemento
    passato e' nullo
 
 
@@ -91,7 +104,7 @@ Operazioni Ulteriori
 
 -> getRowNumber (virtuale) -> ritorna numero righe appartenenti al vettore  
 
--> isEmpty(virtuale,parametrico) -> true sse elemento
+-> isEmpty(virtuale) -> true sse elemento
    passato e' nullo
 
 
@@ -187,7 +200,7 @@ Operazioni Ulteriori
 -> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
 -> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
 -> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
-
+-> isEmpty(virtuale) -> ritorna true sse matrice e' vuota , false altrimenti
 
 
 Operazioni Proprie
@@ -280,7 +293,7 @@ Operazioni Ulteriori
 
 -> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
 -> maxDegree (virtuale) -> ritorna il grado massimo del polinomio
--> isEmpty(virtuale,parametrico) -> true sse elemento
+-> isEmpty(virtuale) -> true sse elemento
    passato e' nullo
    
 
@@ -299,11 +312,11 @@ contenuto in ogni classe Concreta
 
 contiene metodi:
 
--> addConsistent(puro,parametrico,statico) -> true sse
+-> addConsistent(parametrico,statico) -> true sse
    elementi passati sono consistenti con operazione di somma, false altrimenti
--> subConsistent(puro,parametrico,statico) -> true sse
+-> subConsistent(parametrico,statico) -> true sse
    elementi passati sono consistenti con operazione di sottrazione,false altrimenti
--> mulConsistent(puro,parametrico,statico) -> true sse
+-> mulConsistent(parametrico,statico) -> true sse
    elementi passati sono consistenti con operazione di prodotto,false altrimenti
--> divConsistent(puro,parametrico,statico) -> true sse
+-> divConsistent(parametrico,statico) -> true sse
    elementi passati sono consistenti con operazione di divisione,false altrimenti
