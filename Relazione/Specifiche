@@ -1,16 +1,4 @@
 
-
-///
-SPOSTARE METODI ALGEBRICI E BOOLEANI IN SOTTOCLASSI CONCRETE
-SPOSTARE METODI ULTERIORI IN CLASSI ASTRATTE(DECIDERE CASO PER CASO)
--> SPOSTARE SE OVERRIDABILI IN SOTTOCLASSI SENZA SUBTYPING
--> THIS PUO' ACCEDERE A CAMPI DATI DEL TIPO DINAMICO A CUI PUNTA
-
-ELIMINARE PARAMETRIZZAZIONE DA TIPI ASTRATTI E CONCRETE PER LE OPERAZIONI BOOLEANE E ALGEBRICHE
--> IMPOSSIBILE FARE OVERRDING DI METODO TEMPLATIZZATO
-///
-
-
 gerarchia di tipi:
 
 Calcolabile
@@ -22,9 +10,12 @@ contiene metodi:
 Operazioni Ulteriori
 
 -> distruttore (virtuale) -> rende distruttori in gerarchia virtuale
+-> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> getElementNumber(virtuale,puro) -> ritorna numero di elementi appartenenti a oggetto
+-> isNull(virtual,puro) -> ritorna T sse elemento e' null , F altrimenti
 
 
-VettoreAstratto<T>
+VettoreAstratto
 
 Vettore sottotipo di Calcolabile
 
@@ -32,40 +23,17 @@ contiene metodi astratti di calcolo propri di ogni Vettore
 
 contiene metodi:
 
-Operazioni Algebriche
-
--> operator+ (virtuale,puro,parametrico) -> somma tra 2 vettori
--> operator- (virtuale,puro,parametrico) -> differenza tra 2 vettori
--> operator* (virtuale,puro,parametrico) -> prodotto di 2 vettori 
--> operator* scalare (virtuale,puro,parametrico) -> prodotto di scalare per Vettore
--> operator/ scalare (virtuale,puro,parametrico) -> divisione di Vettore per scalare
-
-Operazioni Booleane
-
--> operator== (virtuale,puro,parametrico) -> true sse
-   2 vettori sono uguali , false altrimenti
--> operator!= (virtuale,puro,parametrico) -> true sse
-   2 vettori sono diversi , false altrimenti
--> operator<  (virtuale,puro,parametrico) -> true sse
-   primo vettore minore del secondo, false altrimenti
--> operator<= (virtuale,puro,parametrico) -> true sse
-   primo vettore minore o uguale del secondo ,false altrimenti
--> operator> (virtuale,puro,parametrico) -> true sse
-   primo vettore maggiore di secondo ,false altrimenti
--> operator>= (virtuale,puro,parametrico) -> true sse
-   primo vettore maggiore o uguale di secondo,false altrimenti 
-
-
 Operazioni Ulteriori
 
--> getRowNumber (virtuale) -> numero righe appartenenti al vettore  
--> isEmpty(virtuale) -> true sse elemento
+-> getRowNumber (virtuale,puro) -> numero righe appartenenti al vettore  
+-> isEmpty(virtuale,puro) -> true sse elemento
    passato e' nullo
+-> getElementNumber(virtuale,puro) -> numero di elementi appartenenti a oggetto
+-> isNull(virtual,puro) -> ritorna T sse elemento e' null , F altrimenti
 
+VettoreConcreto
 
-VettoreConcreto<T>
-
-T = Razionale,Intero,Double 
+implementazione per tipi Razionale,Intero,Double
 
 implementazione concreta e templatizzata di metodi appartenenti a vettoreAstratto
 
@@ -77,45 +45,43 @@ contieneMetodi:
 
 Operazioni Algebriche
 
-
--> operator+ (virtuale,parametrico) -> somma tra 2 vettori
--> operator- (virtuale,parametrico) -> differenza tra 2 vettori
--> operator* (virtuale,parametrico) -> prodotto di 2 vettori 
--> operator* scalare (virtuale,parametrico) -> prodotto di scalare per Vettore
--> operator/ scalare (virtuale,parametrico) -> divisione di Vettore per scalare
+-> operator+  -> somma tra 2 vettori
+-> operator-  -> differenza tra 2 vettori
+-> operator*  -> prodotto di 2 vettori 
+-> operator* scalare  -> prodotto di scalare per Vettore
+-> operator/ scalare  -> divisione di Vettore per scalare
 
 Operazioni Booleane
 
--> operator== (virtuale,parametrico) -> true sse
+-> operator==  -> true sse
    2 vettori sono uguali , false altrimenti
--> operator!= (virtuale,parametrico) -> true sse
+-> operator!=  -> true sse
    2 vettori sono diversi , false altrimenti
--> operator<  (virtuale,parametrico) -> true sse
+-> operator<   -> true sse
    primo vettore minore del secondo, false altrimenti
--> operator<= (virtuale,parametrico) -> true sse
+-> operator<=  -> true sse
    primo vettore minore o uguale del secondo ,false altrimenti
--> operator> (virtuale,parametrico) -> true sse
+-> operator>  -> true sse
    primo vettore maggiore di secondo ,false altrimenti
--> operator>= (virtuale,parametrico) -> true sse
+-> operator>=  -> true sse
    primo vettore maggiore o uguale di secondo,false altrimenti 
 
    
 Operazioni Ulteriori
 
 -> getRowNumber (virtuale) -> ritorna numero righe appartenenti al vettore  
-
+-> getElementNumber(virtuale) -> ritorna numero di elementi appartenenti a oggetto
 -> isEmpty(virtuale) -> true sse elemento
    passato e' nullo
-
-
-
+-> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 -> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Vettore
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
 -> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria di ogni elemento di Vettore 
 
-MatriceAstratta<T>
+
+MatriceAstratta
 
 matrice sottotipo di Calcolabile
 
@@ -123,45 +89,26 @@ contiene metodi astratti di calcolo propri di ogni matrice
 
 contiene metodi:
 
--> operator+ (virtuale,puro,parametrico) -> somma tra 2 vettori
--> operator- (virtuale,puro,parametrico) -> differenza tra 2 vettori
--> operator* (virtuale,puro,parametrico) -> prodotto di 2 vettori 
--> operator* scalare (virtuale,puro,parametrico) -> prodotto di scalare per Vettore
--> operator/ scalare (virtuale,puro,parametrico) -> divisione di Vettore per scalare
-
-Operazioni Booleane
-
--> operator== (virtuale,puro,parametrico) -> true sse
-   2 vettori sono uguali , false altrimenti
--> operator!= (virtuale,puro,parametrico) -> true sse
-   2 vettori sono diversi , false altrimenti
--> operator<  (virtuale,puro,parametrico) -> true sse
-   primo matrice minore del secondo, false altrimenti
--> operator<= (virtuale,puro,parametrico) -> true sse
-   primo matrice minore o uguale del secondo ,false altrimenti
--> operator> (virtuale,puro,parametrico) -> true sse
-   primo matrice maggiore di secondo ,false altrimenti
--> operator>= (virtuale,puro,parametrico) -> true sse
-   primo matrice maggiore o uguale di secondo,false altrimenti 
 
 Operazioni Ulteriori
 
--> transpose  (virtuale,puro) -> ritorna matrice trasposta rispetto alla matrice originale
--> getRowNumber (virtuale) -> ritorna il numero di righe che compongono matrice
--> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
--> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
--> isSquare -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
--> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
--> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
--> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+-> getRowNumber (virtuale,puro) -> ritorna il numero di righe che compongono matrice
+-> getColumnNumber (virtuale,puro) -> ritorna il numero di colonne che compongono matrice
+-> getElementNumber (virtuale,puro) -> ritorna il numero di elementi che compongono la matrice
+-> isSquare (virtuale,puro) -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
+-> isIdentity (virtuale,puro) -> ritorna true sse matrice e' matrice identita', false altrimenti
+-> isUpperTriangular (virtuale,puro) -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
+-> isLowerTriangular (virtuale,puro) -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+-> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> isNull(virtual,puro) -> ritorna T sse oggetto e' null , F altrimenti
 
+MatriceConcreta
 
-
-MatriceConcreta<T>
+implementazione per tipi Razionale,Intero,Double
 
 T = Razionale,Intero,Double
 
-implementazione concreta e templatizzata di metodi appartenenti a supertipo
+implementazione concreta di metodi appartenenti a supertipo
 
 implementazione metodo aggiuntivo reduceAll(T = Razionale) 
 implementazione metodo aggiuntivo powerAll(T = intero) 
@@ -171,24 +118,24 @@ contiene metodi:
 
 Operazioni Algebriche
 
--> operator+ (virtuale,parametrico) -> somma tra 2 matrici
--> operator-(virtuale,parametrico) -> differenza tra 2 matrici
--> operator* (virtuale,parametrico) -> ritorna matrice risultato del prodotto tra le matrici passate
--> operator* scalare (virtuale,parametrico) -> ritorna Matrice ottenuto da
+-> operator+  -> somma tra 2 matrici
+-> operator- -> differenza tra 2 matrici
+-> operator*  -> ritorna matrice risultato del prodotto tra le matrici passate
+-> operator* scalare  -> ritorna Matrice ottenuto da
    prodotto di scalare per Matrice
--> operator/(virtuale,parametrico) -> ritorna Matrice ottenuto da
+-> operator/ -> ritorna Matrice ottenuto da
    divisione per scalare di Matrice
 
 Operazioni Booleane
 
--> operator==(virtuale,parametrico) -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
--> operator!=(virtuale,parametrico) -> negazione di uguaglianza
+-> operator== -> ritorna true sse oggetti sono uguali per ogni elemento che li compone ,false altrimenti
+-> operator!= -> negazione di uguaglianza
 
--> operator<  (virtuale,parametrico) -> ritorna true sse primo matrice < secondo , false altrimenti
--> operator<= (virtuale,parametrico) -> ritorna true sse primo matrice <= secondo , false altrimenti
+-> operator<   -> ritorna true sse primo matrice < secondo , false altrimenti
+-> operator<=  -> ritorna true sse primo matrice <= secondo , false altrimenti
 
--> operator> (virtuale,parametrico) -> ritorna true sse primo matrice > secondo , false altrimenti
--> operator>= (virtuale,parametrico) -> ritorna true sse primo matrice >= secondo , false altrimenti
+-> operator>  -> ritorna true sse primo matrice > secondo , false altrimenti
+-> operator>=  -> ritorna true sse primo matrice >= secondo , false altrimenti
 
 Operazioni Ulteriori
 
@@ -196,12 +143,12 @@ Operazioni Ulteriori
 -> getRowNumber (virtuale) -> ritorna il numero di righe che compongono matrice
 -> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
 -> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
--> isSquare -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
--> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
--> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
--> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+-> isSquare(virtuale) -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
+-> isIdentity(virtuale) -> ritorna true sse matrice e' matrice identita', false altrimenti
+-> isUpperTriangular(virtuale) -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
+-> isLowerTriangular(virtuale) -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
 -> isEmpty(virtuale) -> ritorna true sse matrice e' vuota , false altrimenti
-
+-> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 
@@ -212,7 +159,7 @@ Operazioni Proprie
    di ogni elemento di Vettore
 
 
-PolinomioAstratto<T>
+PolinomioAstratto
 
 Polinomio sottotipo di Calcolabile
 
@@ -220,45 +167,21 @@ contiene metodi astratti propri di ogni polinomio
 
 contiene metodi:
 
-Operazioni Algebriche
-
--> operator+(virtuale,puro,parametrico) -> ritorna polinomio somma di 2 polinomi passati
--> operator-(virtuale,puro,parametrico) -> ritorna polinomio differenza di 2 polinomi passati
--> operator* (virtuale,puro,parametrico) -> ritorna polinomio prodotto di 2 polinomi passati
-
--> operator* monomio (virtuale,puro,parametrico) -> ritorna polinomio dato da Polinomio e Monomio passato
--> operator/ (virtuale,puro,parametrico) -> ritorna polinomio divisione di 2 polinomi passati
-
-Operazioni Booleani
-
--> operator== (virtuale,puro,parametrico) -> ritorna true sse oggetti sono
-   uguali per ogni elemento che li compone ,false altrimenti
--> operator!=  (virtuale,puro,parametrico) -> negazione di uguaglianza
-
--> operator<  (virtuale,puro,parametrico) -> ritorna true sse primo polinomio < secondo , false altrimenti
--> operator<= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio <= secondo , false altrimenti
-
--> operator> (virtuale,puro,parametrico) -> ritorna true sse primo polinomio > secondo , false altrimenti
--> operator>= (virtuale,puro,parametrico) -> ritorna true sse primo polinomio >= secondo , false altrimenti
-
-
 Operazioni Ulteriori
 
--> first (virtuale) -> ritorna primo elemento di polinomio
--> rest(virtuale) -> ritorna resto degli elemento di polinomio
+-> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> getElementNumber(virtuale,puro) -> ritorna numero di elementi appartenenti a oggetto
+-> isNull(virtual,puro) -> ritorna T sse oggetto e' null , F altrimenti
+-> maxDegree(virtuale,puro) -> ritorna il grado massimo del polinomio
+-> derivative(virtuale,puro) -> ritorna derivata prima di polinomio
 
--> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
--> maxDegree(virtuale) -> ritorna il grado massimo del polinomio
+PolinomioConcreto
 
--> derivative -> ritorna derivata prima di polinomio
-
-PolinomioConcreto<T>
-
-T = Razionale,Intero
+implementazione per tipi Razionale,Intero
 
 PolinomioConcreto sottotipo di PolinomioAstratto
 
-implementazione concreta e templatizzata di metodi supertipo
+implementazione concreta di metodi supertipo
 
 implementazione metodo aggiuntivo (T = intero) powerAll
 implementazione metodo aggiuntivo (T = razionale) reduceAll
@@ -266,24 +189,24 @@ implementazione metodo aggiuntivo (T = razionale) reduceAll
 
 Operazioni Algebriche
 
--> operator+(virtuale,parametrico) -> ritorna polinomio somma di 2 polinomi passati
--> operator-(virtuale,parametrico) -> ritorna polinomio differenza di 2 polinomi passati
--> operator* (virtuale,parametrico) -> ritorna polinomio prodotto di 2 polinomi passati
+-> operator+ -> ritorna polinomio somma di 2 polinomi passati
+-> operator- -> ritorna polinomio differenza di 2 polinomi passati
+-> operator*  -> ritorna polinomio prodotto di 2 polinomi passati
 
--> operator* monomio (virtuale,parametrico) -> ritorna polinomio dato da Polinomio e Monomio passato
--> operator/ (virtuale,parametrico) -> ritorna polinomio divisione di 2 polinomi passati
+-> operator* monomio  -> ritorna polinomio dato da Polinomio e Monomio passato
+-> operator/  -> ritorna polinomio divisione di 2 polinomi passati
 
 Operazioni Booleani
 
--> operator== (virtuale,parametrico) -> ritorna true sse oggetti sono
+-> operator==  -> ritorna true sse oggetti sono
    uguali per ogni elemento che li compone ,false altrimenti
--> operator!=  (virtuale,parametrico) -> negazione di uguaglianza
+-> operator!=   -> negazione di uguaglianza
 
--> operator<  (virtuale,parametrico) -> ritorna true sse primo polinomio < secondo , false altrimenti
--> operator<= (virtuale,parametrico) -> ritorna true sse primo polinomio <= secondo , false altrimenti
+-> operator<   -> ritorna true sse primo polinomio < secondo , false altrimenti
+-> operator<=  -> ritorna true sse primo polinomio <= secondo , false altrimenti
 
--> operator> (virtuale,parametrico) -> ritorna true sse primo polinomio > secondo , false altrimenti
--> operator>= (virtuale,parametrico) -> ritorna true sse primo polinomio >= secondo , false altrimenti
+-> operator>  -> ritorna true sse primo polinomio > secondo , false altrimenti
+-> operator>=  -> ritorna true sse primo polinomio >= secondo , false altrimenti
 
 
 Operazioni Ulteriori
@@ -295,8 +218,7 @@ Operazioni Ulteriori
 -> maxDegree (virtuale) -> ritorna il grado massimo del polinomio
 -> isEmpty(virtuale) -> true sse elemento
    passato e' nullo
-   
-
+-> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 
@@ -307,6 +229,7 @@ Operazioni Proprie
 
 BoundChecker<T>
 
+classe templatizzata
 contiene metodi utili al controllo di bound per ogni operazione possibile
 contenuto in ogni classe Concreta 
 

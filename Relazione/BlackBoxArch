@@ -41,8 +41,8 @@ dim A = 0 , B = 1:
 impossibile
 
 dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
+A is null -> F
+B is null -> F
 (A > 0 , B > 0),A < B, A - B < LIMITE_INF -> F
 (A < 0 , B > 0), A - B < LIMITE_INF -> F
 (A > 0 , B < 0), A - B < LIMITE_SUP -> F
@@ -61,8 +61,8 @@ dim A = 0 , B = 1:
 impossibile
 
 dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
+A is null -> F
+B is null -> F
 (A > 0 , B > 0), A * B > LIMITE_SUP -> F  
 (A < 0 , B < 0), A * B > LIMITE_SUP -> F
 (A > 0 , B < 0), A * B < LIMITE_INF -> F
@@ -86,49 +86,51 @@ dim A = 0 , B = 1:
 impossibile
 
 dim A = 1,B = 1:
-A <-> null -> F
-B <-> null -> F
+A is null -> F
+B is null -> F
 B = 0 -> F
 
 T ALTRIMENTI
 
- 
+  
 dim A > 1,B > 1 :
 impossibile
 
 
-VettoreConcreto<T>
+VettoreConcreto
 
 
-VettoreConcreto<T>::Operazioni Algebriche
+VettoreConcreto::Operazioni Algebriche
 
 
 metodi
 
--> operator+(virtuale,parametrico) 
--> operator-(virtuale,parametrico) 
--> operator* (virtuale,parametrico)
--> operator* scalare (virtuale,parametrico)
--> operator/ (virtuale,parametrico)
+-> operator+ 
+-> operator- 
+-> operator* 
+-> operator* scalare 
+-> operator/ 
 
 
-operator+ (virtuale,puro,parametrico) 
+operator+  
 
-Sia A,B input
+Sia A,B input, 0 vettore nullo
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A = 1, B = 1: 
-    A isEmpty = T, B isEmpty = T -> eccezione
-    dim A = 1, B isEmpty = T -> eccezione
-    A isEmpty = T , B = 1 -> eccezione
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
     esiste coppia (a,b) in A,B |
-    	   (a,b) addConsistent = F -> eccezione
-    addConsistent = T -> somma |
-    		  somma e' somma di A e B
+    	        (a,b) addConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) addConsistent = F) -> somma |
+    		      somma e' somma di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -136,23 +138,26 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-operator- (virtuale,puro,parametrico)
+operator- 
 
-Sia A,B input
+Sia A,B input, 0 vettore nullo
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A = 1, B = 1: 
-    A isEmpty = T, B isEmpty = T -> eccezione
-    dim A = 1, B isEmpty = T -> eccezione
-    A isEmpty = T , B = 1 -> eccezione
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
     esiste coppia (a,b) in A,B |
-    	   (a,b) subConsistent = F -> eccezione
-    subConsistent = T -> differenza |
-    		  differenza e' differenza tra A e B
+    	        (a,b) subConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) subConsistent = F) -> differenza |
+    		      differenza e' differenza di A e B
+
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -160,7 +165,7 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-operator* (virtuale,puro,parametrico)
+operator* 
 
 Sia A,B input
 
@@ -170,23 +175,52 @@ dim A = 0 , B = 1:
     impossibile
 
 dim A = 1, B = 1: 
-    A isEmpty = T, B isEmpty = T -> eccezione
-    dim A = 1, B isEmpty = T -> eccezione
-    A isEmpty = T , B = 1 -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
     esiste coppia (a,b) in A,B |
-    	   (a,b) mulConsistent = F -> eccezione
-    mulConsistent = T -> prodotto |
-    		  prodotto e' prodotto tra A e B
-    
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' prodotto di A e B
+
 dim A > 1, B qualsiasi:
     impossibile
 dim A qualsiasi , B > 1:
     impossibile
 
 
-operator* scalare (virtuale,puro,parametrico)
+operator* scalare 
 
-Sia A,B input
+Sia A vettore ,B scalare input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:  
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' prodotto di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+operator/ scalare 
+
+Sia A vettore,B scalare in input 
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -194,13 +228,15 @@ dim A = 0 , B = 1:
     impossibile
 
 dim A = 1, B = 1: 
-    A isEmpty = T, B isEmpty = T -> eccezione
-    dim A = 1, B isEmpty = T -> eccezione
-    A isEmpty = T , B = 1 -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
     esiste coppia (a,b) in A,B |
-    	   (a,b) mulConsistent = F -> eccezione
-    mulConsistent = T -> prodotto |
-    		  prodotto e' prodotto tra A e B
+    	        (a,b) divConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F) -> prodotto |
+    		      prodotto e' prodotto di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -208,61 +244,35 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-
-operator/ scalare (virtuale,puro,parametrico)
-
-Sia A,B input
-
-dim A = 0 , B = 0 
-dim A = 1 , B = 0
-dim A = 0 , B = 1:
-    impossibile
-
-dim A = 1, B = 1: 
-    A isEmpty = T, B isEmpty = T -> eccezione
-    dim A = 1, B isEmpty = T -> eccezione
-    A isEmpty = T , B = 1 -> eccezione
-    esiste coppia (a,b) in A,B |
-    	   (a,b) divConsistent = F -> eccezione
-    divConsistent = T -> quoziente |
-    		  quoziente e' divisione tra A e B
-
-dim A > 1, B qualsiasi:
-    impossibile
-dim A qualsiasi , B > 1:
-    impossibile
-
-
-VettoreConcreto<T>::Operazioni Booleane
+VettoreConcreto::Operazioni Booleane
 
 Sia A,B input
 
 metodi:
--> operator==(virtuale,parametrico)
--> operator!=(virtuale,parametrico) 
--> operator<  (virtuale,parametrico) 
--> operator<= (virtuale,parametrico) 
--> operator> (virtuale,parametrico) 
--> operator>= (virtuale,parametrico)
+-> operator==
+-> operator!= 
+-> operator<   
+-> operator<=  
+-> operator>  
+-> operator>= 
 
-
-operator== (virtuale,puro,parametrico) 
+ 
+operator==  
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A == B -> T 
-    !(A == B) -> F
+dim A = 1,dim B = 1:
+     
+    A isNull, B isNull -> T
+    A isEmpty, B isEmpty -> T
+    A !isEmpty or !isNull , B isEmpty or isNull -> F
+    A isEmpty or isNull , B !isEmpty or !isNull -> F
+    A isEmpty or isNull , B isEmpty or isNull -> F
+    esiste coppia (a,b) in A,B | a != b -> F
+    !(esiste coppia (a,b) in A,B | a != b) -> T
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -270,7 +280,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator!= (virtuale,puro,parametrico) 
+operator!=  
 
 Sia A,B input
 
@@ -279,16 +289,13 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A != B -> T
-    !(A != B) -> F
+    A isNull, B isNull -> F
+    A isEmpty, B isEmpty -> F
+    A !isEmpty or !isNull , B isEmpty or isNull -> T
+    A isEmpty or isNull , B !isEmpty or !isNull -> T
+    A isEmpty or isNull , B isEmpty or isNull -> T
+    esiste coppia (a,b) in A,B | a != b -> T
+    !(esiste coppia (a,b) in A,B | a != b) -> F
 
 
 dim A > 1, B qualsiasi:
@@ -297,7 +304,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator<  (virtuale,puro,parametrico) 
+operator<   
 
 Sia A,B input
 
@@ -306,16 +313,14 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A < B -> T
-    !(A < B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> eccezione
+      esiste coppia (a,b) in A,B | a >= b -> F
+      !(esiste coppia (a,b) in A,B | a >= b) -> T
 
 
 dim A > 1, B qualsiasi:
@@ -324,7 +329,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator<= (virtuale,puro,parametrico) 
+operator<=  
 
 Sia A,B input
 
@@ -333,16 +338,14 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A <= B -> T
-    !(A <= B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> eccezione
+      esiste coppia (a,b) in A,B | a > b -> F
+      !(esiste coppia (a,b) in A,B | a > b) -> T
 
 
 dim A > 1, B qualsiasi:
@@ -351,7 +354,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator> (virtuale,puro,parametrico) 
+operator>  
 
 Sia A,B input
 
@@ -360,18 +363,15 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A = 1, dimB = 1:
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB 
-    A > B -> T
-    !(A > B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> eccezione
+      esiste coppia (a,b) in A,B | a <= b -> F
+      !(esiste coppia (a,b) in A,B | a <= b) -> T
 
 
 dim A > 1, B qualsiasi:
@@ -380,7 +380,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator>= (virtuale,puro,parametrico)
+operator>= 
 
 Sia A,B input
 
@@ -389,23 +389,22 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
 
-dim A = 1, dimB = 1:
-    A >= B -> T
-    !(A >= B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> eccezione
+      esiste coppia (a,b) in A,B | a < b -> F
+      !(esiste coppia (a,b) in A,B | a < b) -> T
 
 dim A > 1, B qualsiasi:
     impossibile
 dim A qualsiasi , B > 1:
     impossibile
 
-VettoreConcreto<T>::Operazioni Ulteriori
+VettoreConcreto::Operazioni Ulteriori
 
 Sia A input
 
@@ -415,7 +414,7 @@ metodi:
 -> isEmpty(virtuale,parametrico) 
 
 
-isEmpty(virtuale,puro,parametrico)
+isEmpty(virtuale)
 
 Sia A input
 
@@ -447,7 +446,7 @@ dim A > 1:
     -> impossibile
 
 
-VettoreConcreto<T>::Operazioni Proprie
+VettoreConcreto::Operazioni Proprie
 
 sia A input
 
@@ -510,26 +509,26 @@ FINE OPERAZIONI VETTORE CONCRETO
 
 
 
-MatriceConcreta<T>
+MatriceConcreta
 
 
 
-MatriceConcreta<T>
+MatriceConcreta
 
 
-MatriceConcreta<T>::Operazioni Algebriche
-
+MatriceConcreta::Operazioni Algebriche
 
 metodi
 
--> operator+(virtuale,parametrico) 
--> operator-(virtuale,parametrico) 
--> operator* (virtuale,parametrico)
--> operator* monomio (virtuale,parametrico)
--> operator/ (virtuale,parametrico)
+
+-> operator+ 
+-> operator- 
+-> operator* 
+-> operator* scalare 
+-> operator/ 
 
 
-operator+ (virtuale,puro,parametrico) 
+operator+  
 
 Sia A,B input
 
@@ -551,7 +550,7 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-operator- (virtuale,puro,parametrico)
+operator- 
 
 Sia A,B input
 
@@ -573,7 +572,7 @@ dim A qualsiasi , B > 1:
     impossibile
     
 
-operator* (virtuale,puro,parametrico)
+operator* 
 
 Sia A,B input
 
@@ -595,7 +594,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator* scalare (virtuale,puro,parametrico)
+operator* scalare 
 
 Sia A,B input
 
@@ -618,7 +617,7 @@ dim A qualsiasi , B > 1:
 
 
 
-operator/ scalare (virtuale,puro,parametrico)
+operator/ scalare 
 
 Sia A,B input
 
@@ -640,20 +639,20 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-MatriceConcreta<T>::Operazioni Booleane
+MatriceConcreta::Operazioni Booleane
 
 Sia A,B input
 
 metodi:
--> operator==(virtuale,parametrico)
--> operator!=(virtuale,parametrico) 
--> operator<  (virtuale,parametrico) 
--> operator<= (virtuale,parametrico) 
--> operator> (virtuale,parametrico) 
--> operator>= (virtuale,parametrico)
+-> operator==
+-> operator!= 
+-> operator<   
+-> operator<=  
+-> operator>  
+-> operator>= 
 
 
-operator== (virtuale,puro,parametrico) 
+operator==  
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -677,7 +676,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator!= (virtuale,puro,parametrico) 
+operator!=  
 
 Sia A,B input
 
@@ -704,7 +703,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator<  (virtuale,puro,parametrico) 
+operator<   
 
 Sia A,B input
 
@@ -731,7 +730,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator<= (virtuale,puro,parametrico) 
+operator<=  
 
 Sia A,B input
 
@@ -758,7 +757,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator> (virtuale,puro,parametrico) 
+operator>  
 
 Sia A,B input
 
@@ -787,7 +786,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-operator>= (virtuale,puro,parametrico)
+operator>= 
 
 Sia A,B input
 
@@ -813,23 +812,23 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-MatriceConcreta<T>::Operazioni Ulteriori
+MatriceConcreta::Operazioni Ulteriori
 
 
 metodi:
--> transpose  (virtuale,puro) 
+-> transpose 
 -> getRowNumber (virtuale) 
 -> getColumnNumber (virtuale)
 -> getElementNumber(virtuale)
--> isSquare 
--> isIdentity 
--> isUpperTriangular 
--> isLowerTriangular
+-> isSquare(virtuale) 
+-> isIdentity(virtuale) 
+-> isUpperTriangular(virtuale) 
+-> isLowerTriangular(virtuale)
 -> isEmpty(virtuale) 
 
 
 
-isEmpty(virtuale,puro,parametrico)
+isEmpty(virtuale)
 
 Sia A input
 
@@ -844,7 +843,7 @@ dim A > 1 :
 impossibile
 
 
-transpose(virtuale,puro)
+transpose(virtuale)
 
 Sia A input
 
@@ -895,7 +894,7 @@ dim A > 1 :
     impossibile
 
 
-getElementNumber:
+getElementNumber(virtuale):
 
 Sia A input
 
@@ -912,7 +911,7 @@ dim A > 1 :
     impossibile
 
 
-isSquare:
+isSquare(virtuale):
 
 Sia A input
 
@@ -929,7 +928,7 @@ dim A > 1 :
     impossibile
 
 
-isIdentity:
+isIdentity(virtuale):
 
 Sia A input
 
@@ -949,7 +948,7 @@ dim A > 1 :
     impossibile
 
 
-isUpperTriangular:
+isUpperTriangular(virtuale):
 
 Sia A input
 
@@ -958,7 +957,6 @@ dim A = 0 :
 
 dim A = 1:
     A is null -> eccezione
-    A isEmpty -> F
     A !(isEmpty), !(null),
     A isSquare, ogni elemento sotto diagonale principale = 0 -> T
     F altrimenti
@@ -966,7 +964,7 @@ dim A = 1:
 dim A > 1 :
     impossibile
 
-isLowerTriangular:
+isLowerTriangular(virtuale):
 
 Sia A input
 
@@ -975,7 +973,6 @@ dim A = 0 :
 
 dim A = 1:
     A is null -> eccezione
-    A isEmpty -> F
     A !(isEmpty), !(null),
     A isSquare, ogni elemento sopra diagonale principale = 0 -> T,
     F altrimenti
