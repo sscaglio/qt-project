@@ -318,7 +318,7 @@ metodi:
 -> isUpperTriangular(virtuale) 
 -> isLowerTriangular(virtuale)
 -> isEmpty(virtuale) 
-
+-> isNull(virtuale)
 
 
 transpose(virtuale)
@@ -473,14 +473,74 @@ dim A = 1 :
 dim A > 1 :
     impossibile
 
-////////////////////////
-////////////////////////
-////////////////////////
-////////////////////////
 
-INSERIRE OPERAZIONI PROPRIE MATRICE CONCRETA
 
-////////////////////////
-////////////////////////
-////////////////////////
-////////////////////////
+isNull(virtual)
+
+sia A input, 0 vettore vuoto
+
+dim A = 0 :
+    impossibile
+
+dim A = 1 :
+    A = 0 -> T
+    A != 0 -> F
+
+dim A > 1:
+    impossibile
+
+
+Operazioni Proprie
+
+-> (T = Razionale) reduceAll
+-> (T = Intero) powerAll 
+-> (T = Double) fractionalAll
+
+
+reduceAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> A' |
+    A' <-> A ridotto ai minimo per ogni suo elemento
+
+dim A > 2:
+    impossibile:
+
+powerAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> potenza |
+    	potenza e' somma di ogni elemento di A elevato al quadrato,
+	potenza < LIMITE_SUP
+	se potenza >= LIMITE_SUP -> eccezione
+
+dim A > 2:
+    impossibile
+
+
+fractionalAll(virtuale)
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> fractional |
+    	fractional e' somma di parte frazionaria di ogni
+	elemento di A,
+	fractional e' < LIMITE_SUP
+	se fractional >= LIMITE_SUP -> eccezione // improbabile
+
+dim A > 1 :
+    impossibile 
