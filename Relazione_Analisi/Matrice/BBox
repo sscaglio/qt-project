@@ -1,0 +1,485 @@
+
+MatriceConcreta
+
+
+MatriceConcreta::Operazioni Algebriche
+
+metodi
+
+
+-> operator+ 
+-> operator- 
+-> operator* 
+-> operator* scalare 
+-> operator/ 
+
+
+operator+  
+
+sia A , B matrici in input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) addConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) addConsistent = F) -> somma |
+    		      somma e' matrice somma di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+operator- 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:
+
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) subConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) subConsistent = F) -> differenza |
+    		      differenza e' matrice differenza di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+operator* 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' matrice prodotto di A e B
+    
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator* scalare 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' matrice prodotto di A e B
+    
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+operator/ scalare 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+     A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F) -> quoziente |
+    		      quoziente e' matrice quoziente di A e B
+    
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+MatriceConcreta::Operazioni Booleane
+
+Sia A,B input
+
+metodi:
+-> operator==
+-> operator!= 
+-> operator<   
+-> operator<=  
+-> operator>  
+-> operator>= 
+
+
+operator==  
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A == B -> T 
+    !(A == B) -> F
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator!=  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A != B -> T
+    !(A != B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<   
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A < B -> T
+    !(A < B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<=  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A <= B -> T
+    !(A <= B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, dimB = 1:
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB 
+    A > B -> T
+    !(A > B) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>= 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A isEmpty = T, B isEmpty = T:
+    eccezione
+dim A = 1, B isEmpty = T:
+    eccezione
+dim A isEmpty = T , B = 1:
+    eccezione
+
+dim A = 1, dimB = 1:
+    A >= B -> T
+    !(A >= B) -> F
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+MatriceConcreta::Operazioni Ulteriori
+
+
+metodi:
+-> transpose 
+-> getRowNumber (virtuale) 
+-> getColumnNumber (virtuale)
+-> getElementNumber(virtuale)
+-> isSquare(virtuale) 
+-> isIdentity(virtuale) 
+-> isUpperTriangular(virtuale) 
+-> isLowerTriangular(virtuale)
+-> isEmpty(virtuale) 
+
+
+
+isEmpty(virtuale)
+
+Sia A input
+
+dim A = 0 :
+impossibile
+
+dim A = 1 :
+A <-> null -> T
+A <-> a -> F
+
+dim A > 1 :
+impossibile
+
+
+transpose(virtuale)
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> A' |
+      A' e' trasposta di A
+
+dim A > 1 :
+    impossibile
+
+
+getRowNumber(virtuale)
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero righe di A
+
+dim A > 1 :
+    impossibile
+
+
+getColumnNumber(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero colonne di A
+
+dim A > 1 :
+    impossibile
+
+
+getElementNumber(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> 0
+    A !(isEmpty), !(null) -> n |
+      n e' numero colonne * numero di righe di A
+
+dim A > 1 :
+    impossibile
+
+
+isSquare(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null), A getRowNumber == A getColumnNumber -> T,
+    F altrimenti 
+
+dim A > 1 :
+    impossibile
+
+
+isIdentity(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A isEmpty -> F
+    A !(isEmpty), !(null),
+      (A isUpperTriangular), (A isLowerTriangular),
+      (ogni elemento su diagonale = 1) -> T,
+    F altrimenti
+      
+
+dim A > 1 :
+    impossibile
+
+
+isUpperTriangular(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A !(isEmpty), !(null),
+    A isSquare, ogni elemento sotto diagonale principale = 0 -> T
+    F altrimenti
+
+dim A > 1 :
+    impossibile
+
+isLowerTriangular(virtuale):
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A is null -> eccezione
+    A !(isEmpty), !(null),
+    A isSquare, ogni elemento sopra diagonale principale = 0 -> T,
+    F altrimenti
+

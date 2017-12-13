@@ -1,0 +1,97 @@
+ 
+BoundChecker<T>
+
+metodi:
+
+-> addConsistent(parametrico,statico)
+-> subConsistent(parametrico,statico)
+-> mulConsistent(parametrico,statico)
+-> divConsistent(parametrico,statico)
+
+addConsistent(parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+(A > 0 , B > 0), A + B > LIMITE_SUP -> F
+(A > 0 , B < 0), A < B, A + B < LIMITE_INF -> F
+(A < 0 , B < 0), A + B < LIMITE_INF -> F
+
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+subConsistent(parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+(A > 0 , B > 0),A < B, A - B < LIMITE_INF -> F
+(A < 0 , B > 0), A - B < LIMITE_INF -> F
+(A > 0 , B < 0), A - B < LIMITE_SUP -> F
+T ALTRIMENTI
+
+dim A > 1,B > 1 :
+impossibile
+
+mulConsistent(parametrico,statico)
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+(A > 0 , B > 0), A * B > LIMITE_SUP -> F  
+(A < 0 , B < 0), A * B > LIMITE_SUP -> F
+(A > 0 , B < 0), A * B < LIMITE_INF -> F
+(A < 0 , B > 0), A * B < LIMITE_INF -> F
+T ALTRIMENTI
+
+
+dim A > 1,B > 1 :
+impossibile 
+
+
+divConsistent(parametrico,statico)
+
+NB : presta attenzione a tipo RAZIONALE(possibili overflow )
+
+sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+impossibile
+
+dim A = 1,B = 1:
+A is null -> F
+B is null -> F
+B = 0 -> F
+
+T ALTRIMENTI
+
+  
+dim A > 1,B > 1 :
+impossibile
+
+
