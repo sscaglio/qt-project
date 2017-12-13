@@ -330,16 +330,16 @@ PolinomioConcreto::Operazioni Ulteriori
 
 metodi
 
--> first (virtuale) 
--> rest(virtuale)
--> getElementNumber (virtuale)
--> maxDegree (virtuale)
--> isEmpty(virtuale) 
--> isNull(virtual) 
+-> first  
+-> rest
+-> getElementNumber 
+-> maxDegree 
+-> isEmpty 
+-> isNull 
 
 
 
-first (virtuale) 
+first  
 
 sia A polinomio in input
 
@@ -355,7 +355,7 @@ dim A > 1 :
     impossibile
 
 
-rest(virtuale)
+rest
 
 sia A polinomio in input
 
@@ -371,7 +371,7 @@ dim A > 1 :
     impossibile
 
 
-getElementNumber (virtuale) 
+getElementNumber  
 
 sia A polinomio in input
 
@@ -388,7 +388,7 @@ dim A > 1 :
     impossibile
 
 
-maxDegree (virtuale)
+maxDegree 
 
 sia A polinomio in input
 
@@ -407,11 +407,11 @@ dim A > 1 :
 
 
 
-isEmpty(virtuale) 
+isEmpty 
 
 sia A polinomio in input
 
-isEmpty(virtuale)
+isEmpty
 
 Sia A input
 
@@ -427,7 +427,7 @@ dim A > 1 :
     impossibile
 
 
-isNull(virtual) 
+isNull 
 
 sia A polinomio in input
 
@@ -451,7 +451,7 @@ metodi
 -> (T = Intero) powerAll 
 
 
-reduceAll(virtuale)
+reduceAll
 
 dim A = 0:
     impossibile
@@ -466,7 +466,7 @@ dim A = 1:
 dim A > 2:
     impossibile:
 
-powerAll(virtuale)
+powerAll
 
 dim A = 0:
     impossibile

@@ -310,18 +310,18 @@ MatriceConcreta::Operazioni Ulteriori
 
 metodi:
 -> transpose 
--> getRowNumber (virtuale) 
--> getColumnNumber (virtuale)
--> getElementNumber(virtuale)
--> isSquare(virtuale) 
--> isIdentity(virtuale) 
--> isUpperTriangular(virtuale) 
--> isLowerTriangular(virtuale)
--> isEmpty(virtuale) 
--> isNull(virtuale)
+-> getRowNumber  
+-> getColumnNumber 
+-> getElementNumber
+-> isSquare 
+-> isIdentity 
+-> isUpperTriangular 
+-> isLowerTriangular
+-> isEmpty 
+-> isNull
 
 
-transpose(virtuale)
+transpose
 
 Sia A input
 
@@ -338,7 +338,7 @@ dim A > 1 :
     impossibile
 
 
-getRowNumber(virtuale)
+getRowNumber
 
 Sia A input
 
@@ -355,7 +355,7 @@ dim A > 1 :
     impossibile
 
 
-getColumnNumber(virtuale):
+getColumnNumber:
 
 Sia A input
 
@@ -372,7 +372,7 @@ dim A > 1 :
     impossibile
 
 
-getElementNumber(virtuale):
+getElementNumber:
 
 Sia A input
 
@@ -389,7 +389,7 @@ dim A > 1 :
     impossibile
 
 
-isSquare(virtuale):
+isSquare:
 
 Sia A input
 
@@ -406,7 +406,7 @@ dim A > 1 :
     impossibile
 
 
-isIdentity(virtuale):
+isIdentity:
 
 Sia A input
 
@@ -426,7 +426,7 @@ dim A > 1 :
     impossibile
 
 
-isUpperTriangular(virtuale):
+isUpperTriangular:
 
 Sia A input
 
@@ -442,7 +442,7 @@ dim A = 1:
 dim A > 1 :
     impossibile
 
-isLowerTriangular(virtuale):
+isLowerTriangular:
 
 Sia A input
 
@@ -457,7 +457,7 @@ dim A = 1:
 
 
 
-isEmpty(virtuale)
+isEmpty
 
 Sia A input
 
@@ -475,7 +475,7 @@ dim A > 1 :
 
 
 
-isNull(virtual)
+isNull
 
 sia A input, 0 vettore vuoto
 
@@ -497,7 +497,7 @@ Operazioni Proprie
 -> (T = Double) fractionalAll
 
 
-reduceAll(virtuale)
+reduceAll
 
 dim A = 0:
     impossibile
@@ -511,7 +511,7 @@ dim A = 1:
 dim A > 2:
     impossibile:
 
-powerAll(virtuale)
+powerAll
 
 dim A = 0:
     impossibile
@@ -528,7 +528,7 @@ dim A > 2:
     impossibile
 
 
-fractionalAll(virtuale)
+fractionalAll
 
 dim A = 0 :
     impossibile

@@ -9,10 +9,10 @@ contiene metodi:
 
 Operazioni Ulteriori
 
--> distruttore (virtuale) -> rende distruttori in gerarchia virtuale
--> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
--> getElementNumber(virtuale,puro) -> ritorna numero di elementi appartenenti a oggetto
--> isNull(virtual,puro) -> ritorna T sse elemento e' null , F altrimenti
+-> distruttore  -> rende distruttori in gerarchia virtuale
+-> isEmpty -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> getElementNumber -> ritorna numero di elementi appartenenti a oggetto
+-> isNull -> ritorna T sse elemento e' null , F altrimenti
 
 
 VettoreAstratto
@@ -25,11 +25,11 @@ contiene metodi:
 
 Operazioni Ulteriori
 
--> getRowNumber (virtuale,puro) -> numero righe appartenenti al vettore  
--> isEmpty(virtuale,puro) -> true sse elemento
+-> getRowNumber  -> numero righe appartenenti al vettore  
+-> isEmpty -> true sse elemento
    passato e' nullo
--> getElementNumber(virtuale,puro) -> numero di elementi appartenenti a oggetto
--> isNull(virtual,puro) -> ritorna T sse elemento e' null , F altrimenti
+-> getElementNumber -> numero di elementi appartenenti a oggetto
+-> isNull -> ritorna T sse elemento e' null , F altrimenti
 
 VettoreConcreto
 
@@ -69,11 +69,11 @@ Operazioni Booleane
    
 Operazioni Ulteriori
 
--> getRowNumber (virtuale) -> ritorna numero righe appartenenti al vettore  
--> getElementNumber(virtuale) -> ritorna numero di elementi appartenenti a oggetto
--> isEmpty(virtuale) -> true sse elemento
+-> getRowNumber  -> ritorna numero righe appartenenti al vettore  
+-> getElementNumber -> ritorna numero di elementi appartenenti a oggetto
+-> isEmpty -> true sse elemento
    passato e' nullo
--> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
+-> isNull -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 -> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Vettore
@@ -92,15 +92,15 @@ contiene metodi:
 
 Operazioni Ulteriori
 
--> getRowNumber (virtuale,puro) -> ritorna il numero di righe che compongono matrice
--> getColumnNumber (virtuale,puro) -> ritorna il numero di colonne che compongono matrice
--> getElementNumber (virtuale,puro) -> ritorna il numero di elementi che compongono la matrice
--> isSquare (virtuale,puro) -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
--> isIdentity (virtuale,puro) -> ritorna true sse matrice e' matrice identita', false altrimenti
--> isUpperTriangular (virtuale,puro) -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
--> isLowerTriangular (virtuale,puro) -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
--> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
--> isNull(virtual,puro) -> ritorna T sse oggetto e' null , F altrimenti
+-> getRowNumber  -> ritorna il numero di righe che compongono matrice
+-> getColumnNumber  -> ritorna il numero di colonne che compongono matrice
+-> getElementNumber  -> ritorna il numero di elementi che compongono la matrice
+-> isSquare  -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
+-> isIdentity  -> ritorna true sse matrice e' matrice identita', false altrimenti
+-> isUpperTriangular  -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
+-> isLowerTriangular  -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+-> isEmpty -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> isNull -> ritorna T sse oggetto e' null , F altrimenti
 
 MatriceConcreta
 
@@ -139,16 +139,16 @@ Operazioni Booleane
 
 Operazioni Ulteriori
 
--> transpone  (virtuale) -> ritorna matrice trasposta rispetto alla matrice originale
--> getRowNumber (virtuale) -> ritorna il numero di righe che compongono matrice
--> getColumnNumber (virtuale)-> ritorna il numero di colonne che compongono matrice
--> getElementNumber(virtuale) -> ritorna il numero di elementi che compongono la matrice
--> isSquare(virtuale) -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
--> isIdentity(virtuale) -> ritorna true sse matrice e' matrice identita', false altrimenti
--> isUpperTriangular(virtuale) -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
--> isLowerTriangular(virtuale) -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
--> isEmpty(virtuale) -> ritorna true sse matrice e' vuota , false altrimenti
--> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
+-> transpone   -> ritorna matrice trasposta rispetto alla matrice originale
+-> getRowNumber  -> ritorna il numero di righe che compongono matrice
+-> getColumnNumber -> ritorna il numero di colonne che compongono matrice
+-> getElementNumber -> ritorna il numero di elementi che compongono la matrice
+-> isSquare -> ritorna true sse righe di matrice sono uguali a colonne, false altrimenti
+-> isIdentity -> ritorna true sse matrice e' matrice identita', false altrimenti
+-> isUpperTriangular -> ritorna true sse matrice e' matrice triangolare superiore , false altrimenti
+-> isLowerTriangular -> ritorna true sse matrice e' matrice triangolare inferiore , false altrimenti
+-> isEmpty -> ritorna true sse matrice e' vuota , false altrimenti
+-> isNull -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 
@@ -169,10 +169,10 @@ contiene metodi:
 
 Operazioni Ulteriori
 
--> isEmpty(virtuale,puro) -> ritorna T sse oggetto e' vuoto, false altrimenti
--> getElementNumber(virtuale,puro) -> ritorna numero di elementi appartenenti a oggetto
--> isNull(virtual,puro) -> ritorna T sse oggetto e' null , F altrimenti
--> maxDegree(virtuale,puro) -> ritorna il grado massimo del polinomio
+-> isEmpty -> ritorna T sse oggetto e' vuoto, false altrimenti
+-> getElementNumber -> ritorna numero di elementi appartenenti a oggetto
+-> isNull -> ritorna T sse oggetto e' null , F altrimenti
+-> maxDegree -> ritorna il grado massimo del polinomio
 
 
 PolinomioConcreto
@@ -215,14 +215,14 @@ Operazioni Booleani
 
 Operazioni Ulteriori
 
--> first (virtuale) -> ritorna primo elemento di polinomio
--> rest(virtuale) -> ritorna resto degli elemento di polinomio
+-> first  -> ritorna primo elemento di polinomio
+-> rest -> ritorna resto degli elemento di polinomio
 
--> getElementNumber (virtuale)-> ritorna il numero di elementi di polinomio
--> maxDegree (virtuale) -> ritorna il grado massimo del polinomio
--> isEmpty(virtuale) -> true sse elemento
+-> getElementNumber -> ritorna il numero di elementi di polinomio
+-> maxDegree  -> ritorna il grado massimo del polinomio
+-> isEmpty -> true sse elemento
    passato e' nullo
--> isNull(virtual) -> ritorna T sse oggetto e' null , F altrimenti
+-> isNull -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
 
@@ -239,11 +239,11 @@ contenuto in ogni classe Concreta
 
 contiene metodi:
 
--> addConsistent(parametrico,statico) -> true sse
+-> addConsistent -> true sse
    elementi passati sono consistenti con operazione di somma, false altrimenti
--> subConsistent(parametrico,statico) -> true sse
+-> subConsistent -> true sse
    elementi passati sono consistenti con operazione di sottrazione,false altrimenti
--> mulConsistent(parametrico,statico) -> true sse
+-> mulConsistent -> true sse
    elementi passati sono consistenti con operazione di prodotto,false altrimenti
--> divConsistent(parametrico,statico) -> true sse
+-> divConsistent -> true sse
    elementi passati sono consistenti con operazione di divisione,false altrimenti

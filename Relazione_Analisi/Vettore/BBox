@@ -306,12 +306,12 @@ Sia A input
 
 metodi:
 
--> isEmpty(virtuale) 
--> getRowNumber (virtuale)
--> getElementNumber(virtuale) 
--> isNull(virtual)
+-> isEmpty 
+-> getRowNumber 
+-> getElementNumber 
+-> isNull
 
-isEmpty(virtuale)
+isEmpty
 
 Sia A input
 
@@ -327,7 +327,7 @@ dim A > 1 :
 impossibile
 
 
-getRowNumber(virtuale)
+getRowNumber
 
 
 dim A = 0:
@@ -344,7 +344,7 @@ dim A > 1:
 
 
 
-getElementNumber(virtuale)
+getElementNumber
 
 sia A input
 
@@ -362,7 +362,7 @@ dim A > 1 :
     impossibile
 
 
-isNull(virtual)
+isNull
 
 sia A input, 0 vettore vuoto
 
@@ -386,7 +386,7 @@ metodi:
 -> (T = Intero) powerAll 
 -> (T = Double) fractionalAll
 
-reduceAll(virtuale)
+reduceAll
 
 dim A = 0:
     impossibile
@@ -400,7 +400,7 @@ dim A = 1:
 dim A > 2:
     impossibile:
 
-powerAll(virtuale)
+powerAll
 
 dim A = 0:
     impossibile
@@ -417,7 +417,7 @@ dim A > 2:
     impossibile
 
 
-fractionalAll(virtuale)
+fractionalAll
 
 dim A = 0 :
     impossibile
