@@ -165,21 +165,20 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A == B -> T 
-    !(A == B) -> F
+dim A = 1,dim B = 1:
+     
+    A isNull, B isNull -> T
+    A isEmpty, B isEmpty -> T
+    A !isEmpty or !isNull , B isEmpty or isNull -> F
+    A isEmpty or isNull , B !isEmpty or !isNull -> F
+    esiste coppia (a,b) in A,B | a != b -> F
+    !(esiste coppia (a,b) in A,B | a != b) -> T
 
 dim A > 1, B qualsiasi:
     impossibile
 dim A qualsiasi , B > 1:
     impossibile
+
 
 
 operator!=  
@@ -191,17 +190,14 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A != B -> T
-    !(A != B) -> F
-
+dim A = 1,dim B = 1:
+     
+    A isNull, B isNull -> F
+    A isEmpty, B isEmpty -> T
+    A !isEmpty or !isNull , B isEmpty or isNull -> T
+    A isEmpty or isNull , B !isEmpty or !isNull -> T
+    esiste coppia (a,b) in A,B | a != b -> T
+    !(esiste coppia (a,b) in A,B | a != b) -> F
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -209,7 +205,10 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
+
 operator<   
+
+Sia A,B input
 
 Sia A,B input
 
@@ -218,23 +217,19 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A < B -> T
-    !(A < B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a >= b -> F
+      !(esiste coppia (a,b) in A,B | a >= b) -> T
 
 
 dim A > 1, B qualsiasi:
     impossibile
 dim A qualsiasi , B > 1:
     impossibile
-
 
 operator<=  
 
@@ -245,22 +240,20 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB = 1:
-    A <= B -> T
-    !(A <= B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a > b -> F
+      !(esiste coppia (a,b) in A,B | a > b) -> T
 
 
 dim A > 1, B qualsiasi:
     impossibile
 dim A qualsiasi , B > 1:
     impossibile
+
 
 
 operator>  
@@ -272,18 +265,14 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A = 1, dimB = 1:
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
-
-dim A = 1, dimB 
-    A > B -> T
-    !(A > B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a <= b -> F
+      !(esiste coppia (a,b) in A,B | a <= b) -> T
 
 
 dim A > 1, B qualsiasi:
@@ -301,16 +290,14 @@ dim A = 1 , B = 0
 dim A = 0 , B = 1:
     impossibile
 
-dim A isEmpty = T, B isEmpty = T:
-    eccezione
-dim A = 1, B isEmpty = T:
-    eccezione
-dim A isEmpty = T , B = 1:
-    eccezione
 
-dim A = 1, dimB = 1:
-    A >= B -> T
-    !(A >= B) -> F
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a < b -> F
+      !(esiste coppia (a,b) in A,B | a < b) -> T
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -334,21 +321,6 @@ metodi:
 
 
 
-isEmpty(virtuale)
-
-Sia A input
-
-dim A = 0 :
-impossibile
-
-dim A = 1 :
-A <-> null -> T
-A <-> a -> F
-
-dim A > 1 :
-impossibile
-
-
 transpose(virtuale)
 
 Sia A input
@@ -357,9 +329,9 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
     A isEmpty -> 0
-    A !(isEmpty), !(null) -> A' |
+    A !isEmpty, A !isNull -> A' |
       A' e' trasposta di A
 
 dim A > 1 :
@@ -374,9 +346,9 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
     A isEmpty -> 0
-    A !(isEmpty), !(null) -> n |
+    A !isEmpty, A !isNull -> n |
       n e' numero righe di A
 
 dim A > 1 :
@@ -391,9 +363,9 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
     A isEmpty -> 0
-    A !(isEmpty), !(null) -> n |
+    A !(isEmpty), A !isNull -> n |
       n e' numero colonne di A
 
 dim A > 1 :
@@ -410,8 +382,8 @@ dim A = 0 :
 dim A = 1:
     A is null -> eccezione
     A isEmpty -> 0
-    A !(isEmpty), !(null) -> n |
-      n e' numero colonne * numero di righe di A
+    A !isEmpty, A !isNull -> element |
+      element = A getRowNumber * A getColumnNumber
 
 dim A > 1 :
     impossibile
@@ -425,9 +397,9 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
     A isEmpty -> F
-    A !(isEmpty), !(null), A getRowNumber == A getColumnNumber -> T,
+    A !isEmpty, A !isNull, A getRowNumber == A getColumnNumber -> T,
     F altrimenti 
 
 dim A > 1 :
@@ -442,9 +414,9 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
     A isEmpty -> F
-    A !(isEmpty), !(null),
+    A !isEmpty, A !isNull,
       (A isUpperTriangular), (A isLowerTriangular),
       (ogni elemento su diagonale = 1) -> T,
     F altrimenti
@@ -462,10 +434,10 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
-    A !(isEmpty), !(null),
+    A isNull -> eccezione
+    A isEmpty -> F
+    A !isEmpty, A !isNull,
     A isSquare, ogni elemento sotto diagonale principale = 0 -> T
-    F altrimenti
 
 dim A > 1 :
     impossibile
@@ -478,8 +450,37 @@ dim A = 0 :
     impossibile
 
 dim A = 1:
-    A is null -> eccezione
+    A isNull -> eccezione
+    A isEmpty -> F
     A !(isEmpty), !(null),
     A isSquare, ogni elemento sopra diagonale principale = 0 -> T,
-    F altrimenti
 
+
+
+isEmpty(virtuale)
+
+Sia A input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1 :
+    A isNull -> eccezione
+    sia n numero di elementi di A
+    -> n != 0 -> F
+    -> n = 0 -> T
+
+dim A > 1 :
+    impossibile
+
+////////////////////////
+////////////////////////
+////////////////////////
+////////////////////////
+
+INSERIRE OPERAZIONI PROPRIE MATRICE CONCRETA
+
+////////////////////////
+////////////////////////
+////////////////////////
+////////////////////////

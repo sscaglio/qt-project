@@ -158,7 +158,7 @@ metodi:
 -> operator>  
 -> operator>= 
 
- 
+  
 operator==  
 
 dim A = 0 , B = 0 
@@ -172,7 +172,6 @@ dim A = 1,dim B = 1:
     A isEmpty, B isEmpty -> T
     A !isEmpty or !isNull , B isEmpty or isNull -> F
     A isEmpty or isNull , B !isEmpty or !isNull -> F
-    A isEmpty or isNull , B isEmpty or isNull -> F
     esiste coppia (a,b) in A,B | a != b -> F
     !(esiste coppia (a,b) in A,B | a != b) -> T
 
@@ -195,7 +194,6 @@ dim A = 0 , B = 1:
     A isEmpty, B isEmpty -> F
     A !isEmpty or !isNull , B isEmpty or isNull -> T
     A isEmpty or isNull , B !isEmpty or !isNull -> T
-    A isEmpty or isNull , B isEmpty or isNull -> T
     esiste coppia (a,b) in A,B | a != b -> T
     !(esiste coppia (a,b) in A,B | a != b) -> F
 
@@ -220,7 +218,6 @@ dim A = 1 ,dim B = 1
     A isEmpty, B isEmpty -> eccezione
     A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
     A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
-    A isEmpty or isNull , B isEmpty or isNull -> eccezione
       esiste coppia (a,b) in A,B | a >= b -> F
       !(esiste coppia (a,b) in A,B | a >= b) -> T
 
@@ -245,7 +242,6 @@ dim A = 1 ,dim B = 1
     A isEmpty, B isEmpty -> eccezione
     A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
     A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
-    A isEmpty or isNull , B isEmpty or isNull -> eccezione
       esiste coppia (a,b) in A,B | a > b -> F
       !(esiste coppia (a,b) in A,B | a > b) -> T
 
@@ -271,7 +267,6 @@ dim A = 1 ,dim B = 1
     A isEmpty, B isEmpty -> eccezione
     A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
     A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
-    A isEmpty or isNull , B isEmpty or isNull -> eccezione
       esiste coppia (a,b) in A,B | a <= b -> F
       !(esiste coppia (a,b) in A,B | a <= b) -> T
 
@@ -297,7 +292,6 @@ dim A = 1 ,dim B = 1
     A isEmpty, B isEmpty -> eccezione
     A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
     A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
-    A isEmpty or isNull , B isEmpty or isNull -> eccezione
       esiste coppia (a,b) in A,B | a < b -> F
       !(esiste coppia (a,b) in A,B | a < b) -> T
 
