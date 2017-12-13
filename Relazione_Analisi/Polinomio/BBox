@@ -1,0 +1,484 @@
+PolinomioConcreto
+
+
+PolinomioConcreto::Operazioni Algebriche
+
+Operazioni Algebriche
+
+metodi
+
+-> operator+
+-> operator-
+-> operator*
+-> operator* scalare
+-> operator/  
+-> operator/ scalare
+
+operator+
+
+Sia A,B input, 0 polinomio nullo
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) addConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) addConsistent = F) -> somma |
+    		      somma e' polinomio somma di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+operator-
+
+Sia A,B input, 0 polinomio nullo
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) subConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) subConsistent = F) -> differenza |
+    		      differenza e'polinomio differenza di A e B
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+    
+
+operator*
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty or isNull , B !isEmpty or !isNull -> B
+    A !isEmpty or !isNull , B isEmpty or isNull -> A
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' polinomio prodotto di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+operator* scalare
+
+Sia A polinomio ,B scalare input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1:  
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) mulConsistent = F) -> prodotto |
+    		      prodotto e' polinomio prodotto di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+operator/
+
+Sia A polinomio,B scalare in input 
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F) -> prodotto |
+    		      prodotto e' polinomio quoziente di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+ 
+operator/ scalare
+
+Sia A polinomio,B scalare in input 
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1, B = 1: 
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B isEmpty or isNull -> 0
+    A !isEmpty or !isNull , B !isEmpty or !isNull
+    esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F -> eccezione
+    !(esiste coppia (a,b) in A,B |
+    	        (a,b) divConsistent = F) -> prodotto |
+    		      prodotto e' polinomio quoziente di A e B
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+PolinomioConcreto::Operazioni Booleani
+
+metodi
+
+-> operator== 
+-> operator!=
+-> operator<
+-> operator<= 
+-> operator> 
+-> operator>= 
+
+
+operator==  
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1,dim B = 1:
+     
+    A isNull, B isNull -> T
+    A isEmpty, B isEmpty -> T
+    A !isEmpty or !isNull , B isEmpty or isNull -> F
+    A isEmpty or isNull , B !isEmpty or !isNull -> F
+    esiste coppia (a,b) in A,B | a != b -> F
+    !(esiste coppia (a,b) in A,B | a != b) -> T
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator!=  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+    A isNull, B isNull -> F
+    A isEmpty, B isEmpty -> F
+    A !isEmpty or !isNull , B isEmpty or isNull -> T
+    A isEmpty or isNull , B !isEmpty or !isNull -> T
+    esiste coppia (a,b) in A,B | a != b -> T
+    !(esiste coppia (a,b) in A,B | a != b) -> F
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<   
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a >= b -> F
+      !(esiste coppia (a,b) in A,B | a >= b) -> T
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator<=  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a > b -> F
+      !(esiste coppia (a,b) in A,B | a > b) -> T
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>  
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a <= b -> F
+      !(esiste coppia (a,b) in A,B | a <= b) -> T
+
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+operator>= 
+
+Sia A,B input
+
+dim A = 0 , B = 0 
+dim A = 1 , B = 0
+dim A = 0 , B = 1:
+    impossibile
+
+
+dim A = 1 ,dim B = 1
+    A isNull, B isNull -> eccezione
+    A isEmpty, B isEmpty -> eccezione
+    A !isEmpty or !isNull , B isEmpty or isNull -> eccezione
+    A isEmpty or isNull , B !isEmpty or !isNull -> eccezione
+      esiste coppia (a,b) in A,B | a < b -> F
+      !(esiste coppia (a,b) in A,B | a < b) -> T
+
+dim A > 1, B qualsiasi:
+    impossibile
+dim A qualsiasi , B > 1:
+    impossibile
+
+
+
+PolinomioConcreto::Operazioni Ulteriori
+
+metodi
+
+-> first (virtuale) 
+-> rest(virtuale)
+-> getElementNumber (virtuale)
+-> maxDegree (virtuale)
+-> isEmpty(virtuale) 
+-> isNull(virtual) 
+
+
+
+first (virtuale) 
+
+sia A polinomio in input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> eccezione
+    !(A isNull or A isEmpty) -> primo elemento di polinomio
+
+dim A > 1 :
+    impossibile
+
+
+rest(virtuale)
+
+sia A polinomio in input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> eccezione
+    !(A isNull or A isEmpty) -> resto di polinomio
+
+dim A > 1 :
+    impossibile
+
+
+getElementNumber (virtuale) 
+
+sia A polinomio in input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> n |
+    	n e' il numero di elementi di polinomio
+
+dim A > 1 :
+    impossibile
+
+
+maxDegree (virtuale)
+
+sia A polinomio in input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0 
+    !(A isNull or A isEmpty or ) -> n |
+    	n e' il grado del massimo elemento di polinomio
+
+dim A > 1 :
+    impossibile
+
+
+
+
+isEmpty(virtuale) 
+
+sia A polinomio in input
+
+isEmpty(virtuale)
+
+Sia A input
+
+dim A= 0 :
+    impossibile
+
+dim A = 1 :
+    A isNull -> eccezione
+    A !isNull, numero elementi > 0 -> F
+    A !isNull, numero elementi == 0 -> T
+
+dim A > 1 :
+    impossibile
+
+
+isNull(virtual) 
+
+sia A polinomio in input
+
+dim A = 0 :
+    impossibile
+
+dim A = 1 :
+    A = 0 -> T
+    A != 0 -> F
+
+dim A > 1:
+    impossibile
+
+
+
+PolinomioConcreto::Operazioni Proprie
+
+metodi
+
+-> (T = Razionale) reduceAll
+-> (T = Intero) powerAll 
+
+
+reduceAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> A' |
+    A' <-> A ridotto ai minimo per ogni suo elemento
+    rispetto a coefficiente 
+
+dim A > 2:
+    impossibile:
+
+powerAll(virtuale)
+
+dim A = 0:
+    impossibile
+
+dim A = 1:
+    A isNull -> eccezione
+    A isEmpty -> 0
+    !(A isNull or A isEmpty) -> potenza |
+    	potenza e' somma di ogni coefficiente di A elevato al quadrato,
+	potenza < LIMITE_SUP
+	se potenza >= LIMITE_SUP -> eccezione
+
+dim A > 2:
+    impossibile
+

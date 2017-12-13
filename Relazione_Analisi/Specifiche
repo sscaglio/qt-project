@@ -123,7 +123,7 @@ Operazioni Algebriche
 -> operator*  -> ritorna matrice risultato del prodotto tra le matrici passate
 -> operator* scalare  -> ritorna Matrice ottenuto da
    prodotto di scalare per Matrice
--> operator/ -> ritorna Matrice ottenuto da
+-> operator/ scalare -> ritorna Matrice ottenuto da
    divisione per scalare di Matrice
 
 Operazioni Booleane
@@ -173,9 +173,10 @@ Operazioni Ulteriori
 -> getElementNumber(virtuale,puro) -> ritorna numero di elementi appartenenti a oggetto
 -> isNull(virtual,puro) -> ritorna T sse oggetto e' null , F altrimenti
 -> maxDegree(virtuale,puro) -> ritorna il grado massimo del polinomio
--> derivative(virtuale,puro) -> ritorna derivata prima di polinomio
+
 
 PolinomioConcreto
+
 
 implementazione per tipi Razionale,Intero
 
@@ -193,8 +194,11 @@ Operazioni Algebriche
 -> operator- -> ritorna polinomio differenza di 2 polinomi passati
 -> operator*  -> ritorna polinomio prodotto di 2 polinomi passati
 
--> operator* monomio  -> ritorna polinomio dato da Polinomio e Monomio passato
+-> operator* scalare  -> ritorna polinomio prodotto dato da Polinomio
+   e scalare passato
 -> operator/  -> ritorna polinomio divisione di 2 polinomi passati
+-> operator/ scalare -> ritorna polinomio divisione di polinomio
+   per scalare passati
 
 Operazioni Booleani
 
