@@ -20,22 +20,22 @@ Interfaccia
 
 metodi
 
--> costruttore((T,T),no default)
+-> costruttore((P1,P2),no default)
    // PRIMO PARAMETRO DEFINISCE LIMITE SUPERIORE
    // SECONDO PARAMETRO DEFINISCE LIMITE INFERIORE
--> addConsistent((T,T),const,no default) -> bool
+-> addConsistent((P1,P2),const,no default) -> bool
    // PRIMO E SECONDO PARAMETRO DEVONO ESSERE
    // CONTROLLATI PER CONSISTENZA SOMMA
    // NON STATICO -> DEVO ACCEDERE A SUOI MEMBRI PRIVATI
--> subConsistent((T,T),const,no default) -> bool
+-> subConsistent((P1,P2),const,no default) -> bool
    // PRIMO E SECONDO PARAMETRO DEVONO ESSERE
    // CONTROLLATI PER CONSISTENZA DIFFERENZA
    // NON STATICO -> DEVO ACCEDERE A SUOI MEMBRI PRIVATI
--> mulConsistent((T,T),const,no default) -> bool
+-> mulConsistent((P1,P2),const,no default) -> bool
    // PRIMO E SECONDO PARAMETRO DEVONO ESSERE
    // CONTROLLATI PER CONSISTENZA PRODOTTO
    // NON STATICO -> DEVO ACCEDERE A SUOI MEMBRI PRIVATI
--> divConsistent((T,T),const,no default) -> bool
+-> divConsistent((P1,P2),const,no default) -> bool
    // PRIMO E SECONDO PARAMETRO DEVONO ESSERE
    // CONTROLLATI PER CONSISTENZA DIVISIONE
    // NON STATICO -> DEVO ACCEDERE A SUOI MEMBRI PRIVATI
