@@ -20,34 +20,87 @@ bool
 addConsistent(const T& lht,const T& rht)
 {
   if (((rht > 0) && (lht > (upperBound - rht))) {
-      throw IntegerOverflow;
+      throw Overflow;
     }
     else if  ((rht < 0) && (lht < (lowerBound - rht))){
-      throw IntegerUnderflow;
+      throw Underflow;
     } else {	
-      sum = lht + rht;
-    }
-    return sum;
+      return true;
     }
 }
 catch(const Overflow& e){
-  print "overflow";
+  std::cout << e.what() <<" " <<e.where();
  }
  catch(const UnderFlow& e){
-   print "underflow";
+   std::cout << e.what()<<" " << e.where();
+ }
+  
+bool
+subConsistent(const T& lht,const T& rht) {
+    if (rht > 0 && lht < lowerBound + rht){
+      throw Underflow;
+    }
+    else if((rht < 0 && lht > upperBound + rht)){
+      throw Overflow;
+    } else {
+      return true;
+    }
+  }
+catch(const Overflow& e){
+  std::cout << e.what() <<" " <<e.where();
+ }
+ catch(const UnderFlow& e){
+   std::cout << e.what() <<" " <<e.where();
  }
 
-subConsistent(const T& lht,const T& {
-    T diff;
-    if ((rht > 0 && lht < INT_MIN + rht) ||
-	(rht < 0 && lht > INT_MAX + rht)) {
-      /* Handle error */
-    } else {
-      diff = lht - rht;
-    }
- 
-    /* ... */
+bool
+mulConsistent(const T& lht,const T& rht){
+  if (lht > 0) {  /* lht is positive */
+    if (rht > 0) {  /* lht and rht are positive */
+      if (lht > (upperBound / rht)) {
+        throw Overflow;
+      }
+    } else { /* lht positive, rht nonpositive */
+      if (rht < (lowerBound / lht)) {
+        throw Underflow;
+      }
+    } /* lht positive, rht nonpositive */
+  } else { /* lht is nonpositive */
+    if (rht > 0) { /* lht is nonpositive, rht is positive */
+      if (lht < (lowerBound / rht)) {
+        throw Underflow;
+      }
+    } else { /* lht and rht are nonpositive */
+      if ( (lht != 0) && (rht < (upperBound / lht))) {
+        throw Overflow;
+      }
+    } /* End if lht and rht are nonpositive */
+  } /* End if lht is nonpositive */
+  return true;
+}
+catch(const Overflow& e){
+  std::cout << e.what() <<" " <<e.where();
+ }
+ catch(const UnderFlow& e){
+   std::cout << e.what() <<" " <<e.where();
+ }
 
+
+bool
+divConsistent(const T& lht,const T& rht){
+  if ((s_b == 0)){
+    throw DivisionByZero;
   }
-  mulConsistent((P1,P2),const,no default) -> bool
-  divConsistent((P1,P2),const,no default) -> bool
+  else((s_a == lowerBound) && (s_b == -1)) {
+      throw OverFlow;
+    }
+  else {
+    return true;
+  }
+}
+catch(const Overflow& e){
+  std::cout << e.what() <<" " <<e.where();
+ }
+ catch(const DivisionByZero& e){
+   std::cout << e.what() <<" " << e.where();
+ }

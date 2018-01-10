@@ -1,0 +1,35 @@
+StateBox KalkException
+
+OverFlow
+
+nessun campo dato proprio
+
+interfaccia
+
+metodi
+->what ((),const,noexcept,virtual) -> const char*
+->where((const char *),const,virtual) -> const char*
+
+Underflow
+
+nessun campo dati proprio
+
+interfaccia
+
+metodi
+
+->what ((),const,noexcept,virtual) -> const char*
+->where((const char *),const,virtual) -> const char*
+
+
+DivideByZero
+
+nessun campo dati proprio
+
+interfaccia
+
+metodi
+
+->what ((),const,noexcept,virtual) -> const char*
+->where((const char *),const,virtual) -> const char*
+ 
