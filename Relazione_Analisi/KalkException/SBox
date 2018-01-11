@@ -1,6 +1,7 @@
 StateBox KalkException
 
-OverFlow
+OverFlow 
+
 
 nessun campo dato proprio
 
@@ -8,7 +9,6 @@ interfaccia
 
 metodi
 ->what ((),const,noexcept,virtual) -> const char*
-->where((const char *),const,virtual) -> const char*
 
 Underflow
 
@@ -19,7 +19,6 @@ interfaccia
 metodi
 
 ->what ((),const,noexcept,virtual) -> const char*
-->where((const char *),const,virtual) -> const char*
 
 
 DivideByZero
@@ -31,5 +30,4 @@ interfaccia
 metodi
 
 ->what ((),const,noexcept,virtual) -> const char*
-->where((const char *),const,virtual) -> const char*
  

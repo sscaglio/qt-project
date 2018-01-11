@@ -5,18 +5,11 @@ OverFlow
 Overflow::operazioni proprie
 
 what -> stringa contenente informazione relativa al tipo di eccezione
-where -> tipo di operazione che ha sollevato eccezione
 
 what 
 dim = 0:
  stampa stringa contenente nome dell'eccezione sollevata 
 dim != 0:
- impossibile
-
-where
-dim = 1:
- stampa stringa operatore in cui e' stata sollevata eccezione 
-dim != 1:
  impossibile
 
 Underflow
@@ -24,18 +17,11 @@ Underflow
 Underflow::operazioni proprie
 
 what -> stringa contenente informazione relativa al tipo di eccezione
-where -> tipo di operazione che ha sollevato eccezione
 
 what 
 dim = 0:
  stampa stringa contenente nome dell'eccezione sollevata 
 dim != 0:
- impossibile
-
-where
-dim = 1:
- stampa stringa operatore in cui e' stata sollevata eccezione 
-dim != 1:
  impossibile
 
 
@@ -44,7 +30,6 @@ DivideByZero
 DivideByZero::operazioni proprie
 
 what -> stringa contenente informazione relativa al tipo di eccezione
-where -> tipo di operazione che ha sollevato eccezione
 
 what 
 dim = 0:
@@ -52,8 +37,3 @@ dim = 0:
 dim != 0:
  impossibile
 
-where
-dim = 1:
- stampa stringa operatore in cui e' stata sollevata eccezione 
-dim != 1:
- impossibile
