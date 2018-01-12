@@ -146,6 +146,23 @@ Boundchecker<T>::testChecker(){
     if(subConsistent(1.1,2.2)){
         std::cout << "test3 ok" << std::endl;
     }
+
+    std::cout << "div tst" << std::endl;
+
+    std::cout << numeric_limits<T>::min() << std::endl;
+
+    std::cout << (((-1)* numeric_limits<int>::max()) / ((-1)*(1))) << std::endl;
+    if(!divConsistent(100,0)){
+        std::cout << "test1 ok" << std::endl;
+    }
+    if(!divConsistent((numeric_limits<int>::min()),-1)){
+        // attenzione:se numeric_limits<T> ha T = int e valore passato per il controllo e' -1 * MIN_INT -> comportamento scorretto
+        // ai fini dell'esecuzione tutto ok
+        std::cout << "test2 ok" << std::endl;
+    }
+    if(divConsistent(4,2)){
+        std::cout << "test3 ok" << std::endl;
+    }
 }
 
 #endif // BOUNDCHECKER

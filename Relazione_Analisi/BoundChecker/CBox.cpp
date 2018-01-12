@@ -17,7 +17,7 @@ BoundChecker(const T& uBound,const T& lBound)
 {}
 
 bool
-addConsistent(const T& lht,const T& rht)
+addConsistent(const T& lht,const T& rht)const
 {
   if (((rht > 0) && (lht > (upperBound - rht))) {
       throw Overflow;
@@ -36,7 +36,7 @@ catch(const Overflow& e){
  }
   
 bool
-subConsistent(const T& lht,const T& rht) {
+subConsistent(const T& lht,const T& rht) const{
     if (rht > 0 && lht < lowerBound + rht){
       throw Underflow;
     }
@@ -54,7 +54,7 @@ catch(const Overflow& e){
  }
 
 bool
-mulConsistent(const T& lht,const T& rht){
+mulConsistent(const T& lht,const T& rht) const{
   if (lht > 0) {  /* lht is positive */
     if (rht > 0) {  /* lht and rht are positive */
       if (lht > (upperBound / rht)) {
@@ -87,7 +87,7 @@ catch(const Overflow& e){
 
 
 bool
-divConsistent(const T& lht,const T& rht){
+divConsistent(const T& lht,const T& rht) const{
   if ((s_b == 0)){
     throw DivisionByZero;
   }
