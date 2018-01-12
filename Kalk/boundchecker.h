@@ -74,6 +74,8 @@ Boundchecker<T>::subConsistent(const T & lht, const T & rht) const{
     }
 }
 
+// test non completo
+// branch coverage < 100
 template<typename T>
 bool
 Boundchecker<T>::mulConsistent(const T & lht, const T & rht) const{
@@ -105,6 +107,10 @@ Boundchecker<T>::mulConsistent(const T & lht, const T & rht) const{
     return true;
 
 }
+
+
+// branch coverage 100 %
+// per tipi int e double
 
 template<typename T>
 bool
