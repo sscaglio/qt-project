@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    dividebyzero_error.cpp
 
 HEADERS  += mainwindow.h \
-    boundchecker.h
+    boundchecker.h \
+    dividebyzero_error.h
 
 FORMS    += mainwindow.ui

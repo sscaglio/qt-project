@@ -3,10 +3,15 @@
 
 #include<iostream>
 #include<limits>
+#include<stdexcept>
+
+#include "dividebyzero_error.h"
 
 using std::cout;
 using std::endl;
 using std::numeric_limits;
+using std::overflow_error;
+using std::underflow_error;
 
 template<typename T>
 class Boundchecker{
@@ -18,7 +23,7 @@ public:
 
     Boundchecker(const T&,const T&);
     bool addConsistent(const T&,const T&)const;
-    bool subConsistent(const T&,const T&)const ;
+    bool subConsistent(const T&,const T&)const;
     bool mulConsistent(const T&,const T&)const;
     bool divConsistent(const T&,const T&)const;
 
@@ -42,16 +47,18 @@ template<typename T>
 bool
 Boundchecker<T>::addConsistent(const T & lht, const T & rht ) const{
 
-    if ((rht > 0) && (lht > (upperBound - rht))) {
-        //throw Overflow();
-        return false;
-    }
-    else if  ((rht < 0) && (lht < (lowerBound - rht))){
-        return false;
-        //throw Underflow();
-    } else {
+    try{
+        if ((rht > 0) && (lht > (upperBound - rht))) {
+            throw overflow_error("overflow error in operazione di addizione");
+        }
+        else if  ((rht < 0) && (lht < (lowerBound - rht))){
+            throw underflow_error("underflow error in operazione di addizione");
+        }
         return true;
+    }catch(exception& e){
+        std::cout << e.what() << std::endl;
     }
+    return false;
 }
 
 
@@ -62,16 +69,18 @@ template<typename T>
 bool
 Boundchecker<T>::subConsistent(const T & lht, const T & rht) const{
 
-    if (rht > 0 && lht < lowerBound + rht){
-        return false;
-        //throw Underflow;
-    }
-    else if((rht < 0 && lht > upperBound + rht)){
-        return false;
-        //throw Overflow;
-    } else {
+    try{
+        if (rht > 0 && lht < lowerBound + rht){
+            throw underflow_error("underflow error in operazione di sottrazione");
+        }
+        else if((rht < 0 && lht > upperBound + rht)){
+            throw overflow_error("overflow error in operazione di sottrazione");
+        }
         return true;
+    }catch(exception &e){
+        std::cout << e.what() << std::endl;
     }
+    return false;
 }
 
 // test non completo
@@ -79,35 +88,35 @@ Boundchecker<T>::subConsistent(const T & lht, const T & rht) const{
 template<typename T>
 bool
 Boundchecker<T>::mulConsistent(const T & lht, const T & rht) const{
+    try{
     if (lht > 0) {  /* lht is positive */
         if (rht > 0) {  /* lht and rht are positive */
             if (lht > (upperBound / rht)) {
-                //throw Overflow;
-                return false;
+               throw overflow_error("overflow error in operazione di moltiplicazione, termine sinistro e destro positivi");
             }
         } else { /* lht positive, rht nonpositive */
             if (rht < (lowerBound / lht)) {
-               // throw Underflow;
-                return false;
+                throw underflow_error("underflow error in operazione di moltiplicazione, termine sinistro positivo, destro negativo");
             }
         } /* lht positive, rht nonpositive */
     } else { /* lht is nonpositive */
         if (rht > 0) { /* lht is nonpositive, rht is positive */
             if (lht < (lowerBound / rht)) {
-                //throw Underflow;
-                return false;
+                throw underflow_error("underflow error in operazione di moltiplcazione, termine sinistro negativo, destro positivo");
             }
         } else { /* lht and rht are nonpositive */
             if ( (lht != 0) && (rht < (upperBound / lht))) {
-                //throw Overflow;
-                return false;
+                throw overflow_error("overflow error in operazione di moltiplicazione, termine sinistro e destro negativi");
             }
         } /* End if lht and rht are nonpositive */
     } /* End if lht is nonpositive */
     return true;
+    }catch(exception &e){
+        std::cout << e.what() << std::endl;
+    }
+    return false;
 
 }
-
 
 // branch coverage 100 %
 // per tipi int e double
@@ -115,18 +124,19 @@ Boundchecker<T>::mulConsistent(const T & lht, const T & rht) const{
 template<typename T>
 bool
 Boundchecker<T>::divConsistent(const T & lht, const T & rht) const{
-    if ((rht == 0)){
-        //throw DivisionByZero;
-        return false;
-    }
-    else if((lht == lowerBound) && (rht == -1)) {
-        //throw OverFlow;
-        return false;
-    }
-    else {
+    try{
+        if (rht == 0){
+            throw dividebyzero_error("divide by zero error in operazione di divisione");
+        }
+        else if((lht == lowerBound) && (rht == -1)) {
+            throw overflow_error("overflow error in operazione di divisione");
+        }
         return true;
     }
-
+    catch(exception &e){
+        std::cout << e.what() << std::endl;
+    }
+    return false;
 }
 
 template<typename T>
@@ -166,7 +176,7 @@ Boundchecker<T>::testSub(){
         std::cout << "test1 ok" << std::endl;
         tst1 = true;
     }
-    if(!subConsistent((-1)*(numeric_limits<T>::max()),(numeric_limits<T>::max()))){
+    if(!subConsistent((numeric_limits<T>::max()),(-1)*(numeric_limits<T>::max()))){
         std::cout << "test2 ok" << std::endl;;
         tst2 = true;
     }
