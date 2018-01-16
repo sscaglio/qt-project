@@ -1,0 +1,46 @@
+MatriceConcreta<T>
+
+Membri interni
+
+matrix(T)
+row(const)
+column(const)
+
+boundChecker(T,const,static)
+
+Interfaccia
+
+Operazioni algebriche
+
+metodi
+
+->costruttore((P1 = 1,P2 = 1))
+// PRIMO PARAMETRO DEFINISCE NUMERO DI RIGHE DI MATRICE
+// SECONDO PARAMETRO DEFINISCE NUMERO DI COLONNE DI MATRICE
+
+-> operator+((P1),const ,no default) -> matriceConcreta*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE DEVE ESSERE CONSISTENTE
+
+-> operator-((P1),const ,no default) -> matriceConcreta*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE DEVE ESSERE CONSISTENTE
+
+-> operator*((P1),const ,no default) -> matriceConcreta*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE DEVE ESSERE CONSISTENTE
+
+-> operator/((P1),const ,no default) -> matriceConcreta*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERAND
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE DEVE ESSERE CONSISTENTE
+
+
+
+Operazioni booleane
+
+
+Operazioni Ulteriori

@@ -9,9 +9,9 @@ Membri interni
 
 campi dati
 
--> upperBound(costante)
+-> upperBound(const)
    // LIMITE DEFINITO DA TIPO TEMPLATIZZATO PASSATO
--> lowerBound(costante)
+-> lowerBound(const)
    // LIMITE DEFINITO DA TIPO TEMPLATIZZATO PASSATO
 
 
