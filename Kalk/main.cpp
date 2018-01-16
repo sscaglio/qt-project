@@ -3,12 +3,13 @@
 
 // libreria limiti (sia per float che per interi)
 #include<limits>
+#include<iostream>
 
 #include"boundchecker.h"
-
+#include "matrice.h"
 
 using std::numeric_limits;
-
+using std::cout;
 
 int main(int argc, char *argv[])
 {
@@ -16,12 +17,17 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Boundchecker<double> provaDouble(numeric_limits<double>::max(),(-1)*(numeric_limits<double>::max()));
-    // NB PER VALORI DI TIPO DOUBLE IL MINIMO NEGATIVO E' NEGATIVO DI MAX(PRE C++11)
-    provaDouble.testChecker();
+    Matrice<int> matr1 = Matrice<int>(1,3);
+    Matrice<int> matr2 = Matrice<int>(1,5);
 
-Boundchecker<int> provaInt(numeric_limits<int>::max(),(numeric_limits<int>::min()));
-  //PER VALORI DI TIPO INT POSSO USARE min come minimo negativo
-   provaInt.testChecker();
+    for(int i = 0; i < 3;++i){
+        matr1.insertValue(1);
+        matr2.insertValue(1);
+    }
+    Matrice<int> *res = new Matrice<int>(1,5);
+    res = matr1 + matr2;
+    if(res){
+        res->printAll();
+    }
     return a.exec();
 }

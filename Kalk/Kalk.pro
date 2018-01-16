@@ -18,6 +18,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
-    dividebyzero_error.h
+    dividebyzero_error.h \
+    matrice.h
 
 FORMS    += mainwindow.ui

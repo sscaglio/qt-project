@@ -8,7 +8,7 @@ campi dati
 QVector<T> matrice
 const unsigned int righe
 const unsigned int colonne
-const Boundchecker<T> bd
+static const Boundchecker<T> bd
 
 
 Interfaccia
@@ -16,13 +16,13 @@ Interfaccia
 metodi
 
 Matrice(unsigned int r,unsigned int c):
-       matrice(QVector(righe * colonne)),righe(r),colonne(c){
+       matrice(QVector()),righe(r),colonne(c){
 }
 
 Matrice*
 operator+(const Matrice& rht)const{
   try{
-    if(!((righe == rht.righe) ||
+    if(((righe != rht.righe) ||
 	 (colonne != rht.colonne))){// dimensioni non consistenti
       throw domain_error("dimensioni matrice non consistenti");
     }
@@ -39,7 +39,6 @@ operator+(const Matrice& rht)const{
     return res;
   }catch(exception & e){
     res.clear();// elimina ogni elemento appartente a res
-    delete res;// dealloca puntatore
     e.what();// stampa messaggio errore
   }
 }
@@ -65,7 +64,6 @@ operator-(const Matrice& rht)const{
     return res;
   }catch(exception & e){
     res.clear();// elimina ogni elemento appartente a res
-    delete res;// dealloca puntatore
     e.what();// stampa messaggio errore
   }
 }
@@ -78,15 +76,16 @@ operator*(const Matrice& rht)const{
     if(colonne != rht.righe)
       throw domain_error("dimensioni matrice non consistenti");
     }
-    Matrice<T> *res = new Matrice<T>(righe * colonne);
+    Matrice<T> *res = new Matrice<T>(righe * rht.colonne);
     for(int i = 0 ; i < righe;++i){
       for(int j = 0; j < rht.colonne;++j){
 	T sommaParziale = T();
 	for(int k = 0; k < colonne;++i){
 	  if(bd.addConsistent
-	     (matrice[i * colonna + k],rht.matrice[colonna * k + j]))
+	     (matrice[righe * i + k],rht.matrice[rht.colonne * k + j])){
 	    sommaParziale =
-	      matrice[i * colonna + k] + rht.matrice[colonna * k + j]
+	      matrice[righe * i + k] + rht.matrice[rht.colonne * k + j];
+	  }
 	}
 	res.push_back(sommaParziale);
       }
@@ -95,7 +94,6 @@ operator*(const Matrice& rht)const{
     return res;
   }catch(exception & e){
     res.clear();// elimina ogni elemento appartente a res
-    delete res;// dealloca puntatore
     e.what();// stampa messaggio errore
   }
 }
