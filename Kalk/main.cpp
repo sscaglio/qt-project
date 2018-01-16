@@ -18,13 +18,13 @@ int main(int argc, char *argv[])
     w.show();
 
     Matrice<int> matr1 = Matrice<int>(1,3);
-    Matrice<int> matr2 = Matrice<int>(1,5);
+    Matrice<int> matr2 = Matrice<int>(1,3);
 
     for(int i = 0; i < 3;++i){
-        matr1.insertValue(1);
+        matr1.insertValue(std::numeric_limits<int>::max());
         matr2.insertValue(1);
     }
-    Matrice<int> res = Matrice<int>(1,5);
+    Matrice<int> res = Matrice<int>(1,3);
     res = matr1 + matr2;
     res.printAll();
     return a.exec();
