@@ -24,10 +24,8 @@ int main(int argc, char *argv[])
         matr1.insertValue(1);
         matr2.insertValue(1);
     }
-    Matrice<int> *res = new Matrice<int>(1,5);
+    Matrice<int> res = Matrice<int>(1,5);
     res = matr1 + matr2;
-    if(res){
-        res->printAll();
-    }
+    res.printAll();
     return a.exec();
 }
