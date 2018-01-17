@@ -132,7 +132,7 @@ Matrice<T>::operator -(const Matrice<T>& rht) const{
 }
 
 
-// operatore differenza tra tipi matrice
+// operatore prodotto tra tipi matrice
 // testato errore dimensioni non compatibili
 // sistemato problema memory leak in caso di condizioni eccezionali
 // sollevate all'interno del ciclo
@@ -143,21 +143,21 @@ Matrice<T>::operator *(const Matrice<T>& rht) const{
 
     Matrice<T> *res = 0;// puntatore a matrice risultato
     try{
-        if(!(colonne != rht.righe)){
+        if(colonne != rht.righe){
             throw domain_error("dimensione matrici non compatibili");
         }
         res = new Matrice<T>(righe,rht.colonne);
-        for(int i = 0 ;i < righe;++i){
-            for(int j = 0; j < rht.colonne;++j){
-                T prodottoParziale = T();
-                for(int k = 0; k < colonne;++k){
-                    T sommaParziale = T();
-                    bd.mulConsistent(matrice[righe * i + k],rht.matrice[rht.colonne * k + j]);
-                    sommaParziale = matrice[righe * i + k] + rht.matrice[rht.colonne * k + j];
-                    bd.addConsistent(sommaParziale,prodottoParziale);
-                    prodottoParziale = prodottoParziale + sommaParziale;
+        for(unsigned int i = 0 ;i < righe;++i){
+            for(unsigned int j = 0; j < rht.colonne;++j){
+                T risultatoParziale = T();
+                for(unsigned int k = 0; k < colonne;++k){
+                    T prodottoParziale = T();
+                    bd.mulConsistent(matrice[colonne * i + k],rht.matrice[rht.colonne * k + j]);
+                    prodottoParziale = matrice[colonne * i + k] * rht.matrice[rht.colonne * k + j];
+                    bd.addConsistent(risultatoParziale,prodottoParziale);
+                    risultatoParziale = risultatoParziale + prodottoParziale;
                 }
-                res->matrice.push_back(prodottoParziale);
+                res->matrice.push_back(risultatoParziale);
             }
         }
         // ogni elemento di matrice risultante e' definito, nessuna eccezione sollevata

@@ -17,17 +17,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Matrice<int> matr1 = Matrice<int>(1,3);
-    Matrice<int> matr2 = Matrice<int>(1,3);
-
-    for(int i = 0; i < 3;++i){
-        matr1.insertValue(2);
-        matr2.insertValue(1);
-    }
-    Matrice<int> *res = new Matrice<int>(1,3);
-    res = matr1 - matr2;
-    if(res != 0)
-        res->printAll();
-    delete res;
     return a.exec();
 }
