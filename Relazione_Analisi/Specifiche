@@ -15,11 +15,11 @@ Operazioni Ulteriori
 -> isNull -> ritorna T sse elemento e' null , F altrimenti
 
 
-VettoreAstratto
+ComplessoAstratto
 
-Vettore sottotipo di Calcolabile
+Complesso sottotipo di Calcolabile
 
-contiene metodi astratti di calcolo propri di ogni Vettore 
+contiene metodi astratti di calcolo propri di ogni Complesso 
 
 contiene metodi:
 
@@ -31,7 +31,7 @@ Operazioni Ulteriori
 -> getElementNumber -> numero di elementi appartenenti a oggetto
 -> isNull -> ritorna T sse elemento e' null , F altrimenti
 
-VettoreConcreto
+ComplessoConcreto
 
 implementazione per tipi Razionale,Intero,Double
 
@@ -48,8 +48,8 @@ Operazioni Algebriche
 -> operator+  -> somma tra 2 vettori
 -> operator-  -> differenza tra 2 vettori
 -> operator*  -> prodotto di 2 vettori 
--> operator* scalare  -> prodotto di scalare per Vettore
--> operator/ scalare  -> divisione di Vettore per scalare
+-> operator* scalare  -> prodotto di scalare per Complesso
+-> operator/ scalare  -> divisione di Complesso per scalare
 
 Operazioni Booleane
 
@@ -76,9 +76,9 @@ Operazioni Ulteriori
 -> isNull -> ritorna T sse oggetto e' null , F altrimenti
 
 Operazioni Proprie
--> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Vettore
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elemento Complesso
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
--> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria di ogni elemento di Vettore 
+-> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria di ogni elemento di Complesso 
 
 
 MatriceAstratta
@@ -152,11 +152,11 @@ Operazioni Ulteriori
 
 Operazioni Proprie
 
--> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoComplesso
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento
    appartenente a vettore
 -> (T = Double) fractionalAll -> ritorna T tc T e' somma di parteFrazionaria
-   di ogni elemento di Vettore
+   di ogni elemento di Complesso
 
 
 PolinomioAstratto
@@ -226,7 +226,7 @@ Operazioni Ulteriori
 
 Operazioni Proprie
 
--> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoVettore
+-> (T = Razionale) reduceAll -> riduce ai minimi termini ogni elementoComplesso
 -> (T = Intero) powerAll -> ritorna T tc T e' somma di Potenza di ogni elemento appartenente a vettore
 
 

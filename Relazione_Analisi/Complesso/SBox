@@ -1,0 +1,42 @@
+Complesso<T>
+
+mamebri interni
+
+reale(T,const)
+immaginaria(T,const)
+
+boundChecker(T,const,static)
+
+interfaccia
+
+operazioni algebriche
+
+metodi
+
+-> costruttore((P1 = 1,P2 = 0))
+// PRIMO PARAMETRO DETERMINA PARTE REALE DEL COMPLESSO
+// SECONDO PARAMETRO DETERMINA PARTE IMMAGINARIA DEL COMPLESSO
+
+-> operator+((P1),const , no default) -> complesso*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE E' CONSISTENTE
+
+-> operator-((P1),const , no default) -> complesso*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE E' CONSISTENTE
+
+-> operator*((P1),const , no default) -> complesso *
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE E' CONSISTENTE
+
+-> operator/((P1),const , no default) -> complesso*
+// PRIMO PARAMETRO DEFINISCE SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA
+// OGNI OPERAZIONE E' CONSISTENTE
+
+operazioni booleane
+
+operazioni ulteriori
