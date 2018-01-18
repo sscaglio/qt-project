@@ -9,12 +9,16 @@ class Monomio{
   BoundChecker<T> bd;
 
 public:
+
+  friend ostream& operator<< <T>(ostream &,const Monomio<T>&);
   Monomio(const T = T(),const unsigned int g = unsigned int(1))
   
   Monomio operator+(const Monomio&)const;
   Monomio operator-(const Monomio&)const;
   Monomio operator*(const Monomio&)const;
   Monomio operator/(const Monomio&)const;
+
+  bool operator>(const Monomio&)const;
 };
 
 <typename T>
@@ -82,7 +86,15 @@ Monomio<T>::operator/(const Monomio<T>& rht)const{
   }
 }
 
+template<typename T>
+bool
+Monomio<T>::operator>(const Monomio<T>& rht)const {
+  return grado > rht.grado ||
+    (grado == rht.grado && coefficiente > rht.coefficiente);
+}
 
-
-
-  
+template<typename T>
+ostream&
+Monomio<T>::operator<<(ostream & lht,const Monomio<T>& rht){
+  return lht << rht.coefficiente << "x" << "^" << rht.grado;
+}

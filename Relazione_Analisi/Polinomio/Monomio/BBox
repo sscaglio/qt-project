@@ -10,6 +10,9 @@ metodi
 -> operator*
 -> operator/
 
+-> operator >
+-> operator<<
+
 operator+
 
 Sia A , B input, grado A,B uguale

@@ -10,8 +10,10 @@
 using std::cout;
 using std::endl;
 using std::numeric_limits;
+using std::ostream;
 using std::overflow_error;
 using std::underflow_error;
+
 
 template<typename T>
 class Monomio{
@@ -28,6 +30,8 @@ public:
     Monomio operator-(const Monomio&) const;
     Monomio operator*(const Monomio&) const;
     Monomio operator/(const Monomio&) const;
+
+    bool operator>(const Monomio&)const;
 
     void printAll(){
         cout << "coeff " << coefficiente << endl;
@@ -107,6 +111,14 @@ Monomio<T>::operator /(const Monomio<T> & rht)const{
     }
     return Monomio<T>();
 }
+
+template<typename T>
+bool
+Monomio<T>::operator>(const Monomio<T>& rht)const {
+  return grado > rht.grado ||
+    (grado == rht.grado && coefficiente > rht.coefficiente);
+}
+
 
 
 #endif // MONOMIO

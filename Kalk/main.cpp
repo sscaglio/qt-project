@@ -2,6 +2,8 @@
 #include <QApplication>
 
 #include "monomio.h"
+#include<iostream>
+
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,7 @@ int main(int argc, char *argv[])
     (t1 - t2).printAll();
     (t1 * t2).printAll();
     (t1 / t2).printAll();
+
 
     return a.exec();
 }

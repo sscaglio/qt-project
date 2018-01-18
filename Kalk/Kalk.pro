@@ -21,6 +21,7 @@ HEADERS  += mainwindow.h \
     dividebyzero_error.h \
     matrice.h \
     complesso.h \
-    monomio.h
+    monomio.h \
+    polinomio.h
 
 FORMS    += mainwindow.ui

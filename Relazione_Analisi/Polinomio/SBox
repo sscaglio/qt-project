@@ -8,7 +8,7 @@ membri interni
 
 membri interni
 
-QList<Monomio*>
+QList<Monomio>
 
 // BOUNDCHECKER CONTENUTO ALL'INTERNO DI
 // MONOMIO 
