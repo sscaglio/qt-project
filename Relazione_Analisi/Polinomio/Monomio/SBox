@@ -1,0 +1,21 @@
+// SBOX
+
+Monomio<T>
+
+membri interni
+
+unsigned const T coefficiente
+unsigned const int grado
+
+BoundChecker<T>
+
+
+interfaccia
+
+operator+(const Monomio<T>&) const -> Monomio<T>
+
+operator-(const Monomio<T>&) const -> Monomio<T>
+
+operator*(const Monomio<T>&) const -> Monomio<T>
+
+operator/(const Monomio<T>&) const -> Monomio<T>

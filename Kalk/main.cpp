@@ -1,15 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-// libreria limiti (sia per float che per interi)
-#include<limits>
-#include<iostream>
-
-#include"boundchecker.h"
-#include "complesso.h"
-
-using std::numeric_limits;
-using std::cout;
+#include "monomio.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,11 +9,13 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Complesso<int> t1 = Complesso<int>(1,4);
-    Complesso<int> t2 = Complesso<int>(1,-1);
+    Monomio<int> t1 = Monomio<int>(1,1);
+    Monomio<int> t2 = Monomio<int>(1,1);
 
-    Complesso<int> t3 = t1 * t2;
-    t3.printAll();
+    (t1 + t2).printAll();
+    (t1 - t2).printAll();
+    (t1 * t2).printAll();
+    (t1 / t2).printAll();
 
     return a.exec();
 }

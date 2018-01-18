@@ -20,6 +20,7 @@ HEADERS  += mainwindow.h \
     boundchecker.h \
     dividebyzero_error.h \
     matrice.h \
-    complesso.h
+    complesso.h \
+    monomio.h
 
 FORMS    += mainwindow.ui

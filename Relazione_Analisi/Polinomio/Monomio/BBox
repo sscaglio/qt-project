@@ -1,0 +1,58 @@
+// BBOX
+
+Monomio<T>
+
+membro interno contenuto in Polinomio
+
+metodi
+-> operator+
+-> operator-
+-> operator*
+-> operator/
+
+operator+
+
+Sia A , B input, grado A,B uguale
+
+dim A = 0, B = 0 -> 0
+dim A = 1 , B = 0 -> A
+dim A = 0 , B = 0 -> B
+dim A = 1 , B = 1 ->
+    somma monomi data da monomio tc:
+    -> coefficiente e' somma(consistente) tra coefficienti
+    -> grado costante
+
+operator-
+
+Sia A, B input , grado A, B uguale
+
+dim A = 0 , B = 0 -> 0
+dim A = 1 , B = 0 -> A
+dim A = 0 , B = 1 -> B
+dim A = 1 , B = 1 ->
+    differenza monomio data da monomio tc :
+    -> coefficiente e' differenza coefficienti(consistente)
+    -> grado costante
+
+operator*
+sia A , B input , grado A , B non necessariamente uguale
+
+dim A = 0 , dim B = 0 -> 0
+dim A = 1 , dim B = 0 -> 0
+dim A = 0 , dim B = 1 -> 0
+dim A = 1, dim B = 1 ->
+    prodotto monomio dato da monomio tc:
+    -> coefficiente e' prodotto(consistente) tra coefficienti di A e B
+    -> grado e' somma(consistente) di gradi di A e B
+
+
+operator/
+sia A , B input , grado di A, B non necessariamente uguale
+
+dim A = 0 , dim B = 0 -> eccezione(Denominatore nullo)
+dim A = 1 ,  dim B = 0 -> eccezione (Denominatore nullo)
+dim A = 0 , dim B = 1 -> 0
+dim A = 1, dim B = 1 ->
+    quoziente monomio dato da monomio tc:
+    -> coefficiente e' quoziente(consistente) di coefficienti
+    -> grado e' differenza tra grado
