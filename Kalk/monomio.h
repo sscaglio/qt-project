@@ -32,6 +32,8 @@ public:
     Monomio operator/(const Monomio&) const;
 
     bool operator>(const Monomio&)const;
+    bool operator==(const Monomio&)const;
+    bool operator>=(const Monomio&)const;
 
     void printAll(){
         cout << "coeff " << coefficiente << endl;
@@ -119,7 +121,18 @@ Monomio<T>::operator>(const Monomio<T>& rht)const {
     (grado == rht.grado && coefficiente > rht.coefficiente);
 }
 
+template<typename T>
+bool
+Monomio<T>::operator ==(const Monomio& rht)const{
+    return coefficiente == rht.coefficiente &&
+            grado == rht.grado;
+}
 
+template<typename T>
+bool
+Monomio<T>::operator >=(const Monomio& rht)const{
+    return (*this > rht) || (*this == rht);
+}
 
 #endif // MONOMIO
 

@@ -94,7 +94,8 @@ Monomio<T>::operator>(const Monomio<T>& rht)const {
 }
 
 template<typename T>
-ostream&
-Monomio<T>::operator<<(ostream & lht,const Monomio<T>& rht){
-  return lht << rht.coefficiente << "x" << "^" << rht.grado;
+bool
+Monomio<T>::operator==(const Monomio<T>& rht)const {
+  return grado == rht.grado
+    && coefficiente == rht.coefficiente;
 }

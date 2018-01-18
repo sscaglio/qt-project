@@ -11,7 +11,7 @@ metodi
 -> operator/
 
 -> operator >
--> operator<<
+-> operator ==
 
 operator+
 
@@ -59,3 +59,12 @@ dim A = 1, dim B = 1 ->
     quoziente monomio dato da monomio tc:
     -> coefficiente e' quoziente(consistente) di coefficienti
     -> grado e' differenza tra grado
+
+
+operator==
+dim A = 0 , B = 0 -> F
+dim A = 1 , B = 0 -> F
+dim A = 0 , B = 1 -> F
+dim A = 1 , B = 1 -> T sse
+    grado A == grado B e
+    coefficiente A == coefficiente B

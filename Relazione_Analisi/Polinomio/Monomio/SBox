@@ -22,4 +22,4 @@ operator/(const Monomio<T>&) const -> Monomio<T>
 
 operator>(const Monomio<T>&) const -> bool
 
-friend operator<<(const Monomio<T>&) -> ostream&
+operator==(const Monomio<T>&) const -> bool
