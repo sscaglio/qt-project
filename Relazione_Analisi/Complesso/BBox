@@ -1,8 +1,8 @@
 
-VettoreConcreto
+ComplessoConcreto
 
 
-VettoreConcreto::Operazioni Algebriche
+ComplessoConcreto::Operazioni Algebriche
 
 
 metodi
@@ -16,7 +16,7 @@ metodi
 
 operator+  
 
-Sia A,B input, 0 vettore nullo
+Sia A,B input, 0 complesso nullo
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -32,7 +32,7 @@ dim A = 1, B = 1:
     	        (a,b) addConsistent = F -> eccezione
     !(esiste coppia (a,b) in A,B |
     	        (a,b) addConsistent = F) -> somma |
-    		      somma e' vettore somma di A e B
+    		      somma e' complesso somma di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -42,7 +42,7 @@ dim A qualsiasi , B > 1:
 
 operator- 
 
-Sia A,B input, 0 vettore nullo
+Sia A,B input, 0 complesso nullo
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -58,7 +58,7 @@ dim A = 1, B = 1:
     	        (a,b) subConsistent = F -> eccezione
     !(esiste coppia (a,b) in A,B |
     	        (a,b) subConsistent = F) -> differenza |
-    		      differenza e'vettore differenza di A e B
+    		      differenza e'complesso differenza di A e B
 
 
 dim A > 1, B qualsiasi:
@@ -85,7 +85,7 @@ dim A = 1, B = 1:
     	        (a,b) mulConsistent = F -> eccezione
     !(esiste coppia (a,b) in A,B |
     	        (a,b) mulConsistent = F) -> prodotto |
-    		      prodotto e' vettore prodotto di A e B
+    		      prodotto e' complesso prodotto di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -95,7 +95,7 @@ dim A qualsiasi , B > 1:
 
 operator* scalare 
 
-Sia A vettore ,B scalare input
+Sia A complesso ,B scalare input
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -111,7 +111,7 @@ dim A = 1, B = 1:
     	        (a,b) mulConsistent = F -> eccezione
     !(esiste coppia (a,b) in A,B |
     	        (a,b) mulConsistent = F) -> prodotto |
-    		      prodotto e' vettore prodotto di A e B
+    		      prodotto e' complesso prodotto di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -122,7 +122,7 @@ dim A qualsiasi , B > 1:
 
 operator/ scalare 
 
-Sia A vettore,B scalare in input 
+Sia A complesso,B scalare in input 
 
 dim A = 0 , B = 0 
 dim A = 1 , B = 0
@@ -138,7 +138,7 @@ dim A = 1, B = 1:
     	        (a,b) divConsistent = F -> eccezione
     !(esiste coppia (a,b) in A,B |
     	        (a,b) divConsistent = F) -> prodotto |
-    		      prodotto e' vettore prodotto di A e B
+    		      prodotto e' complesso prodotto di A e B
 
 dim A > 1, B qualsiasi:
     impossibile
@@ -146,7 +146,7 @@ dim A qualsiasi , B > 1:
     impossibile
 
 
-VettoreConcreto::Operazioni Booleane
+ComplessoConcreto::Operazioni Booleane
 
 Sia A,B input
 
@@ -300,7 +300,7 @@ dim A > 1, B qualsiasi:
 dim A qualsiasi , B > 1:
     impossibile
 
-VettoreConcreto::Operazioni Ulteriori
+ComplessoConcreto::Operazioni Ulteriori
 
 Sia A input
 
@@ -337,7 +337,7 @@ dim A = 1:
     A isNull -> eccezione
     A isEmpty -> 0
     !(A is Empty) -> n |
-    	n e' numero elementi di Vettore
+    	n e' numero elementi di Complesso
 
 dim A > 1:
     -> impossibile
@@ -364,7 +364,7 @@ dim A > 1 :
 
 isNull
 
-sia A input, 0 vettore vuoto
+sia A input, 0 complesso vuoto
 
 dim A = 0 :
     impossibile
@@ -377,9 +377,9 @@ dim A > 1:
     impossibile
 
 
-VettoreConcreto::Operazioni Proprie
+ComplessoConcreto::Operazioni Proprie
 
-sia A input, 0 vettore vuoto
+sia A input, 0 complesso vuoto
 
 metodi:
 -> (T = Razionale) reduceAll

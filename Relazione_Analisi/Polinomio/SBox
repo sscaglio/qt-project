@@ -1,0 +1,41 @@
+// STATE BOX
+
+POLINOMIO<T>
+
+membri interni
+
+// contiene classe interna monomio
+
+membri interni
+
+QList<Monomio*>
+
+// BOUNDCHECKER CONTENUTO ALL'INTERNO DI
+// MONOMIO 
+
+interfaccia
+
+costruttore()
+// INIZIALIZZA LISTA CONTENUTA IN POLINOMIO
+
+-> operator+((P1),const ,no default) -> Polinomio
+// PRIMO PARAMETRO DEFINSCE IL SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA ALL'INTERNO DI
+// MONOMIO
+
+-> operator-((P1),const , no default) -> Polinomio
+// PRIMO PARAMETRO DEFINSCE IL SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA ALL'INTERNO DI
+// MONOMIO
+
+
+-> operator*((P1),const , no default) -> Polinomio
+// PRIMO PARAMETRO DEFINSCE IL SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA ALL'INTERNO DI
+// MONOMIO
+
+
+-> operator/((P1),const , no default) -> Polinomio
+// PRIMO PARAMETRO DEFINSCE IL SECONDO OPERANDO
+// OGNI OPERAZIONE E' CONTROLLATA ALL'INTERNO DI
+// MONOMIO
