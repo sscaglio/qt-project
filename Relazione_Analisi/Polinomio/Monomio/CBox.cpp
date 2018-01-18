@@ -19,6 +19,10 @@ public:
   Monomio operator/(const Monomio&)const;
 
   bool operator>(const Monomio&)const;
+  bool operator==(const Monomio&)const;
+
+  const T getCoefficiente()const;
+  const unsigned int getGrado()const;
 };
 
 <typename T>
@@ -98,4 +102,16 @@ bool
 Monomio<T>::operator==(const Monomio<T>& rht)const {
   return grado == rht.grado
     && coefficiente == rht.coefficiente;
+}
+
+template<typename T>
+const T
+Monomio<T>::getCoefficiente()const{
+  return coefficiente;
+}
+
+template<typename T>
+const unsigned int
+Monomio<T>::getGrado()const{
+  return grado;
 }

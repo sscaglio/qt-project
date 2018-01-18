@@ -23,3 +23,7 @@ operator/(const Monomio<T>&) const -> Monomio<T>
 operator>(const Monomio<T>&) const -> bool
 
 operator==(const Monomio<T>&) const -> bool
+
+getCoefficiente() const -> unsigned const T
+
+getGrado() const -> const int

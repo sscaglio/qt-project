@@ -13,6 +13,10 @@ metodi
 -> operator >
 -> operator ==
 
+-> getCoefficiente
+-> getGrado
+
+
 operator+
 
 Sia A , B input, grado A,B uguale
