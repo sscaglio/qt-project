@@ -160,4 +160,63 @@ Polinomio<T>::operator-()const{
 
 template<typename T>
 Polinomio<T>
-Polinomio<T>::operator*()const{}
+Polinomio<T>::operator*()const{
+
+  try{
+
+    Polinomio<T> bufferRes = Polinomio<T>();
+    for(int i= 0; i < pol.size();++i){
+      // per ogni monomio appartenente a operando sx
+      for(int j = 0; j < rht.pol.size();++j){
+	// per ogni monomio appartenente a operando dx
+	bd.mulConsistent(pol[i].getCoefficiente,rht.pol[j].getCoefficiente);
+ 	// operazione di moltiplicazione tra coefficienti e' consistente
+	bd.addConsistent(pol[i].getGrado(),rht.pol[j].getGrado());
+	// operazione di somma tra gradi e' consistente
+	T coefficienteRisultante =
+	  pol[i].getCoefficiente * rht.pol[j].getCoefficiente;
+	if(coefficienteRisultante != 0){
+	  bd.addConsistent(pol[i].getGrado(),rht.pol[j].getGrado());
+	// operazione di somma tra gradi e' consistente
+	  T gradoRisultante = pol[i].getGrado() * rht.pol[j].getGrado();
+	  bufferRes.pol.append(Monomio<T>(coefficienteRisultante,gradoRisultante));
+	}
+	// ogni elemento di operando sx e' stato moltiplicato per operando dx
+	// e inserito in bufferRes
+      }
+    }
+    std::sort(bufferRes.pol.begin(),bufferRes.pol.end());
+    // bufferRes e' ordinato -> posso semplificare monomi con grado ==
+    Polinomio<T> res = Polinomio<T>();
+    int i = 0 ;
+    while(i < bufferRes.pol.size()){
+      T coeffGradiUguali = T();
+      // coeffGradiUguali rappresenta coefficiente somma di tutti i
+      // monomi di grado ==
+      int j = i;
+
+      // i, j  <  bufferRes.pol.size()
+      while(j < bufferRes.pol.size() &&
+	    bufferRes.pol[i].getGrado() == bufferRes.pol[j].getGrado()){
+	bd.addConsistent(coeffGradiUguali,bufferRes.pol[j].getGrado());
+	// somma consistente tra coefficiente parziale e coefficiente da
+	// sommare
+	coeffGradiUguali = coeffGradiUguali + bufferRes.pol[j].getCoefficiente();
+	++j;
+      }
+      // monomio puntato da j ha grado diverso rispetto a
+      // monomio puntato da i or arrivato a fine di bufferRes
+      // coeffGradiUguali contiene somma di tutti i coefficienti
+      // di grado uguale a bufferRes.pol[i]
+      res.append(Monomio<T>(coeffGradiUguali,bufferRes.pol[i].getGrado()));
+      i = j;
+      // sposto indice in porzione di lista | grado predecessore < grado attuale
+      // i eventualmente ==  bufferRes.pol.size() 
+    }
+    return res;
+    
+  }catch(runtime_error& e){// raccoglie eccezioni overflow e underflow 
+    std::cout << e.what();
+  }
+  return Polinomio<T>();
+}

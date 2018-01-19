@@ -35,6 +35,8 @@ public:
     bool operator==(const Monomio&)const;
     bool operator>=(const Monomio&)const;
 
+    bool operator<(const Monomio&)const;
+
     T getCoefficiente()const ;
     unsigned int getGrado()const ;
 
@@ -120,8 +122,8 @@ Monomio<T>::operator /(const Monomio<T> & rht)const{
 template<typename T>
 bool
 Monomio<T>::operator>(const Monomio<T>& rht)const {
-  return grado > rht.grado ||
-    (grado == rht.grado && coefficiente > rht.coefficiente);
+    return grado > rht.grado ||
+            (grado == rht.grado && coefficiente > rht.coefficiente);
 }
 
 template<typename T>
@@ -135,6 +137,13 @@ template<typename T>
 bool
 Monomio<T>::operator >=(const Monomio& rht)const{
     return (*this > rht) || (*this == rht);
+}
+
+// necessario per sorting
+template<typename T>
+bool
+Monomio<T>::operator <(const Monomio<T>& rht)const{
+    return (rht > *this);
 }
 
 template<typename T>

@@ -1,6 +1,7 @@
 #ifndef POLINOMIO
 #define POLINOMIO
 
+#include<algorithm>
 #include<iostream>
 #include<QList>
 #include<limits>
