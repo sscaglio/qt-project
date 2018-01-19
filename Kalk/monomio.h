@@ -17,8 +17,8 @@ using std::underflow_error;
 
 template<typename T>
 class Monomio{
-    const T coefficiente;
-    const unsigned int grado;
+    T coefficiente;
+    unsigned int grado;
 
     static const Boundchecker<T> bd;
 
@@ -35,7 +35,10 @@ public:
     bool operator==(const Monomio&)const;
     bool operator>=(const Monomio&)const;
 
-    void printAll(){
+    T getCoefficiente()const ;
+    unsigned int getGrado()const ;
+
+    void printAll()const{
         cout << "coeff " << coefficiente << endl;
         cout << "grado " << grado << endl;
     }
@@ -132,6 +135,18 @@ template<typename T>
 bool
 Monomio<T>::operator >=(const Monomio& rht)const{
     return (*this > rht) || (*this == rht);
+}
+
+template<typename T>
+T
+Monomio<T>::getCoefficiente()const {
+    return coefficiente;
+}
+
+template<typename T>
+unsigned int
+Monomio<T>::getGrado()const {
+    return grado;
 }
 
 #endif // MONOMIO

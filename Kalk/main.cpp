@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "monomio.h"
+#include "polinomio.h"
 #include<iostream>
 
 
@@ -11,15 +11,9 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Monomio<int> t1 = Monomio<int>(2,1);
-    Monomio<int> t2 = Monomio<int>(1,1);
+    Polinomio<int>p2 = Polinomio<int>();
 
-    (t1 + t2).printAll();
-    (t1 - t2).printAll();
-    (t1 * t2).printAll();
-    (t1 / t2).printAll();
-
-    std::cout << (t1 > t2) << " " << (Monomio<int>(1,1) >= Monomio<int>(1,1)) << std::endl;
+    p2.testSum();
 
     return a.exec();
 }

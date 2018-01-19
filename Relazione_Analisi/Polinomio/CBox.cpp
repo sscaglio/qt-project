@@ -21,6 +21,19 @@ public:
       std::cout << pol." "
 	}
   }
+
+  void testSum(){
+    Polinomio<Monomio<T>> p1;
+    Polinomio<Monomio<T>> p2;
+
+    for(int i = 0 ; i < 4;++i){
+      p1.append(Monomio<T>(i,i));
+      p2.append(Monomio<T>(i,i));
+    }
+    Polinomio<Monomio<T>> res = p1 + p2;
+    res.printAll();
+
+  }
 };
 
 
@@ -34,59 +47,57 @@ Polinomio<T>::operator+(const Polinomio<T>& rht)const{
 
     int i = 0;
     int j = 0;
-    for(;++i,++j){
+    while(i < pol.size() && j < rht.pol.size()){
       // se monomi attuali di lht == rht
       // -> possibile definire somma tra monomi
       if(pol[i] == pol[j]){
 	bd.addConsistent
-	(pol[i].getCoefficiente(),
-	 pol[j].getCoefficiente()); 
+	  (pol[i].getCoefficiente(),
+	   pol[j].getCoefficiente()); 
 	T coefficienteRisultante =
-	pol[i].getCoefficiente() + pol[j].getCoefficiente());
+	  pol[i].getCoefficiente() + pol[j].getCoefficiente());
       Monomio<T> risultante =
-      Monomio<T>(coefficienteRisultante,pol[i].getGrado());
+	Monomio<T>(coefficienteRisultante,pol[i].getGrado());
       res.append(risultante);
-      }
-      else{
-	// monomi distinti
+      ++i;
+      ++j;
+    }
+    else{
+      // monomi distinti
 
-	// se monomio di lht > monomio rht
-	// -> appendi monomio sx a res , incrementa
-	// contatore di sx (<->i)
-	if(pol[i] > pol[j]){
-	  res.append(pol[i]);
-	  ++i;
-	}
-	// se monomio di lht < monomio rht
-	// -> appendi monomio dx a res , incrementa
-	// contatore di dx (<->j)
-	else{
-	  res.append(pol[j]);
-	  ++j;
-	}
+      // se monomio di lht > monomio rht
+      // -> appendi monomio sx a res , incrementa
+      // contatore di sx (<->i)
+      if(pol[i] > pol[j]){
+	res.append(pol[i]);
+	++i;
+      }
+      // se monomio di lht < monomio rht
+      // -> appendi monomio dx a res , incrementa
+      // contatore di dx (<->j)
+      else{
+	res.append(pol[j]);
+	++j;
       }
     }
-    // solo Polinomio lht e' vuoto -> appendi rht a res
+  }
   QList<Monomio> rimanente = QList<Monomio>();
-  if(i >= pol.size() && j < rht.pol.size()){
+  if(j < rht.pol.size()){
     // esistono elementi in polinomio rht
     rimanente = rht.pol.mid(j);
   }
-  else if(i < pol.size() && j >= rht.pol.size()){
+  if(i < pol.size() ){
     // esistono elementi in polinomio lht
     rimanente = rht.pol.mid(i);
   }
-  if(rimanente.empty()){
-    return res;
-  }
-  else{
+  if(!(rimanente.empty())){
     res.append(rimanente);
-    return res;
-  }    
-  }catch(runtime_error &e){
-    std::cout << e.what() << std::endl;
   }
-  return Polinomio();
+  return res;
+}catch(runtime_error &e){
+  std::cout << e.what() << std::endl;
+ }
+return Polinomio<T>();
 }
 
 template<typename T>
