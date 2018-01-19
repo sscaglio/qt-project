@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     Polinomio<int>p2 = Polinomio<int>();
 
-    p2.testSum();
+    p2.testOperation();
 
     return a.exec();
 }
