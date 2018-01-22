@@ -21,7 +21,7 @@ class Complesso{
     const T reale;
     const T immaginaria;
 
-    static const Boundchecker<T>bd;
+     static const Boundchecker<T>bd;
 
 public :
     Complesso(const T& = 0,const T& = 0);
@@ -30,6 +30,10 @@ public :
     Complesso operator-(const Complesso&)const;
     Complesso operator*(const Complesso&)const;
     Complesso operator/(const Complesso&)const;
+
+    T getReale()const;
+    T getImmaginaria()const;
+    Boundchecker<T> getBoundChecker()const;
 
     void printAll(){
         std::cout << "R: " << reale << std::endl;
@@ -165,5 +169,24 @@ Complesso<T>::operator /(const Complesso<T>& rht)const {
     }
     return 0;
 }
+
+template<typename T>
+T
+Complesso<T>::getReale() const{
+    return reale;
+}
+
+template<typename T>
+T
+Complesso<T>::getImmaginaria()const{
+    return immaginaria;
+}
+
+template<typename T>
+Boundchecker<T>
+Complesso<T>::getBoundChecker()const{
+    return bd;
+}
+
 #endif // COMPLESSO
 

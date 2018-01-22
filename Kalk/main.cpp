@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "polinomio.h"
+#include "complessoint.h"
 #include<iostream>
 
 
@@ -11,9 +11,13 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Polinomio<int>p2 = Polinomio<int>();
+    ComplessoInt x1 = ComplessoInt(1,1);
+    ComplessoInt x2 = ComplessoInt(1,1);
 
-    p2.testOperation();
+    (x1 / x2).printAll();
+
+    ComplessoInt x3 = ComplessoInt(5,5);
+    x3.factorial().printAll();
 
     return a.exec();
 }
