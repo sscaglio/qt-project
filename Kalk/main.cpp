@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "complessoint.h"
+#include "complessodouble.h"
 #include<iostream>
 
 
@@ -11,13 +11,16 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    ComplessoInt x1 = ComplessoInt(1,1);
-    ComplessoInt x2 = ComplessoInt(1,1);
+    ComplessoDouble x1 = ComplessoDouble(2.5,2.5);
+    ComplessoDouble x2 = ComplessoDouble(2.5,2.5);
 
+    (x1 + x2).printAll();
+    (x1 - x2).printAll();
+    (x1 * x2).printAll();
     (x1 / x2).printAll();
+    x1.squareRoot().printAll();
 
-    ComplessoInt x3 = ComplessoInt(5,5);
-    x3.factorial().printAll();
+    //ComplessoDouble x3 = ComplessoDouble(5,5);
 
     return a.exec();
 }

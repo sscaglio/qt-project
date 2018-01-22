@@ -15,7 +15,8 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     dividebyzero_error.cpp \
-    complessoint.cpp
+    complessoint.cpp \
+    complessodouble.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -25,6 +26,7 @@ HEADERS  += mainwindow.h \
     monomio.h \
     polinomio.h \
     complessoint.h \
-    complessoarithmeticexecutor.h
+    complessoarithmeticexecutor.h \
+    complessodouble.h
 
 FORMS    += mainwindow.ui
