@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     complessoint.cpp \
     complessodouble.cpp \
     matriceint.cpp \
-    matricedouble.cpp
+    matricedouble.cpp \
+    polinomioint.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -32,6 +33,8 @@ HEADERS  += mainwindow.h \
     complessodouble.h \
     matriceint.h \
     matrixarithmeticexecutor.h \
-    matricedouble.h
+    matricedouble.h \
+    polinomioint.h \
+    polynomialarithmeticexecutor.h
 
 FORMS    += mainwindow.ui

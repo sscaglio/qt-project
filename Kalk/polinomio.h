@@ -17,6 +17,7 @@ using std::numeric_limits;
 template<typename T>
 class Polinomio{
 
+protected:
     QList<Monomio<T> > pol;
 
     static const Boundchecker<T> bd;
