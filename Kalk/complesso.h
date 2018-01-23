@@ -21,6 +21,7 @@ class Complesso{
     const T reale;
     const T immaginaria;
 
+    static Boundchecker<T> bd;
 
 public :
     Complesso(const T& = 0,const T& = 0);
@@ -39,6 +40,11 @@ public :
 template<typename T>
 Complesso<T>::Complesso(const T& r,const T& i)
     :reale(r),immaginaria(i){}
+
+// campo dati statico per creare unica istanza boundchecker
+template<typename T>
+Boundchecker<T> Complesso<T>::bd = Boundchecker<T>(std::numeric_limits<T>::max(),(-1) * std::numeric_limits<T>::max());
+
 
 template<typename T>
 T
