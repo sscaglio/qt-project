@@ -3,14 +3,14 @@
 
 #include<iostream>
 
-#include "polinomioint.h"
+#include "polinomiodouble.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
 
-    PolinomioInt x1 = PolinomioInt();
+    PolinomioDouble x1 = PolinomioDouble();
     x1.testOperation();
 
     w.show();

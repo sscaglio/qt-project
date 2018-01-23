@@ -135,5 +135,67 @@ PolynomialArithmeticExecutor<T,U>::sub(const T& lht,const T& rht){
     }
     return T();
 }
+
+template<typename T,typename U>
+T
+PolynomialArithmeticExecutor<T,U>::mul(const T& lht,const T& rht){
+
+    try{
+        T bufferRes = T();
+        for(int i= 0; i < lht.pol.size();++i){
+            // per ogni monomio appartenente a operando sx
+            for(int j = 0; j < rht.pol.size();++j){
+                // per ogni monomio appartenente a operando dx
+                bd.mulConsistent(lht.pol[i].getCoefficiente(),rht.pol[j].getCoefficiente());
+                // operazione di moltiplicazione tra coefficienti e' consistente
+                bd.addConsistent(lht.pol[i].getGrado(),rht.pol[j].getGrado());
+                // operazione di somma tra gradi e' consistente
+                U coefficienteRisultante =
+                        lht.pol[i].getCoefficiente() * rht.pol[j].getCoefficiente();
+                if(coefficienteRisultante != 0){
+                    bd.addConsistent(lht.pol[i].getGrado(),rht.pol[j].getGrado());
+                    // operazione di somma tra gradi e' consistente
+                    U gradoRisultante = lht.pol[i].getGrado() + rht.pol[j].getGrado();
+                    bufferRes.pol.append(Monomio<U>(coefficienteRisultante,gradoRisultante));
+                }
+                // ogni elemento di operando sx e' stato moltiplicato per operando dx
+                // e inserito in bufferRes
+            }
+        }
+        // algoritmo di base ok
+        std::sort(bufferRes.pol.begin(),bufferRes.pol.end());
+          // bufferRes e' ordinato -> posso semplificare monomi con grado ==
+          T res = T();
+          int i = 0 ;
+          while(i < bufferRes.pol.size()){
+            U coeffGradiUguali = U();
+            // coeffGradiUguali rappresenta coefficiente somma di tutti i
+            // monomi di grado ==
+            int j = i;
+
+            // i, j  <  bufferRes.pol.size()
+            while(j < bufferRes.pol.size() &&
+              bufferRes.pol[i].getGrado() == bufferRes.pol[j].getGrado()){
+          bd.addConsistent(coeffGradiUguali,bufferRes.pol[j].getGrado());
+          // somma consistente tra coefficiente parziale e coefficiente da
+          // sommare
+          coeffGradiUguali = coeffGradiUguali + bufferRes.pol[j].getCoefficiente();
+          ++j;
+            }
+            // monomio puntato da j ha grado diverso rispetto a
+            // monomio puntato da i or arrivato a fine di bufferRes
+            // coeffGradiUguali contiene somma di tutti i coefficienti
+            // di grado uguale a bufferRes.pol[i]
+            res.pol.push_front(Monomio<U>(coeffGradiUguali,bufferRes.pol[i].getGrado()));
+            i = j;
+            // sposto indice in porzione di lista | grado predecessore < grado attuale
+            // i eventualmente ==  bufferRes.pol.size()
+          }
+          return res;
+    } catch(runtime_error& e){// raccoglie eccezioni overflow e underflow
+        std::cout << e.what();
+    }
+    return T();
+}
 #endif // POLYNOMIALARITHMETICEXECUTOR
 
