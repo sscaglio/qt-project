@@ -41,7 +41,21 @@ ComplessoInt::factorial()const{
         factorialImmaginaria*=daMoltImmaginaria;
         --daMoltImmaginaria;
     }
+
     // nessun overflow underflow in operazione di fattoriale per parte immaginaria
     return ComplessoInt(factorialReale,factorialImmaginaria);
 
+}
+
+ComplessoInt
+ComplessoInt::parse(const QString & toBeParsed){
+    QStringList res = toBeParsed.split("+",QString::SkipEmptyParts);
+    QString immaginaria = res.at(1);
+    return ComplessoInt(res.at(0).toInt(),immaginaria.remove('i').toInt());
+}
+
+QString
+ComplessoInt::convertToQString(const ComplessoInt& toBeConverted){
+    QString res = QString::number(toBeConverted.reale) + " + " + QString::number(toBeConverted.immaginaria) + "i";
+    return res;
 }

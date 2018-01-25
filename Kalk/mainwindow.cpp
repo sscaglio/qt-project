@@ -38,7 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void
 MainWindow::showComplexIntMode(){
-
+    KalkComplessoInt *k = new KalkComplessoInt();
+    k->show();
 }
 
 void

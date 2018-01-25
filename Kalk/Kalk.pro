@@ -21,8 +21,8 @@ SOURCES += main.cpp\
     matricedouble.cpp \
     polinomioint.cpp \
     polinomiodouble.cpp \
-    abstractcalc.cpp \
-    complexintcalc.cpp
+    kalkbutton.cpp \
+    kalkcomplessoint.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -40,7 +40,7 @@ HEADERS  += mainwindow.h \
     polinomioint.h \
     polynomialarithmeticexecutor.h \
     polinomiodouble.h \
-    abstractcalc.h \
-    complexintcalc.h
+    kalkbutton.h \
+    kalkcomplessoint.h
 
 FORMS    += mainwindow.ui

@@ -4,10 +4,13 @@
 #include "complesso.h"
 #include "complessoarithmeticexecutor.h"
 
+#include<QString>
+#include<QStringList>
+
 class ComplessoInt : public Complesso<int>
 {
 public:
-    ComplessoInt(const int,const int);
+    ComplessoInt(const int = 0,const int = 0);
 
     ComplessoInt operator+(const ComplessoInt&)const;
     ComplessoInt operator-(const ComplessoInt&)const;
@@ -17,9 +20,10 @@ public:
     // operazione propria di ComplessoInt
     ComplessoInt factorial()const;
 
-    void printAll(){
-        std::cout << "reale " << (this->getReale()) << " immaginaria" << (this->getImmaginaria()) << std::endl;
-    }
+    static ComplessoInt parse(const QString &);
+    static QString convertToQString(const ComplessoInt&);
+
+
 };
 
 

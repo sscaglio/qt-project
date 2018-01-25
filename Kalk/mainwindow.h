@@ -9,7 +9,7 @@
 #include<QDialog>
 #include<iostream>
 
-#include "abstractcalc.h"
+#include "kalkcomplessoint.h"
 
 namespace Ui {
 class MainWindow;
