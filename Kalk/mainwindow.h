@@ -1,7 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QAction>
 #include <QMainWindow>
+#include<QGroupBox>
+#include<QPushButton>
+#include<QVBoxLayout>
+#include<QDialog>
+#include<iostream>
+
+#include "abstractcalc.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,10 +21,19 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    AbstractCalc * tipoEffettivoCalcolo;
+
+    QGroupBox* createPushButtonGroup();
+
+public slots:
+    void showComplexIntMode();
+    void showComplexRealMode();
+    void showMatrixIntMode();
+    void showMatrixRealMode();
+    void showPolynomialIntMode();
+    void showPolynomialRealMode();
 };
 
 #endif // MAINWINDOW_H
