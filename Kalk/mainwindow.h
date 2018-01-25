@@ -10,6 +10,7 @@
 #include<iostream>
 
 #include "kalkcomplessoint.h"
+#include "kalkcomplessodouble.h"
 
 namespace Ui {
 class MainWindow;

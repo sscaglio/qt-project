@@ -44,7 +44,8 @@ MainWindow::showComplexIntMode(){
 
 void
 MainWindow::showComplexRealMode(){
-
+    KalkComplessoDouble *k = new KalkComplessoDouble();
+    k->show();
 }
 
 void
