@@ -9,6 +9,8 @@ class AbstractCalc : public QWidget
 public:
     explicit AbstractCalc(QWidget *parent = 0);
 
+    virtual void setupSpecificOperation() = 0;
+
 signals:
 
 public slots:

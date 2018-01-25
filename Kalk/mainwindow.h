@@ -22,11 +22,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
 
-private:
-    AbstractCalc * tipoEffettivoCalcolo;
-
-    QGroupBox* createPushButtonGroup();
-
 public slots:
     void showComplexIntMode();
     void showComplexRealMode();

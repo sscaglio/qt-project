@@ -38,35 +38,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void
 MainWindow::showComplexIntMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }
 
 void
 MainWindow::showComplexRealMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }
 
 void
 MainWindow::showMatrixIntMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }
 
 void
 MainWindow::showMatrixRealMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }
 
 void
 MainWindow::showPolynomialIntMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }
 void
 MainWindow::showPolynomialRealMode(){
-    QWidget *prova = new QWidget();
-    prova->show();
+
 }

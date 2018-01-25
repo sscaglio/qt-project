@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     matricedouble.cpp \
     polinomioint.cpp \
     polinomiodouble.cpp \
-    abstractcalc.cpp
+    abstractcalc.cpp \
+    complexintcalc.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -39,6 +40,7 @@ HEADERS  += mainwindow.h \
     polinomioint.h \
     polynomialarithmeticexecutor.h \
     polinomiodouble.h \
-    abstractcalc.h
+    abstractcalc.h \
+    complexintcalc.h
 
 FORMS    += mainwindow.ui
