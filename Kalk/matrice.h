@@ -18,6 +18,7 @@ using std::underflow_error;
 template<typename T>
 class Matrice{// eredita da classe astratta MatriceAstratta
 
+protected:
     QVector<T> matrice;
     unsigned int righe;
     unsigned int colonne;
@@ -31,17 +32,6 @@ public:
     Matrice operator-(const Matrice&)const ;
     Matrice operator*(const Matrice&)const ;
 
-    //test fn
-    void insertValue(const T& val){
-        matrice.push_back(val);
-    }
-
-    void printAll(){
-        for(unsigned int i = 0 ; i < righe * colonne;++i){
-            std::cout << matrice[i] << " ";
-        }
-        std::cout << std::endl;
-    }
 };
 
 // campo dati statico per creare unica istanza boundchecker
@@ -63,7 +53,7 @@ template<typename T>
 Matrice<T>
 Matrice<T>::operator +(const Matrice<T>& rht) const{
 
-        try{
+    try{
         if(!(righe == rht.righe && colonne == rht.colonne)){
             throw domain_error("dimensione matrici non compatibili");
         }
@@ -155,5 +145,7 @@ Matrice<T>::operator *(const Matrice<T>& rht) const{
     }
     return 0;
 }
+
+
 #endif // MATRICE
 

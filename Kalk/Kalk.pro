@@ -14,7 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dividebyzero_error.cpp
+    dividebyzero_error.cpp \
+    complessoint.cpp \
+    complessodouble.cpp \
+    matriceint.cpp \
+    matricedouble.cpp \
+    polinomioint.cpp \
+    polinomiodouble.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -22,6 +28,15 @@ HEADERS  += mainwindow.h \
     matrice.h \
     complesso.h \
     monomio.h \
-    polinomio.h
+    polinomio.h \
+    complessoint.h \
+    complessoarithmeticexecutor.h \
+    complessodouble.h \
+    matriceint.h \
+    matrixarithmeticexecutor.h \
+    matricedouble.h \
+    polinomioint.h \
+    polynomialarithmeticexecutor.h \
+    polinomiodouble.h
 
 FORMS    += mainwindow.ui
