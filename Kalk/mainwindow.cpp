@@ -51,18 +51,23 @@ MainWindow::showComplexRealMode(){
 void
 MainWindow::showMatrixIntMode(){
 
+    KalkMatriceInt *k = new KalkMatriceInt();
+    k->show();
 }
 
 void
 MainWindow::showMatrixRealMode(){
-
+    KalkMatriceDouble *k = new KalkMatriceDouble();
+    k->show();
 }
 
 void
 MainWindow::showPolynomialIntMode(){
-
+    KalkPolinomioInt *k = new KalkPolinomioInt();
+    k->show();
 }
 void
 MainWindow::showPolynomialRealMode(){
-
+    KalkPolinomioDouble *k = new KalkPolinomioDouble();
+    k->show();
 }

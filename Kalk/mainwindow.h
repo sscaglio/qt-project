@@ -11,6 +11,11 @@
 
 #include "kalkcomplessoint.h"
 #include "kalkcomplessodouble.h"
+#include "kalkmatriceint.h"
+#include "kalkmatricedouble.h"
+#include "kalkpolinomiodouble.h"
+#include "kalkpolinomiodouble.h"
+
 
 namespace Ui {
 class MainWindow;
