@@ -5,12 +5,14 @@
 
 #include "matrixarithmeticexecutor.h"
 
+#include<QString>
+#include<QStringList>
 
 class MatriceInt : public Matrice<int>
 {
     friend class MatrixArithmeticExecutor<MatriceInt,int>;
 public:
-    MatriceInt(const unsigned int,const unsigned int);
+    MatriceInt(const unsigned int = 0,const unsigned int = 0);
 
     MatriceInt operator+(const MatriceInt&)const;
     MatriceInt operator-(const MatriceInt&)const;
@@ -18,16 +20,13 @@ public:
 
     MatriceInt factorial()const;
 
-    void printAll()const{
-        for(unsigned int i= 0 ; i< righe * colonne;++i){
-            std::cout << matrice[i] << " ";
-        }
-    }
-
     //test fn
     void insertValue(const int& val){
         matrice.push_back(val);
     }
+
+    static MatriceInt parse(const QString&,unsigned int,unsigned int);
+    static QString convertToQString(const MatriceInt&);
 };
 
 #endif // MATRICEINT_H

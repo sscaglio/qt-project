@@ -63,11 +63,11 @@ MainWindow::showMatrixRealMode(){
 
 void
 MainWindow::showPolynomialIntMode(){
-    KalkPolinomioInt *k = new KalkPolinomioInt();
+   /* KalkPolinomioInt *k = new KalkPolinomioInt();
     k->show();
-}
+*/}
 void
 MainWindow::showPolynomialRealMode(){
-    KalkPolinomioDouble *k = new KalkPolinomioDouble();
+  /*  KalkPolinomioDouble *k = new KalkPolinomioDouble();
     k->show();
-}
+*/}
