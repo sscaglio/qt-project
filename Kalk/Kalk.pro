@@ -21,9 +21,7 @@ SOURCES += main.cpp\
     matricedouble.cpp \
     polinomioint.cpp \
     polinomiodouble.cpp \
-<<<<<<< HEAD
-    button.cpp
-=======
+    button.cpp \
     kalkbutton.cpp \
     kalkcomplessoint.cpp \
     kalkcomplessodouble.cpp \
@@ -31,7 +29,6 @@ SOURCES += main.cpp\
     kalkmatricedouble.cpp \
     kalkpolinomioint.cpp \
     kalkpolinomiodouble.cpp
->>>>>>> 26c34637398dd4bc3c858118c9f31472f828d3f1
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -49,10 +46,8 @@ HEADERS  += mainwindow.h \
     polinomioint.h \
     polynomialarithmeticexecutor.h \
     polinomiodouble.h \
-<<<<<<< HEAD
     complexviewcalculator.h \
-    button.h
-=======
+    button.h \
     kalkbutton.h \
     kalkcomplessoint.h \
     kalkcomplessodouble.h \
@@ -60,6 +55,5 @@ HEADERS  += mainwindow.h \
     kalkmatricedouble.h \
     kalkpolinomioint.h \
     kalkpolinomiodouble.h
->>>>>>> 26c34637398dd4bc3c858118c9f31472f828d3f1
 
 FORMS    += mainwindow.ui

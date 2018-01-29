@@ -13,7 +13,7 @@ KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsign
     display = new QLineEdit("0");
     display->setReadOnly(true);
     display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(15);
+    display->setMaxLength(30);
 
     QFont font = display->font();
     font.setPointSize(font.pointSize() + 8);
@@ -57,12 +57,15 @@ KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsign
 }
 
 
+
+#include<QDebug>
+
 void
 KalkMatriceInt::insertMatrixClicked(){
     QDialog *insertMatrix = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci complesso");
+    QLabel * helperText = new QLabel("inserisci matrice");
     QLineEdit * line = new QLineEdit(this);
-    line->setPlaceholderText("1 + 1");
+    line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertMatrix);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertMatrix,SLOT(accept()));
@@ -78,8 +81,7 @@ KalkMatriceInt::insertMatrixClicked(){
     insertMatrix->setLayout(grid);
     if(insertMatrix->exec() == QDialog::Accepted){
         QString text = line->text();
-        MatriceInt toDisplay = MatriceInt::parse(text,righeMatriceAttuale,colonneMatriceAttuale);
-        display->setText(MatriceInt::convertToQString(toDisplay));
+        display->setText(text);
         waitingForOperand = true;
     };
 }
@@ -89,7 +91,7 @@ KalkMatriceInt::setMatrixDimension(){
     QDialog *insertMatrixDimension = new QDialog(this);
     QLabel *helperText = new QLabel("inserisci dimensione matrice");
     QLineEdit * line = new QLineEdit(this);
-    line->setPlaceholderText("3x3");
+    line->setPlaceholderText("3,3");
     QPushButton *ok = new QPushButton(insertMatrixDimension);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertMatrixDimension,SLOT(accept()));
@@ -105,8 +107,10 @@ KalkMatriceInt::setMatrixDimension(){
     insertMatrixDimension->setLayout(grid);
     if(insertMatrixDimension->exec() == QDialog::Accepted){
         QString text = line->text();
-        QStringList parsedText = text.split("x",QString::SkipEmptyParts);
-        updateMatrixDimension(parsedText.at(0).toUInt(),parsedText.at(1).toUInt());
+        QStringList parsedText = text.split(",",QString::SkipEmptyParts);
+        clearAll();
+        righeMatriceAttuale = parsedText.at(0).toUInt();
+        colonneMatriceAttuale = parsedText.at(1).toUInt();
         waitingForOperand = true;
     };
 }
@@ -127,7 +131,7 @@ KalkMatriceInt::unaryOperatorClicked(){
         res = operandoMatrice.factorial();
     }
 
-    QString textualRes = MatriceInt::convertToQString(res);
+    QString textualRes = MatriceInt::convertToQString(res,righeMatriceAttuale,colonneMatriceAttuale);
     display->setText(textualRes);
     waitingForOperand = true;
 
@@ -144,7 +148,7 @@ KalkMatriceInt::additiveOperatorClicked(){
         if (!calculate(operand, pendingMultiplicativeOperator)) {
             return;
         }
-        display->setText(MatriceInt::convertToQString(factorSoFar));
+        display->setText(MatriceInt::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
         operand = factorSoFar;
         factorSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
         pendingMultiplicativeOperator.clear();
@@ -154,7 +158,7 @@ KalkMatriceInt::additiveOperatorClicked(){
         if (!calculate(operand, pendingAdditiveOperator)) {
             return;
         }
-        display->setText(MatriceInt::convertToQString(sumSoFar));
+        display->setText(MatriceInt::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
     } else {
         sumSoFar = operand;
     }
@@ -174,7 +178,7 @@ KalkMatriceInt::multiplicativeOperatorClicked(){
         if (!calculate(operand, pendingMultiplicativeOperator)) {
             return;
         }
-        display->setText(MatriceInt::convertToQString(factorSoFar));
+        display->setText(MatriceInt::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
     } else {
         factorSoFar = operand;
     }
@@ -204,7 +208,7 @@ KalkMatriceInt::equalClicked(){
         sumSoFar = operand;
     }
 
-    display->setText(MatriceInt::convertToQString(sumSoFar));
+    display->setText(MatriceInt::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
     sumSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
     waitingForOperand = true;
 }

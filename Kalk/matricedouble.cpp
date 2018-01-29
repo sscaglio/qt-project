@@ -33,3 +33,24 @@ MatriceDouble::squareRoot()const{
     }
     return res;
 }
+
+MatriceDouble
+MatriceDouble::parse(const QString& rht,unsigned int r,unsigned int c){
+    MatriceDouble res = MatriceDouble(r,c);
+    QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
+    for(unsigned int i = 0; i < r * c;++i){
+        res.insertValue(toBeParsed.at(i).toDouble());
+    }
+    return res;
+}
+
+QString
+MatriceDouble::convertToQString(const MatriceDouble& rht,const unsigned int r,const unsigned int c){
+    QString res = QString();
+    unsigned int i = 0;
+    for(; i < (r * c - 1)  ;++i){
+        res +=(QString::number(rht.matrice[i]) + ",");
+    }
+    res+=(QString::number(rht.matrice[i]));
+    return res;
+}

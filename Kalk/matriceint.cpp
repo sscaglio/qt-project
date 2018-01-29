@@ -49,21 +49,23 @@ MatriceInt::factorial()const{
 
 
 MatriceInt
-MatriceInt::parse(const QString & rht,unsigned int r,unsigned int c){
+MatriceInt::parse(const QString & rht,const unsigned int r,const unsigned int c){
 
     MatriceInt res = MatriceInt(r,c);
     QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
-    for(int i = 0; i < res.matrice.size();++i){
+    for(unsigned int i = 0; i < r * c;++i){
         res.insertValue(toBeParsed.at(i).toInt());
     }
     return res;
 }
 
 QString
-MatriceInt::convertToQString(const MatriceInt & rht){
+MatriceInt::convertToQString(const MatriceInt & rht,const unsigned int r,const unsigned int c){
     QString res = QString();
-    for(int i = 0; i < rht.matrice.size();++i){
-        res +=(QString::number(rht.matrice[i]));
+    unsigned int i = 0;
+    for(; i < (r * c - 1)  ;++i){
+        res +=(QString::number(rht.matrice[i]) + ",");
     }
+    res+=(QString::number(rht.matrice[i]));
     return res;
 }

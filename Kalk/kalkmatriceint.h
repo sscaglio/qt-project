@@ -15,7 +15,7 @@ class KalkMatriceInt : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KalkMatriceInt(QWidget *parent = 0,const unsigned int = 0,const unsigned int = 0);
+    explicit KalkMatriceInt(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
 
 signals:
 
@@ -28,7 +28,7 @@ private slots:
     void backspaceClicked();
     void clear();
     void clearAll();
-
+    void setMatrixDimension();
 private:
 
     unsigned int righeMatriceAttuale;
@@ -37,7 +37,6 @@ private:
     KalkButton *createKalkButton(const QString &text, const char *member);
     bool calculate(const MatriceInt&, const QString &);
 
-    void setMatrixDimension();
     void updateMatrixDimension(unsigned int ,unsigned int);
     MatriceInt sumSoFar;
     MatriceInt factorSoFar;
