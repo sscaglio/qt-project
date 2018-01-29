@@ -18,8 +18,9 @@ using std::endl;
 template<typename T>
 class Complesso{
 
-    const T reale;
-    const T immaginaria;
+protected:
+    T reale;
+    T immaginaria;
 
     static Boundchecker<T> bd;
 

@@ -39,10 +39,31 @@ MatriceInt::factorial()const{
             }
             risultante.matrice.push_back(factorialParziale);
         }
-    return risultante;
+        return risultante;
     }catch(runtime_error &e){
         std::cout << e.what() << std::endl;
     }
     return MatriceInt(0,0);
 
+}
+
+
+MatriceInt
+MatriceInt::parse(const QString & rht,unsigned int r,unsigned int c){
+
+    MatriceInt res = MatriceInt(r,c);
+    QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
+    for(int i = 0; i < res.matrice.size();++i){
+        res.insertValue(toBeParsed.at(i).toInt());
+    }
+    return res;
+}
+
+QString
+MatriceInt::convertToQString(const MatriceInt & rht){
+    QString res = QString();
+    for(int i = 0; i < rht.matrice.size();++i){
+        res +=(QString::number(rht.matrice[i]));
+    }
+    return res;
 }

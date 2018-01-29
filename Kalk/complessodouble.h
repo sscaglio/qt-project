@@ -6,10 +6,13 @@
 
 #include <math.h>
 
+#include<QString>
+#include<QStringList>
+
 class ComplessoDouble : public Complesso<double>
 {
 public:
-    ComplessoDouble(const double,const double);
+    ComplessoDouble(const double = 0,const double = 0);
 
     ComplessoDouble operator +(const ComplessoDouble&)const;
     ComplessoDouble operator -(const ComplessoDouble&)const;
@@ -19,9 +22,8 @@ public:
     // operazione propria di ComplessoDouble
     ComplessoDouble squareRoot()const;
 
-    void printAll(){
-        std::cout << "reale " << (this->getReale()) << " immaginaria" << (this->getImmaginaria()) << std::endl;
-    }
+    static ComplessoDouble parse(const QString &);
+    static QString convertToQString(const ComplessoDouble&);
 };
 
 #endif // COMPLESSODOUBLE_H
