@@ -4,8 +4,6 @@
 #include "kalkbutton.h"
 #include "complessoint.h"
 
-#include <QWidget>
-#include<QLineEdit>
 #include<QLineEdit>
 #include<QDialog>
 #include<QLabel>

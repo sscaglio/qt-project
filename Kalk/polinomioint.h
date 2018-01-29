@@ -5,6 +5,8 @@
 
 #include "polynomialarithmeticexecutor.h"
 
+#include <QStringList>
+
 class PolinomioInt : public Polinomio<int>
 {
     friend class PolynomialArithmeticExecutor<PolinomioInt,int>;
@@ -19,6 +21,9 @@ public:
     void printAll()const;
 
     PolinomioInt factorial()const;
+
+    static PolinomioInt parse(const QString&);
+    static QString convertToQString(const PolinomioInt&);
 };
 
 #endif // POLINOMIOINT_H

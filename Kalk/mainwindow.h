@@ -13,7 +13,7 @@
 #include "kalkcomplessodouble.h"
 #include "kalkmatriceint.h"
 #include "kalkmatricedouble.h"
-#include "kalkpolinomiodouble.h"
+#include "kalkpolinomioint.h"
 #include "kalkpolinomiodouble.h"
 
 

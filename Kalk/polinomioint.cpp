@@ -71,3 +71,29 @@ PolinomioInt::testOperation()const{
     res.printAll();
     cout << std::endl;
 }
+
+
+PolinomioInt
+PolinomioInt::parse(const QString& rht){
+
+    QStringList res = rht.split(",",QString::SkipEmptyParts);
+    PolinomioInt val = PolinomioInt();
+    for(int i= 0 ; i < res.size();++i){
+        if(res[i] != "s"){// se res[i] = 's' -> salta inserimento simbolo
+            QStringList par = res[i].split("x^");
+            val.pol.append(Monomio<int>(par.at(0).toInt(),par.at(1).toInt()));
+        }
+    }
+    return val;
+}
+
+QString
+PolinomioInt::convertToQString(const PolinomioInt & rht){
+    QString res = QString();
+    unsigned int i = 0;
+    for(; i < rht.pol.size();++i){
+        res +=(QString::number(rht.pol[i].getCoefficiente()) + "x^" + QString::number(rht.pol[i].getGrado()) + ",");
+    }
+    res+=(QString::number(rht.pol[i].getCoefficiente()) + "x^" +QString::number(rht.pol[i].getGrado()));
+    return res;
+}
