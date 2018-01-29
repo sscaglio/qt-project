@@ -3,16 +3,16 @@
 
 #include<iostream>
 
-#include "polinomiodouble.h"
+#include "complessoint.h"
+#include "complexviewcalculator.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-
-    PolinomioDouble x1 = PolinomioDouble();
-    x1.testOperation();
-
-    w.show();
+    //MainWindow w;
+    //w.show();
+    ComplexViewCalculator<ComplessoInt> x =
+            ComplexViewCalculator<ComplessoInt>();
+    x.show();
     return a.exec();
 }
