@@ -1,31 +1,8 @@
-abstract class AbstractComplex<T>{
-
-    private T reale;
-    private T immaginaria;
-    
-    public AbstractComplex(T reale,T immaginaria){
-	this.reale = reale;
-	this.immaginaria = immaginaria;
-    }
-
-    public String toString(){
-	return new String(reale.toString() + "+" + immaginaria.toString() + "i");
-    }
-
-    public T getReale(){
-	return reale;
-    }
-    public T getImmaginaria(){
-	return immaginaria;
-    }
-}
-
-
 public class ComplexInt
     extends AbstractComplex<Integer> implements ArithInterface<ComplexInt>{
 
-
-    ArithComplexExecutor<complexint,Integer>() acexec = new ArithComplexExecutor<Complexint,Integer>();
+    Integer upperBound = Integer.MAX_VALUE;
+    Integer lowerBound = Integer.MIN_VALUE;
     
     public ComplexInt(){
 	this(1);
@@ -38,50 +15,170 @@ public class ComplexInt
 	super(reale,immaginaria);
     }
 
+
+    private Integer addConsistent(Integer lht,Integer rht)
+	throws ArithmeticException{
+	if((rht > 0) && (lht > (upperBound - rht))){
+	    throw new ArithmeticException("integer overflow");
+	}
+	else if((rht < 0) && (lht < (lowerBound - rht))){
+	    throw new ArithmeticException("integer underflow");
+	}
+	return lht + rht;
+    }
+	
+    private Integer subConsistent(Integer lht,Integer rht)
+	throws ArithmeticException{
+	if (rht > 0 && (lht < (lowerBound + rht))){
+	    throw new ArithmeticException("integer underflow");
+	}
+	else if((rht < 0) && (lht > (upperBound + rht))){
+	    throw new ArithmeticException("integer overflow");
+	}
+	return lht - rht;
+    }
+
+    private Integer mulConsistent(Integer lht,Integer rht){
+	if (lht > 0) {  /* lht is positive */
+	    if (rht > 0) {  /* lht and rht are positive */
+		if (lht > (upperBound / rht)) {
+		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro positivi");
+		}
+	    } else { /* lht positive, rht nonpositive */
+		if (rht < (lowerBound / lht)) {
+		    throw new ArithmeticException("underflow error in operazione di moltiplicazione, termine sinistro positivo, destro negativo");
+		}
+	    } /* lht positive, rht nonpositive */
+	} else { /* lht is nonpositive */
+	    if (rht > 0) { /* lht is nonpositive, rht is positive */
+		if (lht < (lowerBound / rht)) {
+		    throw new ArithmeticException("underflow error in operazione di moltiplcazione, termine sinistro negativo, destro positivo");
+		}
+	    } else { /* lht and rht are nonpositive */
+		if ( (lht != 0) && (rht < (upperBound / lht))) {
+		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro negativi");
+		}
+	    } /* End if lht and rht are nonpositive */
+	} /* End if lht is nonpositive */
+	return lht * rht;
+    }
+    
+
+    private Integer divConsistent(Integer rht,Integer lht){
+	if (rht == 0){
+	    throw new ArithmeticException("divide by zero error in operazione di divisione");
+	}
+	else if((lht == lowerBound) && (rht == -1)) {
+	    throw new ArithmeticException("overflow error in operazione di divisione");
+	}
+	return lht / rht;
+    }
+
     public ComplexInt sum(ComplexInt rht){
-	return ArithComplexExecutor<ComplexInt,Integer>.sumExecutor(this,rht);
+	return new ComplexInt(addConsistent(reale,rht.reale),addConsistent(immaginaria,rht.immaginaria));
     }
 
     public ComplexInt difference(ComplexInt rht){
-	return arexec.differenceExecutor(this,rht);
+	return new ComplexInt(subConsistent(reale,rht.reale),subConsistent(immaginaria,rht.immaginaria));
     }
     
     public ComplexInt product(ComplexInt rht){
-	return new ComplexInt();
+         // prodotto tra 2 complessi descritto da relazione
+        // i parte immaginaria()
+        //(a + bi)*(c + di) = (ac - bd) + (bc + ad)i
+        Integer primoTermine = mulConsistent(reale,rht.reale);
+        Integer secondoTermine = mulConsistent(immaginaria,rht.immaginaria);
+        // ac e bd consistenti
+        Integer terzoTermine = mulConsistent(immaginaria,rht.reale);
+        Integer quartoTermine = mulConsistent(reale,rht.immaginaria);
+        // bc e ad consistenti
+        Integer realeFinale = subConsistent(primoTermine,secondoTermine); 
+        // ac - bd consistente;
+        Integer immaginariaFinale = addConsistent(terzoTermine,quartoTermine);
+        // bc + ad consistente
+
+        // -> (ac - bd) - (bc + ad) consistente
+        return new ComplexInt(realeFinale,immaginariaFinale);
     }
 
-    public ComplexInt factorial(){
-	Integer facReale = getReale();
-	Integer facImg = getImmaginaria();
+    public ComplexInt division(ComplexInt rht){
 
-	Integer daMultReal = reale - 1;
-	Integer daMultImg = immaginaria - 1;
+          // prodotto tra 2 complessi descritto da relazione
+        // i parte immaginaria
+        //(a + bi)/(c + di) = ((ac - bd)/(c*c + d*d))/((bc + ad)/(c*c + d*d))i
+        
+        Integer primoTermine =mulConsistent(reale,rht.reale);
+        Integer secondoTermine = mulConsistent(immaginaria,rht.immaginaria);
+        // ac e bd consistenti
+        Integer terzoTermine =  mulConsistent(immaginaria,rht.reale);
+        Integer quartoTermine =  mulConsistent(reale,rht.immaginaria);
+        // bc e ad consistenti 
+        // ac + bd consistente;
+        Integer primoNumeratore = addConsistent(primoTermine,secondoTermine);;
+        // bc - ad consistente
+        Integer secondoNumeratore = subConsistent(terzoTermine,quartoTermine);;
+        
+        // c al quadrato consistente
+        // d al quadrato consistente
+        // denominatore consistente
+        Integer denominatore = addConsistent(mulConsistent(rht.reale,rht.reale),mulConsistent(rht.immaginaria,rht.immaginaria)) ;
+        
+        // (ac + bd)/(c^2 + d^2) consistente
+        Integer parteReale = divConsistent(primoNumeratore,denominatore);
+        // ->((bc - ad)/(c^2 + d^2)) consistente
+        Integer parteImmaginaria = divConsistent(secondoNumeratore,denominatore);;
+        // tutte le operazioni che compongono il risultante complesso sono
+        // consistenti -> complesso tornato e' consistente
+        return new ComplexInt(parteReale,parteImmaginaria);
+     }
+    
+    public ComplexInt factorial(){
+	Integer facReale = reale;
+	Integer facImg = immaginaria;
+
+	Integer daMultReal = facReale - 1;
+	Integer daMultImg = facImg - 1;
 
 	while(daMultReal > 1){
-	    facReale*=daMultReal;
+	    facReale = mulConsistent(facReale,daMultReal);
 	    daMultReal = daMultReal - 1;
 	}
 
 	while(daMultImg > 1){
-	    facImg*=daMultImg;
+	    facImg = mulConsistent(facImg,daMultImg);
 	    daMultImg = daMultImg - 1;
 	}
 	
 	return new ComplexInt(facReale,facImg);
     }
 
+     public String toString(){
+	String res = new String();
+	res+=reale.toString();
+	if(immaginaria > 0){
+	    res+=(" +");
+	}
+	return res+=(immaginaria.toString() + "i"); 
+    }
+    
     public static void main(String[] args){
-	ComplexInt t1 = new ComplexInt(5,5);
+	ComplexInt t1 = new ComplexInt(6,5);
 	ComplexInt t2 = new ComplexInt(3,3);
 
-	// // somma
-	// System.out.println(t1.sum(t2));
+	// somma
+	System.out.println(t1.sum(t2));
 
-	// // differenza
+	//  differenza
 
-	// System.out.println(t1.difference(t2));
+	System.out.println(t1.difference(t2));
+
+	// prodotto
+	System.out.println(t1.product(t2));
+
+	// divisione
+	System.out.println(t1.division(t2));
 	
-	// // fattoriale
-	// System.out.println(t1.factorial());
+	//fattoriale
+	System.out.println(t1.factorial());
     }
 }
