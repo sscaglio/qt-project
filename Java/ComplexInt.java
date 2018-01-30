@@ -1,7 +1,7 @@
 abstract class AbstractComplex<T>{
 
-    protected T reale;
-    protected T immaginaria;
+    private T reale;
+    private T immaginaria;
     
     public AbstractComplex(T reale,T immaginaria){
 	this.reale = reale;
@@ -11,12 +11,22 @@ abstract class AbstractComplex<T>{
     public String toString(){
 	return new String(reale.toString() + "+" + immaginaria.toString() + "i");
     }
-   
+
+    public T getReale(){
+	return reale;
+    }
+    public T getImmaginaria(){
+	return immaginaria;
+    }
 }
 
 
-public class ComplexInt extends AbstractComplex<Integer>{
+public class ComplexInt
+    extends AbstractComplex<Integer> implements ArithInterface<ComplexInt>{
 
+
+    ArithComplexExecutor<complexint,Integer>() acexec = new ArithComplexExecutor<Complexint,Integer>();
+    
     public ComplexInt(){
 	this(1);
     }
@@ -28,13 +38,21 @@ public class ComplexInt extends AbstractComplex<Integer>{
 	super(reale,immaginaria);
     }
 
+    public ComplexInt sum(ComplexInt rht){
+	return ArithComplexExecutor<ComplexInt,Integer>.sumExecutor(this,rht);
+    }
+
+    public ComplexInt difference(ComplexInt rht){
+	return arexec.differenceExecutor(this,rht);
+    }
+    
     public ComplexInt product(ComplexInt rht){
 	return new ComplexInt();
     }
 
     public ComplexInt factorial(){
-	Integer facReale = reale;
-	Integer facImg = immaginaria;
+	Integer facReale = getReale();
+	Integer facImg = getImmaginaria();
 
 	Integer daMultReal = reale - 1;
 	Integer daMultImg = immaginaria - 1;
