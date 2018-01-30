@@ -72,6 +72,7 @@ PolinomioInt::testOperation()const{
     cout << std::endl;
 }
 
+#include<QDebug>
 
 PolinomioInt
 PolinomioInt::parse(const QString& rht){
@@ -80,8 +81,19 @@ PolinomioInt::parse(const QString& rht){
     PolinomioInt val = PolinomioInt();
     for(int i= 0 ; i < res.size();++i){
         if(res[i] != "s"){// se res[i] = 's' -> salta inserimento simbolo
-            QStringList par = res[i].split("x^");
-            val.pol.append(Monomio<int>(par.at(0).toInt(),par.at(1).toInt()));
+            if(res[i].contains("x^")){// esiste grado
+                QStringList tmp = res[i].split("x^",QString::SkipEmptyParts);
+                if(tmp.size() == 2){
+                val.pol.append(Monomio<int>(tmp.at(0).toInt(),(tmp.at(1)).toInt()));
+                }
+                else{
+                    val.pol.append(Monomio<int>(1,tmp.at(0).toInt()));
+                }
+            }
+            else{// non esiste grado
+
+                val.pol.append(Monomio<int>(res[i].toInt(),0));
+            }
         }
     }
     return val;
@@ -90,10 +102,25 @@ PolinomioInt::parse(const QString& rht){
 QString
 PolinomioInt::convertToQString(const PolinomioInt & rht){
     QString res = QString();
-    unsigned int i = 0;
-    for(; i < rht.pol.size();++i){
-        res +=(QString::number(rht.pol[i].getCoefficiente()) + "x^" + QString::number(rht.pol[i].getGrado()) + ",");
+    int i = 0;
+    for(; i < (rht.pol.size() - 1);++i){
+        int coeff = rht.pol[i].getCoefficiente();
+        int grad = rht.pol[i].getGrado();
+        if(coeff != 0){
+            res+=(QString::number(coeff));
+        }
+        if(grad != 0){
+            res+=("x^" + QString::number(grad));
+        }
+        res+=",";
     }
-    res+=(QString::number(rht.pol[i].getCoefficiente()) + "x^" +QString::number(rht.pol[i].getGrado()));
+    int coeff = rht.pol[i].getCoefficiente();
+    int grad = rht.pol[i].getGrado();
+    if(coeff != 0){
+        res+=(QString::number(coeff));
+    }
+    if(grad != 0){
+        res+=("x^" + QString::number(grad));
+    }
     return res;
 }
