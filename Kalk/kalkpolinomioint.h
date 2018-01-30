@@ -17,7 +17,6 @@
 class KalkPolinomioInt : public QWidget
 {
     Q_OBJECT
-public:
 
 public:
     KalkPolinomioInt(QWidget *parent = 0);

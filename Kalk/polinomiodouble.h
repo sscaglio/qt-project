@@ -5,6 +5,7 @@
 #include "polynomialarithmeticexecutor.h"
 
 #include <cmath>
+#include<QStringList>
 
 class PolinomioDouble : public Polinomio<double>
 {
@@ -21,6 +22,9 @@ public:
     void printAll()const;
 
     void testOperation()const;
+
+    static PolinomioDouble parse(const QString&);
+    static QString convertToQString(const PolinomioDouble&rht);
 };
 
 #endif // POLINOMIODOUBLE_H

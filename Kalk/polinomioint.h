@@ -6,6 +6,8 @@
 #include "polynomialarithmeticexecutor.h"
 
 #include <QStringList>
+#include<QDebug>
+#include<algorithm>
 
 class PolinomioInt : public Polinomio<int>
 {

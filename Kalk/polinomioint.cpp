@@ -72,8 +72,6 @@ PolinomioInt::testOperation()const{
     cout << std::endl;
 }
 
-#include<QDebug>
-
 PolinomioInt
 PolinomioInt::parse(const QString& rht){
 
@@ -96,6 +94,7 @@ PolinomioInt::parse(const QString& rht){
             }
         }
     }
+    std::sort(val.pol.begin(),val.pol.end());
     return val;
 }
 
