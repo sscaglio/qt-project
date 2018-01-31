@@ -8,57 +8,46 @@ KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsign
     righeMatriceAttuale = r;
     colonneMatriceAttuale = c;
 
-    waitingForOperand = true;
+    setUpDisplay();
 
-    display = new QLineEdit("0");
-    display->setReadOnly(true);
-    display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(30);
+    QGridLayout *mainLayout = new QGridLayout;
+    setUpLayout(mainLayout);
 
-    QFont font = display->font();
-    font.setPointSize(font.pointSize() + 8);
-    display->setFont(font);
+    setWindowTitle(tr("KalkMatriceInt"));
+}
 
-    KalkButton *insertMatrixKalkButton = createKalkButton(tr("insert matrix"),SLOT(insertMatrixClicked()));
-    KalkButton *setMatrixDimensionButton = createKalkButton("set matrix dimensione",SLOT(setMatrixDimension()));
+void
+KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
+    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert complex"),SLOT(insertComplexClicked()));
+
     KalkButton *backspaceKalkButton = createKalkButton(tr("Canc"), SLOT(backspaceClicked()));
     KalkButton *clearKalkButton = createKalkButton(tr("Canc Operando"), SLOT(clear()));
     KalkButton *clearAllKalkButton = createKalkButton(tr("Reset Kalk"), SLOT(clearAll()));
 
-    //KalkButton *divisionKalkButton = createKalkButton(tr("/"), SLOT(multiplicativeOperatorClicked()));
+    KalkButton *divisionKalkButton = createKalkButton(tr("/"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *timesKalkButton = createKalkButton(tr("*"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
 
-    KalkButton *factorialKalkButton = createKalkButton(tr("factorial"), SLOT(unaryOperatorClicked()));
+    KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
 
-    QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
     mainLayout->addWidget(clearKalkButton, 1, 2, 1, 2);
     mainLayout->addWidget(clearAllKalkButton, 1, 4, 1, 2);
 
-    mainLayout->addWidget(insertMatrixKalkButton,2,0,1,3);
-    mainLayout->addWidget(setMatrixDimensionButton,2,4,1,-1);
+    mainLayout->addWidget(insertComplexKalkButton,2,0,1,-1);
 
     mainLayout->addWidget(factorialKalkButton, 3, 4);
-    //mainLayout->addWidget(divisionKalkButton, 3, 3);
+    mainLayout->addWidget(divisionKalkButton, 3, 3);
     mainLayout->addWidget(timesKalkButton, 3, 2);
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
-
-
     mainLayout->addWidget(equalKalkButton, 4, 0);
     setLayout(mainLayout);
-
-    setWindowTitle(tr("KalkMatriceInt"));
 }
-
-
-
-#include<QDebug>
 
 void
 KalkMatriceInt::insertMatrixClicked(){
@@ -215,38 +204,22 @@ KalkMatriceInt::equalClicked(){
 
 void
 KalkMatriceInt::backspaceClicked(){
-    QString text = display->text();
-    text.chop(1);
-    if (text.isEmpty()) {
-        text = "0";
-        waitingForOperand = true;
-    }
-    display->setText(text);
+  waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void
 KalkMatriceInt::clear(){
-    display->setText("0");
-    waitingForOperand = true;
+    waitingForOperand = cleaner::cleanerClear(display);
 }
 
 void
 KalkMatriceInt::clearAll(){
+
+    waitingForOperand = cleaner::cleanerCleanAll(display,pendingAdditiveOperator,pendingMultiplicativeOperator);
     sumSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
     factorSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
 }
 
-
-KalkButton*
-KalkMatriceInt::createKalkButton(const QString &text, const char *member){
-    KalkButton *button = new KalkButton(text);
-    connect(button, SIGNAL(clicked()), this, member);
-    return button;
-}
 
 bool
 KalkMatriceInt::calculate(const MatriceInt & rht, const QString & pendingOperator){

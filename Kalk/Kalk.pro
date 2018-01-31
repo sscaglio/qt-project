@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     kalkmatriceint.cpp \
     kalkmatricedouble.cpp \
     kalkpolinomioint.cpp \
-    kalkpolinomiodouble.cpp
+    kalkpolinomiodouble.cpp \
+    abstractkalk.cpp \
+    cleaner.cpp
 
 HEADERS  += mainwindow.h \
     boundchecker.h \
@@ -55,6 +57,7 @@ HEADERS  += mainwindow.h \
     kalkmatricedouble.h \
     kalkpolinomioint.h \
     kalkpolinomiodouble.h \
-    kalktemplateview.h
+    abstractkalk.h \
+    cleaner.h
 
 FORMS    += mainwindow.ui

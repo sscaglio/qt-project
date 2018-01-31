@@ -1,11 +1,13 @@
 #ifndef KALKCOMPLESSODOUBLE_H
 #define KALKCOMPLESSODOUBLE_H
 
+
+#include "abstractkalk.h"
+#include "cleaner.h"
 #include "kalkbutton.h"
 #include "complessodouble.h"
 
 #include <QWidget>
-#include<QLineEdit>
 #include<QLineEdit>
 #include<QDialog>
 #include<QLabel>
@@ -14,36 +16,28 @@
 
 #include <QDebug>
 
-class KalkComplessoDouble : public QWidget
+class KalkComplessoDouble : public AbstractKalk
 {
-    Q_OBJECT
-
 public:
     KalkComplessoDouble(QWidget *parent = 0);
+    virtual void setUpLayout(QGridLayout *);
+public slots:
 
-private slots:
-
-    void insertComplexClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
+    virtual void insertComplexClicked();
+    virtual void unaryOperatorClicked();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
 
 private:
-    KalkButton *createKalkButton(const QString &text, const char *member);
     bool calculate(const ComplessoDouble&, const QString &);
 
     ComplessoDouble sumInMemory;
     ComplessoDouble sumSoFar;
     ComplessoDouble factorSoFar;
-    QString pendingAdditiveOperator;
-    QString pendingMultiplicativeOperator;
-    bool waitingForOperand;
-
-    QLineEdit *display;
 };
 
 

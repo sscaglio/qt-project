@@ -1,47 +1,42 @@
 #ifndef KALKCOMPLESSOINT_H
 #define KALKCOMPLESSOINT_H
 
+#include "abstractkalk.h"
+#include "cleaner.h"
 #include "kalkbutton.h"
 #include "complessoint.h"
 
+#include <QWidget>
 #include<QLineEdit>
 #include<QDialog>
 #include<QLabel>
 #include<QGridLayout>
 #include<QPushButton>
 
-#include <QDebug>
 
-class KalkComplessoInt : public QWidget
+class KalkComplessoInt : public AbstractKalk
 {
     Q_OBJECT
-
 public:
     KalkComplessoInt(QWidget *parent = 0);
+    virtual void setUpLayout(QGridLayout *);
+public slots:
 
-private slots:
-
-    void insertComplexClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
+    virtual void insertTypeClicked();
+    virtual void unaryOperatorClicked();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
 
 private:
-    KalkButton *createKalkButton(const QString &text, const char *member);
     bool calculate(const ComplessoInt&, const QString &);
 
     ComplessoInt sumInMemory;
     ComplessoInt sumSoFar;
     ComplessoInt factorSoFar;
-    QString pendingAdditiveOperator;
-    QString pendingMultiplicativeOperator;
-    bool waitingForOperand;
-
-    QLineEdit *display;
 };
 
 #endif // KALKCOMPLESSOINT_H

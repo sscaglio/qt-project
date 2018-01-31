@@ -1,22 +1,23 @@
 #include "kalkcomplessoint.h"
 
 KalkComplessoInt::KalkComplessoInt(QWidget *parent)
-    : QWidget(parent)
+    : AbstractKalk(parent)
 {
     sumSoFar = ComplessoInt();
     factorSoFar = ComplessoInt();
-    waitingForOperand = true;
 
-    display = new QLineEdit("0");
-    display->setReadOnly(true);
-    display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(15);
+    setUpDisplay();
 
-    QFont font = display->font();
-    font.setPointSize(font.pointSize() + 8);
-    display->setFont(font);
+    QGridLayout *mainLayout = new QGridLayout;
+    setUpLayout(mainLayout);
 
-    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert complex"),SLOT(insertComplexClicked()));
+    setWindowTitle(tr("KalkComplessoInt"));
+}
+
+void
+KalkComplessoInt::setUpLayout(QGridLayout * mainLayout){
+
+    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert complex"),SLOT(insertTypeClicked()));
 
     KalkButton *backspaceKalkButton = createKalkButton(tr("Canc"), SLOT(backspaceClicked()));
     KalkButton *clearKalkButton = createKalkButton(tr("Canc Operando"), SLOT(clear()));
@@ -27,10 +28,9 @@ KalkComplessoInt::KalkComplessoInt(QWidget *parent)
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
 
-    KalkButton *factorialKalkButton = createKalkButton(tr("factorial"), SLOT(unaryOperatorClicked()));
+    KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
 
-    QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
@@ -44,17 +44,14 @@ KalkComplessoInt::KalkComplessoInt(QWidget *parent)
     mainLayout->addWidget(timesKalkButton, 3, 2);
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
-
-
     mainLayout->addWidget(equalKalkButton, 4, 0);
     setLayout(mainLayout);
-
-    setWindowTitle(tr("KalkComplessoInt"));
 }
 
 
+
 void
-KalkComplessoInt::insertComplexClicked(){
+KalkComplessoInt::insertTypeClicked(){
 
     QDialog *insertComplex = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci complesso");
@@ -181,37 +178,21 @@ void KalkComplessoInt::equalClicked()
 
 void KalkComplessoInt::backspaceClicked()
 {
-    QString text = display->text();
-    text.chop(1);
-    if (text.isEmpty()) {
-        text = "0";
-        waitingForOperand = true;
-    }
-    display->setText(text);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void KalkComplessoInt::clear()
 {
-    display->setText("0");
-    waitingForOperand = true;
+    waitingForOperand = cleaner::cleanerClear(display);
 }
 
 void KalkComplessoInt::clearAll()
 {
+    waitingForOperand = cleaner::cleanerCleanAll(display,pendingAdditiveOperator,pendingMultiplicativeOperator);
     sumSoFar = ComplessoInt();
     factorSoFar = ComplessoInt();
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
 }
 
-KalkButton* KalkComplessoInt::createKalkButton(const QString &text, const char *member)
-{
-    KalkButton *button = new KalkButton(text);
-    connect(button, SIGNAL(clicked()), this, member);
-    return button;
-}
 
 
 bool KalkComplessoInt::calculate(const ComplessoInt& rightOperand, const QString &pendingOperator)
