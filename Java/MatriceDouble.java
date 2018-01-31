@@ -1,25 +1,25 @@
 import java.util.ArrayList;
 
-public class MatriceInt
-    extends AbstractMatrix<Integer>
-    implements ArithInterface<MatriceInt>{
+public class MatriceDouble
+    extends AbstractMatrix<Double>
+    implements ArithInterface<MatriceDouble>{
 
-    Integer upperBound = Integer.MAX_VALUE;
-    Integer lowerBound = Integer.MIN_VALUE;
+    Double upperBound = Double.MAX_VALUE;
+    Double lowerBound = -Double.MAX_VALUE;
     
-    public MatriceInt(){
+    public MatriceDouble(){
 	this(1);
     }
     
-    public MatriceInt(int righe){
+    public MatriceDouble(int righe){
 	this(righe,1);
     }
 
-    public MatriceInt(int righe,int colonne){
-	this(new ArrayList<Integer>(),righe,colonne);
+    public MatriceDouble(int righe,int colonne){
+	this(new ArrayList<Double>(),righe,colonne);
     }
 
-    public MatriceInt(ArrayList<Integer> matrice,int righe,int colonne){
+    public MatriceDouble(ArrayList<Double> matrice,int righe,int colonne){
 	super(matrice,righe,colonne);
     }
 
@@ -34,7 +34,7 @@ public class MatriceInt
 	return res;
     }
     
-    private Integer addConsistent(Integer lht,Integer rht)
+    private Double addConsistent(Double lht,Double rht)
 	throws ArithmeticException{
 	if((rht > 0) && (lht > (upperBound - rht))){
 	    throw new ArithmeticException("integer overflow");
@@ -45,7 +45,7 @@ public class MatriceInt
 	return lht + rht;
     }
 	
-    private Integer subConsistent(Integer lht,Integer rht)
+    private Double subConsistent(Double lht,Double rht)
 	throws ArithmeticException{
 	if (rht > 0 && (lht < (lowerBound + rht))){
 	    throw new ArithmeticException("integer underflow");
@@ -56,7 +56,7 @@ public class MatriceInt
 	return lht - rht;
     }
 
-    private Integer mulConsistent(Integer lht,Integer rht){
+    private Double mulConsistent(Double lht,Double rht){
 	if (lht > 0) {  /* lht is positive */
 	    if (rht > 0) {  /* lht and rht are positive */
 		if (lht > (upperBound / rht)) {
@@ -82,29 +82,29 @@ public class MatriceInt
     }
     
     
-    public MatriceInt sum(MatriceInt rht){
-	MatriceInt res = new MatriceInt(righe,colonne);
+    public MatriceDouble sum(MatriceDouble rht){
+	MatriceDouble res = new MatriceDouble(righe,colonne);
 	for(int i = 0 ; i < (righe * colonne);++i){
 	    res.matrice.add(addConsistent(matrice.get(i),rht.matrice.get(i)));
 	}
 	return res;
     }
 
-    public MatriceInt difference(MatriceInt rht){
-	MatriceInt res = new MatriceInt(righe,colonne);
+    public MatriceDouble difference(MatriceDouble rht){
+	MatriceDouble res = new MatriceDouble(righe,colonne);
 	for(int i = 0 ; i < (righe * colonne);++i){
 	    res.matrice.add(subConsistent(matrice.get(i),rht.matrice.get(i)));
 	}
 	return res;
     }
 
-    public MatriceInt product(MatriceInt rht){
-	MatriceInt res = new MatriceInt(righe,rht.colonne);
+    public MatriceDouble product(MatriceDouble rht){
+	MatriceDouble res = new MatriceDouble(righe,rht.colonne);
         for(int i = 0 ;i < righe;++i){
             for(int j = 0; j < rht.colonne;++j){
-                Integer risultatoParziale = new Integer(0);
+                Double risultatoParziale = new Double(0);
                 for(int k = 0; k < colonne;++k){
-                    Integer prodottoParziale = new Integer(0);
+                    Double prodottoParziale = new Double(0);
                     prodottoParziale =
 			mulConsistent(matrice.get(colonne * i + k),rht.matrice.get(rht.colonne * k + j));
                     risultatoParziale =
@@ -117,32 +117,29 @@ public class MatriceInt
         return res;
     }
 
-    public MatriceInt factorial(){
-	MatriceInt res = new MatriceInt(righe,colonne);
-	for(int i = 0; i < (righe * colonne);++i){
-	    Integer factorialParziale = matrice.get(i);
-	    Integer daMoltElt = factorialParziale - 1;
-	    while(daMoltElt > 1){
-		factorialParziale = mulConsistent(factorialParziale,daMoltElt);
-		daMoltElt = daMoltElt - 1;
-	    }
-	    res.matrice.add(factorialParziale);
+    public MatriceDouble squareRoot(){
+	
+        MatriceDouble res = new MatriceDouble(righe,colonne);
+	for(int i = 0 ; i < (righe * colonne);++i){
+	    res.matrice.add(Math.sqrt(matrice.get(i)));
 	}
 	return res;
     }
-    
-    public static void main(String[] args){
-	MatriceInt x1 = new MatriceInt(2,2);
-	MatriceInt x2 = new MatriceInt(2,2);
 
-	for(int i = 0 ; i < (x1.righe * x1.colonne);++i){
-	    x1.matrice.add(i);
-	    x2.matrice.add(i);
+
+    public static void main(String[] args){
+	MatriceDouble x1 = new MatriceDouble(2,2);
+	MatriceDouble x2 = new MatriceDouble(2,2);
+	double elt = 0.0;
+	for(int i = 0 ; i < (2 * 2);++i){
+	    x1.matrice.add(elt);
+	    x2.matrice.add(elt);
+	    elt = elt + 1.5;
 	}
+
 	System.out.println(x1.sum(x2));
 	System.out.println(x1.difference(x2));
 	System.out.println(x1.product(x2));
-	System.out.println(x1.factorial());
+	System.out.println(x1.squareRoot());
     }
 }
-	    
