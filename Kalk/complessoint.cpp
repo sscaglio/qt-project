@@ -49,13 +49,13 @@ ComplessoInt::factorial()const{
 
 ComplessoInt
 ComplessoInt::parse(const QString & toBeParsed){
-    QStringList res = toBeParsed.split("+",QString::SkipEmptyParts);
+    QStringList res = toBeParsed.split(",",QString::SkipEmptyParts);
     QString immaginaria = res.at(1);
     return ComplessoInt(res.at(0).toInt(),immaginaria.remove('i').toInt());
 }
 
 QString
 ComplessoInt::convertToQString(const ComplessoInt& toBeConverted){
-    QString res = QString::number(toBeConverted.reale) + " + " + QString::number(toBeConverted.immaginaria) + "i";
+    QString res = QString::number(toBeConverted.reale) + " ," + QString::number(toBeConverted.immaginaria) + "i";
     return res;
 }

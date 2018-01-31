@@ -54,6 +54,7 @@ HEADERS  += mainwindow.h \
     kalkmatriceint.h \
     kalkmatricedouble.h \
     kalkpolinomioint.h \
-    kalkpolinomiodouble.h
+    kalkpolinomiodouble.h \
+    kalktemplateview.h
 
 FORMS    += mainwindow.ui

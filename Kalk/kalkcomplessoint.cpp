@@ -59,7 +59,7 @@ KalkComplessoInt::insertComplexClicked(){
     QDialog *insertComplex = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci complesso");
     QLineEdit * line = new QLineEdit(this);
-    line->setPlaceholderText("1 + 1");
+    line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertComplex);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertComplex,SLOT(accept()));
