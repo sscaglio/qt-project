@@ -29,7 +29,7 @@ class MonomioInt{
 }
 
 
-class MonomioComparator implements Comparator<MonomioInt>{
+class MonomioComparatorInt implements Comparator<MonomioInt>{
     public int compare(MonomioInt lht,MonomioInt rht){
 	if((lht.getGrado() > rht.getGrado()) ||
 	   ((lht.getGrado().equals(rht.getGrado()) && lht.getCoefficiente() > rht.getCoefficiente()))){
@@ -230,7 +230,7 @@ public class PolinomioInt
                 // e inserito in bufferRes
             }
         }
-        Collections.sort(bufferRes.polinomio,new MonomioComparator());
+        Collections.sort(bufferRes.polinomio,new MonomioComparatorInt());
 	// bufferRes e' ordinato -> posso semplificare monomi con grado ==
 	PolinomioInt res = new PolinomioInt();
 	int i1 = 0 ;
@@ -281,19 +281,28 @@ public class PolinomioInt
 	return res;
     }
     
-    public static void main(String[] args){
+    public static void testPolInteri(){
+	
 	PolinomioInt x1 = new PolinomioInt();
 	PolinomioInt x2 = new PolinomioInt();
-
+	
 	for(int i = 0 ; i < 5;++i){
 	    MonomioInt inserted = new MonomioInt(new Integer(i),new Integer(i));
 	    x1.polinomio.add(inserted);
 	    MonomioInt inserted2 = new MonomioInt(new Integer(2 * i),new Integer(i));
 	    x2.polinomio.add(inserted2);
 	}
+	System.out.println("POLINOMI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
+	
+	System.out.println("SOMMA");
 	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
 	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("FATTORIALE");
 	System.out.println(x1.factorial());
     }
 }

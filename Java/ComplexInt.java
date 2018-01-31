@@ -161,24 +161,22 @@ public class ComplexInt
 	return res+=(immaginaria.toString() + "i"); 
     }
     
-    public static void main(String[] args){
-	ComplexInt t1 = new ComplexInt(6,5);
-	ComplexInt t2 = new ComplexInt(3,3);
+    public static void testCompInt(){
+	ComplexInt x1 = new ComplexInt(6,5);
+	ComplexInt x2 = new ComplexInt(3,3);
 
-	// somma
-	System.out.println(t1.sum(t2));
-
-	//  differenza
-
-	System.out.println(t1.difference(t2));
-
-	// prodotto
-	System.out.println(t1.product(t2));
-
-	// divisione
-	System.out.println(t1.division(t2));
 	
-	//fattoriale
-	System.out.println(t1.factorial());
+	System.out.println("COMPLESSI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
+	
+	System.out.println("SOMMA");
+	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
+	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
+	System.out.println(x1.product(x2));
+	System.out.println("FATTORIALE");
+	System.out.println(x1.factorial());
     }
 }

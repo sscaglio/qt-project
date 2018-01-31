@@ -131,7 +131,7 @@ public class MatriceInt
 	return res;
     }
     
-    public static void main(String[] args){
+    public static void testMatInt(){
 	MatriceInt x1 = new MatriceInt(2,2);
 	MatriceInt x2 = new MatriceInt(2,2);
 
@@ -139,9 +139,17 @@ public class MatriceInt
 	    x1.matrice.add(i);
 	    x2.matrice.add(i);
 	}
+	System.out.println("MATRICI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
+	
+	System.out.println("SOMMA");
 	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
 	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("FATTORIALE");
 	System.out.println(x1.factorial());
     }
 }

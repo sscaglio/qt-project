@@ -127,7 +127,7 @@ public class MatriceDouble
     }
 
 
-    public static void main(String[] args){
+    public static void testMatDouble(){
 	MatriceDouble x1 = new MatriceDouble(2,2);
 	MatriceDouble x2 = new MatriceDouble(2,2);
 	double elt = 0.0;
@@ -137,9 +137,17 @@ public class MatriceDouble
 	    elt = elt + 1.5;
 	}
 
+	System.out.println("MATRICI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
+	
+	System.out.println("SOMMA");
 	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
 	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("SQUARE ROOT");
 	System.out.println(x1.squareRoot());
     }
 }

@@ -29,7 +29,7 @@ class MonomioDouble{
 }
 
 
-class MonomioComparator implements Comparator<MonomioDouble>{
+class MonomioComparatorDouble implements Comparator<MonomioDouble>{
     public int compare(MonomioDouble lht,MonomioDouble rht){
 	if((lht.getGrado() > rht.getGrado()) ||
 	   ((lht.getGrado().equals(rht.getGrado()) && lht.getCoefficiente() > rht.getCoefficiente()))){
@@ -285,7 +285,7 @@ private Double addConsistent(Double lht,Double rht)
                 // e inserito in bufferRes
             }
         }
-        Collections.sort(bufferRes.polinomio,new MonomioComparator());
+        Collections.sort(bufferRes.polinomio,new MonomioComparatorDouble());
 	// bufferRes e' ordinato -> posso semplificare monomi con grado ==
 	PolinomioDouble res = new PolinomioDouble();
 	int i1 = 0 ;
@@ -324,19 +324,28 @@ private Double addConsistent(Double lht,Double rht)
 	return res;
     }
     
-    public static void main(String[] args){
+    public static void testPolDouble(){
+	
 	PolinomioDouble x1 = new PolinomioDouble();
 	PolinomioDouble x2 = new PolinomioDouble();
-
+	
 	for(int i = 0 ; i < 5;++i){
 	    MonomioDouble inserted = new MonomioDouble(new Double(i + 0.5),new Integer(i));
 	    x1.polinomio.add(inserted);
 	    MonomioDouble inserted2 = new MonomioDouble(new Double(2 * i),new Integer(i));
 	    x2.polinomio.add(inserted2);
 	}
+	System.out.println("POLINOMI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
+	
+	System.out.println("SOMMA");
 	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
 	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("ESTRAZIONE RADICE");
 	System.out.println(x1.squareRoot());
     }
 }

@@ -4,7 +4,7 @@ public class ComplexDouble
     extends AbstractComplex<Double> implements ArithInterface<ComplexDouble>{
 
     Double upperBound = Double.MAX_VALUE;
-    Double lowerBound = Double.MIN_VALUE;
+    Double lowerBound = (-1) * Double.MAX_VALUE;
     
     public ComplexDouble(){
 	this(1.0);
@@ -150,24 +150,20 @@ public class ComplexDouble
 	return res+=(immaginaria.toString() + "i"); 
     }
     
-    public static void main(String[] args){
-	ComplexDouble t1 = new ComplexDouble(6.0,5.0);
-	ComplexDouble t2 = new ComplexDouble(4.0,3.0);
+    public static void testCompDouble(){
+	ComplexDouble x1 = new ComplexDouble(6.5,5.5);
+	ComplexDouble x2 = new ComplexDouble(4.0,3.0);
 
-	// somma
-	System.out.println(t1.sum(t2));
-
-	//  differenza
-
-	System.out.println(t1.difference(t2));
-
-	// prodotto
-	System.out.println(t1.product(t2));
-
-	// divisione
-	System.out.println(t1.division(t2));
+	System.out.println("COMPLESSI DI PARTENZA");
+	System.out.println(x1);
+	System.out.println(x2);
 	
-	//fattoriale
-	System.out.println(t1.squareRoot());
-    }
+	System.out.println("SOMMA");
+	System.out.println(x1.sum(x2));
+	System.out.println("DIFFERENZA");
+	System.out.println(x1.difference(x2));
+	System.out.println("PRODOTTO");
+	System.out.println(x1.product(x2));
+	System.out.println("SQUARE ROOT");
+	System.out.println(x1.squareRoot());    }
 }
