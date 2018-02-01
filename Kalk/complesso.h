@@ -27,14 +27,7 @@ protected:
 public :
     Complesso(const T& = 0,const T& = 0);
 
-    T getReale()const;
-    T getImmaginaria()const;
-    Boundchecker<T> getBoundChecker()const;
 
-    void printAll(){
-        std::cout << "R: " << reale << std::endl;
-        std::cout << "I: " << immaginaria << std::endl;
-    }
 };
 
 //costruttore
@@ -47,23 +40,6 @@ template<typename T>
 Boundchecker<T> Complesso<T>::bd = Boundchecker<T>(std::numeric_limits<T>::max(),(-1) * std::numeric_limits<T>::max());
 
 
-template<typename T>
-T
-Complesso<T>::getReale() const{
-    return reale;
-}
-
-template<typename T>
-T
-Complesso<T>::getImmaginaria()const{
-    return immaginaria;
-}
-
-template<typename T>
-Boundchecker<T>
-Complesso<T>::getBoundChecker()const{
-    return bd;
-}
 
 #endif // COMPLESSO
 

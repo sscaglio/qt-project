@@ -11,6 +11,7 @@
 
 class ComplessoDouble : public Complesso<double>
 {
+    friend class ComplessoArithmeticExecutor<ComplessoDouble,double>;
 public:
     ComplessoDouble(const double = 0,const double = 0);
 

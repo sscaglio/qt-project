@@ -1,6 +1,8 @@
 #ifndef KALKPOLINOMIOINT_H
 #define KALKPOLINOMIOINT_H
 
+
+#include "abstractkalk.h"
 #include "kalkbutton.h"
 #include "polinomioint.h"
 
@@ -14,16 +16,17 @@
 
 #include <QDebug>
 
-class KalkPolinomioInt : public QWidget
+class KalkPolinomioInt : public AbstractKalk
 {
     Q_OBJECT
 
 public:
     KalkPolinomioInt(QWidget *parent = 0);
+    virtual void setUpLayout(QGridLayout *);
 
-private slots:
+public slots:
 
-    void insertPolynomialClicked();
+    void insertTypeClicked();
     void unaryOperatorClicked();
     void additiveOperatorClicked();
     void multiplicativeOperatorClicked();
@@ -39,11 +42,6 @@ private:
     PolinomioInt sumInMemory;
     PolinomioInt sumSoFar;
     PolinomioInt factorSoFar;
-    QString pendingAdditiveOperator;
-    QString pendingMultiplicativeOperator;
-    bool waitingForOperand;
-
-    QLineEdit *display;
 };
 
 #endif // KALKPOLINOMIOINT_H

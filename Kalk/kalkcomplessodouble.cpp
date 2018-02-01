@@ -110,7 +110,7 @@ void KalkComplessoDouble::additiveOperatorClicked()
         }
         display->setText(ComplessoDouble::convertToQString(factorSoFar));
         operand = factorSoFar;
-        factorSoFar = ComplessoDouble(0,0);
+        factorSoFar = ComplessoDouble();
         pendingMultiplicativeOperator.clear();
     }
 
@@ -156,7 +156,7 @@ void KalkComplessoDouble::equalClicked()
             return;
         }
         operand = factorSoFar;
-        factorSoFar = ComplessoDouble(0,0);
+        factorSoFar = ComplessoDouble();
         pendingMultiplicativeOperator.clear();
     }
     if (!pendingAdditiveOperator.isEmpty()) {
@@ -169,7 +169,7 @@ void KalkComplessoDouble::equalClicked()
     }
 
     display->setText(ComplessoDouble::convertToQString(sumSoFar));
-    sumSoFar = ComplessoDouble(0,0);
+    sumSoFar = ComplessoDouble();
     waitingForOperand = true;
 }
 

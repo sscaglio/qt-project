@@ -29,10 +29,10 @@ template<typename T,typename U>
 T
 ComplessoArithmeticExecutor<T,U>::add(const T& lht,const T& rht){
     try{
-        bd.addConsistent(lht.getReale(),rht.getReale());
-        bd.addConsistent(lht.getImmaginaria(),rht.getImmaginaria());
+        bd.addConsistent(lht.reale,rht.reale);
+        bd.addConsistent(lht.immaginaria,rht.immaginaria);
         // entrambe operazioni di somma non causano overflow e underflow
-        return T(lht.getReale() + rht.getReale(),lht.getImmaginaria() + rht.getImmaginaria());
+        return T(lht.reale + rht.reale,lht.immaginaria + rht.immaginaria);
 
     }
     catch(runtime_error& e){
@@ -45,10 +45,10 @@ template<typename T,typename U>
 T
 ComplessoArithmeticExecutor<T,U>::sub(const T& lht,const T&rht){
     try{
-        bd.subConsistent(lht.getReale(),rht.getReale());
-        bd.subConsistent(lht.getImmaginaria(),rht.getImmaginaria());
+        bd.subConsistent(lht.reale,rht.reale);
+        bd.subConsistent(lht.immaginaria,rht.immaginaria);
         // entrambe operazioni di somma non causano overflow e underflow
-        return T(lht.getReale() - rht.getReale(),lht.getImmaginaria() - rht.getImmaginaria());
+        return T(lht.reale - rht.reale,lht.immaginaria - rht.immaginaria);
 
     }
     catch(runtime_error& e){
@@ -64,15 +64,15 @@ ComplessoArithmeticExecutor<T,U>::mul(const T& lht,const T& rht){
         // prodotto tra 2 complessi descritto da relazione
         // i parte getImmaginaria()
         //(a + bi)*(c + di) = (ac - bd) + (bc + ad)i
-        bd.mulConsistent(lht.getReale(),rht.getReale());
-        U primoTermine = lht.getReale() * rht.getReale();
-        bd.mulConsistent(lht.getImmaginaria(),rht.getImmaginaria());
-        U secondoTermine = lht.getImmaginaria() * rht.getImmaginaria();
+        bd.mulConsistent(lht.reale,rht.reale);
+        U primoTermine = lht.reale * rht.reale;
+        bd.mulConsistent(lht.immaginaria,rht.immaginaria);
+        U secondoTermine = lht.immaginaria * rht.immaginaria;
         // ac e bd consistenti
-        bd.mulConsistent(lht.getImmaginaria(),rht.getReale());
-        U terzoTermine = lht.getImmaginaria() * rht.getReale();
-        bd.mulConsistent(lht.getReale(),rht.getImmaginaria());
-        U quartoTermine = lht.getReale() * rht.getImmaginaria();
+        bd.mulConsistent(lht.immaginaria,rht.reale);
+        U terzoTermine = lht.immaginaria * rht.reale;
+        bd.mulConsistent(lht.reale,rht.immaginaria);
+        U quartoTermine = lht.reale * rht.immaginaria;
         // bc e ad consistenti
         bd.subConsistent(primoTermine,secondoTermine);
         // ac - bd consistente;
@@ -96,15 +96,15 @@ ComplessoArithmeticExecutor<T,U>::div(const T& lht,const T& rht){
         // prodotto tra 2 complessi descritto da relazione
         // i parte immaginaria
         //(a + bi)/(c + di) = ((ac - bd)/(c*c + d*d))/((bc + ad)/(c*c + d*d))i
-        bd.mulConsistent(lht.getReale(),rht.getReale());
-        U primoTermine = lht.getReale() * rht.getReale();
-        bd.mulConsistent(lht.getImmaginaria(),rht.getImmaginaria());
-        U secondoTermine = lht.getImmaginaria() * rht.getImmaginaria();
+        bd.mulConsistent(lht.reale,rht.reale);
+        U primoTermine = lht.reale * rht.reale;
+        bd.mulConsistent(lht.immaginaria,rht.immaginaria);
+        U secondoTermine = lht.immaginaria * rht.immaginaria;
         // ac e bd consistenti
-        bd.mulConsistent(lht.getImmaginaria(),rht.getReale());
-        U terzoTermine = lht.getImmaginaria() * rht.getReale();
-        bd.mulConsistent(lht.getReale(),rht.getImmaginaria());
-        U quartoTermine = lht.getReale() * rht.getImmaginaria();
+        bd.mulConsistent(lht.immaginaria,rht.reale);
+        U terzoTermine = lht.immaginaria * rht.reale;
+        bd.mulConsistent(lht.reale,rht.immaginaria);
+        U quartoTermine = lht.reale * rht.immaginaria;
         // bc e ad consistenti
         bd.addConsistent(primoTermine,secondoTermine);
         // ac + bd consistente;
@@ -112,13 +112,13 @@ ComplessoArithmeticExecutor<T,U>::div(const T& lht,const T& rht){
         bd.subConsistent(terzoTermine,quartoTermine);
         // bc - ad consistente
         U secondoNumeratore = terzoTermine - quartoTermine;
-        bd.mulConsistent(rht.getReale(),rht.getReale());
+        bd.mulConsistent(rht.reale,rht.reale);
         // c al quadrato consistente
-        bd.mulConsistent(rht.getImmaginaria(),rht.getImmaginaria());
+        bd.mulConsistent(rht.immaginaria,rht.immaginaria);
         // d al quadrato consistente
-        bd.addConsistent(rht.getReale() * rht.getReale(),rht.getImmaginaria() * rht.getImmaginaria());
+        bd.addConsistent(rht.reale * rht.reale,rht.immaginaria * rht.immaginaria);
         // denominatore consistente
-        U denominatore = rht.getReale() * rht.getReale() + rht.getImmaginaria() * rht.getImmaginaria();
+        U denominatore = rht.reale * rht.reale + rht.immaginaria * rht.immaginaria;
         bd.divConsistent(primoNumeratore,denominatore);
         // (ac + bd)/(c^2 + d^2) consistente
         U parteReale = primoNumeratore / denominatore;

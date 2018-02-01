@@ -3,6 +3,7 @@
 
 #include "kalkbutton.h"
 #include "polinomiodouble.h"
+#include "abstractkalk.h"
 
 #include <QWidget>
 #include<QLineEdit>
@@ -13,14 +14,15 @@
 
 #include <QDebug>
 
-class KalkPolinomioDouble : public QWidget
+class KalkPolinomioDouble : public AbstractKalk
 {
     Q_OBJECT
 public:
     explicit KalkPolinomioDouble(QWidget *parent = 0);
+    virtual void setUpLayout(QGridLayout *);
 
-private slots:
-    void insertPolynomialClicked();
+public slots:
+    void insertTypeClicked();
     void unaryOperatorClicked();
     void additiveOperatorClicked();
     void multiplicativeOperatorClicked();
@@ -37,11 +39,7 @@ private:
     PolinomioDouble sumInMemory;
     PolinomioDouble sumSoFar;
     PolinomioDouble factorSoFar;
-    QString pendingAdditiveOperator;
-    QString pendingMultiplicativeOperator;
-    bool waitingForOperand;
 
-    QLineEdit *display;
 };
 
 #endif // KALKPOLINOMIODOUBLE_H

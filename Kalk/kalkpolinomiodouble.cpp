@@ -1,35 +1,34 @@
 #include "kalkpolinomiodouble.h"
 
-KalkPolinomioDouble::KalkPolinomioDouble(QWidget *parent) : QWidget(parent)
+KalkPolinomioDouble::KalkPolinomioDouble(QWidget *parent) : AbstractKalk(parent)
 {
     sumSoFar = PolinomioDouble();
     factorSoFar = PolinomioDouble();
     waitingForOperand = true;
 
-    display = new QLineEdit("0");
-    display->setReadOnly(true);
-    display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(15);
+    setUpDisplay();
 
-    QFont font = display->font();
-    font.setPointSize(font.pointSize() + 8);
-    display->setFont(font);
+    QGridLayout *mainLayout = new QGridLayout;
+    setUpLayout(mainLayout);
 
-    KalkButton *insertPolynomialKalkButton = createKalkButton(tr("insert Polynomial"),SLOT(insertPolynomialClicked()));
+    setWindowTitle(tr("KalkPolinomioDouble"));
+}
+
+void
+KalkPolinomioDouble::setUpLayout(QGridLayout *mainLayout){
+
+    KalkButton *insertPolynomialKalkButton = createKalkButton(tr("insert Polynomial"),SLOT(insertTypeClicked()));
 
     KalkButton *backspaceKalkButton = createKalkButton(tr("Canc"), SLOT(backspaceClicked()));
     KalkButton *clearKalkButton = createKalkButton(tr("Canc Operando"), SLOT(clear()));
     KalkButton *clearAllKalkButton = createKalkButton(tr("Reset Kalk"), SLOT(clearAll()));
 
-    //KalkButton *divisionKalkButton = createKalkButton(tr("/"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *timesKalkButton = createKalkButton(tr("*"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
 
     KalkButton *squareRootKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
-
-    QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
@@ -39,7 +38,6 @@ KalkPolinomioDouble::KalkPolinomioDouble(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(insertPolynomialKalkButton,2,0,1,-1);
 
     mainLayout->addWidget(squareRootKalkButton, 3, 4);
-    //mainLayout->addWidget(divisionKalkButton, 3, 3);
     mainLayout->addWidget(timesKalkButton, 3, 2);
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
@@ -47,12 +45,10 @@ KalkPolinomioDouble::KalkPolinomioDouble(QWidget *parent) : QWidget(parent)
 
     mainLayout->addWidget(equalKalkButton, 4, 0);
     setLayout(mainLayout);
-
-    setWindowTitle(tr("KalkPolinomioDouble"));
 }
 
 void
-KalkPolinomioDouble::insertPolynomialClicked(){
+KalkPolinomioDouble::insertTypeClicked(){
 
     QDialog *insertPolynomial = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci polinomio");
@@ -94,9 +90,6 @@ void KalkPolinomioDouble::unaryOperatorClicked()
     if(clickedOperator == tr("sqrt")){
         res = operandoComplesso.squareRoot();
     }
-    qDebug() << "post op";
-    res.printAll();
-    qDebug() << "pre parse";
     QString textualRes = PolinomioDouble::convertToQString(res);
     display->setText(textualRes);
     waitingForOperand = true;

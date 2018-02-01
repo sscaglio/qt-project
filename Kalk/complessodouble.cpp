@@ -27,7 +27,7 @@ ComplessoDouble::operator /(const ComplessoDouble& rht)const{
 
 ComplessoDouble
 ComplessoDouble::squareRoot()const{
-    return ComplessoDouble(sqrt(getReale()),sqrt(getImmaginaria()));
+    return ComplessoDouble(sqrt(reale),sqrt(immaginaria));
 }
 
 

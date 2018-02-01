@@ -1,7 +1,7 @@
 #include "kalkmatricedouble.h"
 
 KalkMatriceDouble::KalkMatriceDouble(QWidget *parent,const unsigned int r,const unsigned int c)
-    : QWidget(parent)
+    : AbstractKalk(parent)
 {
     sumSoFar = MatriceDouble(r,c);
     factorSoFar = MatriceDouble(r,c);
@@ -11,22 +11,22 @@ KalkMatriceDouble::KalkMatriceDouble(QWidget *parent,const unsigned int r,const 
 
     waitingForOperand = true;
 
-    display = new QLineEdit("0");
-    display->setReadOnly(true);
-    display->setAlignment(Qt::AlignRight);
-    display->setMaxLength(30);
+    setUpDisplay();
 
-    QFont font = display->font();
-    font.setPointSize(font.pointSize() + 8);
-    display->setFont(font);
+    QGridLayout * mainLayout = new QGridLayout;
+    setUpLayout(mainLayout);
+    setWindowTitle(tr("KalkMatriceDouble"));
+}
 
-    KalkButton *insertMatrixKalkButton = createKalkButton(tr("insert matrix"),SLOT(insertMatrixClicked()));
-    KalkButton *setMatrixDimensionButton = createKalkButton("set matrix dimensione",SLOT(setMatrixDimension()));
+void
+KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
+
+    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert matrix"),SLOT(insertTypeClicked()));
+
     KalkButton *backspaceKalkButton = createKalkButton(tr("Canc"), SLOT(backspaceClicked()));
     KalkButton *clearKalkButton = createKalkButton(tr("Canc Operando"), SLOT(clear()));
     KalkButton *clearAllKalkButton = createKalkButton(tr("Reset Kalk"), SLOT(clearAll()));
 
-    //KalkButton *divisionKalkButton = createKalkButton(tr("/"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *timesKalkButton = createKalkButton(tr("*"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
@@ -34,35 +34,25 @@ KalkMatriceDouble::KalkMatriceDouble(QWidget *parent,const unsigned int r,const 
     KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
 
-    QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
     mainLayout->addWidget(clearKalkButton, 1, 2, 1, 2);
     mainLayout->addWidget(clearAllKalkButton, 1, 4, 1, 2);
 
-    mainLayout->addWidget(insertMatrixKalkButton,2,0,1,3);
-    mainLayout->addWidget(setMatrixDimensionButton,2,4,1,-1);
+    mainLayout->addWidget(insertComplexKalkButton,2,0,1,-1);
 
     mainLayout->addWidget(factorialKalkButton, 3, 4);
-    //mainLayout->addWidget(divisionKalkButton, 3, 3);
     mainLayout->addWidget(timesKalkButton, 3, 2);
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
-
-
     mainLayout->addWidget(equalKalkButton, 4, 0);
     setLayout(mainLayout);
-
-    setWindowTitle(tr("KalkMatriceDouble"));
 }
 
 
-
-#include<QDebug>
-
 void
-KalkMatriceDouble::insertMatrixClicked(){
+KalkMatriceDouble::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci matrice");
     QLineEdit * line = new QLineEdit(this);

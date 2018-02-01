@@ -3,6 +3,7 @@
 
 #include "kalkbutton.h"
 #include "matricedouble.h"
+#include "abstractkalk.h"
 
 #include <QWidget>
 #include <QLineEdit>
@@ -11,16 +12,15 @@
 #include <QGridLayout>
 #include <QPushButton>
 
-class KalkMatriceDouble : public QWidget
+class KalkMatriceDouble : public AbstractKalk
 {
     Q_OBJECT
 public:
     explicit KalkMatriceDouble(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
+    virtual void setUpLayout(QGridLayout *);
 
-signals:
-
-private slots:
-    void insertMatrixClicked();
+public slots:
+    void insertTypeClicked();
     void unaryOperatorClicked();
     void additiveOperatorClicked();
     void multiplicativeOperatorClicked();
@@ -40,11 +40,6 @@ private:
     void updateMatrixDimension(unsigned int ,unsigned int);
     MatriceDouble sumSoFar;
     MatriceDouble factorSoFar;
-    QString pendingAdditiveOperator;
-    QString pendingMultiplicativeOperator;
-    bool waitingForOperand;
-
-    QLineEdit *display;
 
 };
 

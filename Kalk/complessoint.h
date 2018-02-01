@@ -9,6 +9,7 @@
 
 class ComplessoInt : public Complesso<int>
 {
+    friend class ComplessoArithmeticExecutor<ComplessoInt,int>;
 public:
     ComplessoInt(const int = 0,const int = 0);
 
@@ -22,7 +23,6 @@ public:
 
     static ComplessoInt parse(const QString &);
     static QString convertToQString(const ComplessoInt&);
-
 
 };
 

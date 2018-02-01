@@ -1,6 +1,7 @@
 #include "kalkmatriceint.h"
 
-KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsigned int c) : QWidget(parent)
+KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsigned int c) :
+    AbstractKalk(parent)
 {
     sumSoFar = MatriceInt(r,c);
     factorSoFar = MatriceInt(r,c);
@@ -18,13 +19,12 @@ KalkMatriceInt::KalkMatriceInt(QWidget *parent,const unsigned int r,const unsign
 
 void
 KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
-    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert complex"),SLOT(insertComplexClicked()));
+    KalkButton *insertComplexKalkButton = createKalkButton(tr("insert matrix"),SLOT(insertTypeClicked()));
 
     KalkButton *backspaceKalkButton = createKalkButton(tr("Canc"), SLOT(backspaceClicked()));
     KalkButton *clearKalkButton = createKalkButton(tr("Canc Operando"), SLOT(clear()));
     KalkButton *clearAllKalkButton = createKalkButton(tr("Reset Kalk"), SLOT(clearAll()));
 
-    KalkButton *divisionKalkButton = createKalkButton(tr("/"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *timesKalkButton = createKalkButton(tr("*"), SLOT(multiplicativeOperatorClicked()));
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
@@ -41,7 +41,6 @@ KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
     mainLayout->addWidget(insertComplexKalkButton,2,0,1,-1);
 
     mainLayout->addWidget(factorialKalkButton, 3, 4);
-    mainLayout->addWidget(divisionKalkButton, 3, 3);
     mainLayout->addWidget(timesKalkButton, 3, 2);
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
@@ -50,7 +49,7 @@ KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
 }
 
 void
-KalkMatriceInt::insertMatrixClicked(){
+KalkMatriceInt::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci matrice");
     QLineEdit * line = new QLineEdit(this);

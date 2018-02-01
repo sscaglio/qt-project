@@ -23,7 +23,7 @@ public:
      virtual void setUpLayout(QGridLayout *);
 
 public slots:
-    virtual void insertMatrixClicked();
+    virtual void insertTypeClicked();
     virtual void unaryOperatorClicked();
     void additiveOperatorClicked();
     void multiplicativeOperatorClicked();
@@ -41,8 +41,6 @@ private:
 
     MatriceInt sumSoFar;
     MatriceInt factorSoFar;
-
-
 
 };
 

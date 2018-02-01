@@ -26,18 +26,18 @@ ComplessoInt::operator /(const ComplessoInt& rht)const{
 
 ComplessoInt
 ComplessoInt::factorial()const{
-    int factorialReale = this->getReale();
-    int factorialImmaginaria = this->getImmaginaria();
+    int factorialReale = reale;
+    int factorialImmaginaria = reale;
     int daMoltReale = factorialReale - 1;
     int daMoltImmaginaria = factorialImmaginaria - 1;
     while(daMoltReale > 1){
-        getBoundChecker().mulConsistent(factorialReale,daMoltReale);
+        bd.mulConsistent(factorialReale,daMoltReale);
         factorialReale*=daMoltReale;
         --daMoltReale;
     }
     // nessun overflow underflow in operazione di fattoriale per parte reale
     while(daMoltImmaginaria > 1){
-        getBoundChecker().mulConsistent(factorialImmaginaria,daMoltImmaginaria);
+        bd.mulConsistent(factorialImmaginaria,daMoltImmaginaria);
         factorialImmaginaria*=daMoltImmaginaria;
         --daMoltImmaginaria;
     }

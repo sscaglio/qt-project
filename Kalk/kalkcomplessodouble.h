@@ -23,7 +23,7 @@ public:
     virtual void setUpLayout(QGridLayout *);
 public slots:
 
-    virtual void insertComplexClicked();
+    virtual void insertTypeClicked();
     virtual void unaryOperatorClicked();
     virtual void additiveOperatorClicked();
     virtual void multiplicativeOperatorClicked();
