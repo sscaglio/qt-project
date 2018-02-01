@@ -5,21 +5,27 @@
 #include "cleaner.h"
 #include "kalkbutton.h"
 #include "complessoint.h"
+#include "guitemplatehelper.h"
 
 #include <QWidget>
 #include<QLineEdit>
 #include<QDialog>
 #include<QLabel>
 #include<QGridLayout>
+#include<QRegExpValidator>
+#include<QValidator>
 #include<QPushButton>
 
 
 class KalkComplessoInt : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkComplessoInt,ComplessoInt>;
 public:
     KalkComplessoInt(QWidget *parent = 0);
     virtual void setUpLayout(QGridLayout *);
+    bool calculate(const ComplessoInt&, const QString &);
 public slots:
 
     virtual void insertTypeClicked();
@@ -32,7 +38,7 @@ public slots:
     virtual void clearAll();
 
 private:
-    bool calculate(const ComplessoInt&, const QString &);
+
 
     ComplessoInt sumInMemory;
     ComplessoInt sumSoFar;

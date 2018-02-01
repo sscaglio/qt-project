@@ -54,6 +54,9 @@ KalkComplessoDouble::insertTypeClicked(){
     QDialog *insertComplex = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci complesso");
     QLineEdit * line = new QLineEdit(this);
+    QRegExp rx("-?[0-9]\\d{0,3}\\.[0-9]\\d{0,3},-?[0-9]\\d{0,3}\\.[0-9]\\d{0,3}");
+    QValidator *validator = new QRegExpValidator(rx,insertComplex);
+    line->setValidator(validator);
     line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertComplex);
     ok->setText("ok");
@@ -70,6 +73,9 @@ KalkComplessoDouble::insertTypeClicked(){
     insertComplex->setLayout(grid);
     if(insertComplex->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return ;
+        }
         ComplessoDouble toDisplay = ComplessoDouble::parse(text);
         display->setText(ComplessoDouble::convertToQString(toDisplay));
         waitingForOperand = true;
@@ -84,47 +90,14 @@ void KalkComplessoDouble::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoComplessoParse = display->text();
-    ComplessoDouble operandoComplesso = ComplessoDouble::parse(operandoComplessoParse);
-
-    ComplessoDouble res = ComplessoDouble();
-
-    if(clickedOperator == tr("sqrt")){
-        res = operandoComplesso.squareRoot();
-    }
-
-    QString textualRes = ComplessoDouble::convertToQString(res);
-    display->setText(textualRes);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
 }
 
 void KalkComplessoDouble::additiveOperatorClicked()
 {
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    ComplessoDouble operand = ComplessoDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(ComplessoDouble::convertToQString(factorSoFar));
-        operand = factorSoFar;
-        factorSoFar = ComplessoDouble();
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(ComplessoDouble::convertToQString(sumSoFar));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::additiveOperatorHelper(this,clickedOperator);
 }
 
 void KalkComplessoDouble::multiplicativeOperatorClicked()
@@ -132,45 +105,12 @@ void KalkComplessoDouble::multiplicativeOperatorClicked()
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    ComplessoDouble operand = ComplessoDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(ComplessoDouble::convertToQString(factorSoFar));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::multiplicativeOperatorHelper(this,clickedOperator);
 }
 
 void KalkComplessoDouble::equalClicked()
 {
-    ComplessoDouble operand = ComplessoDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = ComplessoDouble();
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(ComplessoDouble::convertToQString(sumSoFar));
-    sumSoFar = ComplessoDouble();
-    waitingForOperand = true;
+   GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::equalOperatorHelper(this);
 }
 
 

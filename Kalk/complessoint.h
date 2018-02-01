@@ -24,6 +24,7 @@ public:
     static ComplessoInt parse(const QString &);
     static QString convertToQString(const ComplessoInt&);
 
+
 };
 
 

@@ -69,6 +69,9 @@ KalkMatriceInt::insertTypeClicked(){
     insertMatrix->setLayout(grid);
     if(insertMatrix->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return;
+        }
         display->setText(text);
         waitingForOperand = true;
     };

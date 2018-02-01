@@ -58,6 +58,7 @@ HEADERS  += mainwindow.h \
     kalkpolinomioint.h \
     kalkpolinomiodouble.h \
     abstractkalk.h \
-    cleaner.h
+    cleaner.h \
+    guitemplatehelper.h
 
 FORMS    += mainwindow.ui

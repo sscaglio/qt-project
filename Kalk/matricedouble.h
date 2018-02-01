@@ -33,6 +33,7 @@ public:
 
     static MatriceDouble parse(const QString&,unsigned int,unsigned int);
     static QString convertToQString(const MatriceDouble&,const unsigned int ,const unsigned int);
+
 };
 
 #endif // MATRICEDOUBLE_H

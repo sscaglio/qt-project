@@ -71,6 +71,9 @@ KalkPolinomioInt::insertTypeClicked(){
     insertPolynomial->setLayout(grid);
     if(insertPolynomial->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return;
+        }
         display->setText(text);
         waitingForOperand = true;
     };
@@ -84,47 +87,14 @@ void KalkPolinomioInt::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoComplessoParse = display->text();
-    PolinomioInt operandoComplesso = PolinomioInt::parse(operandoComplessoParse);
-
-    PolinomioInt res = PolinomioInt();
-
-    if(clickedOperator == tr("factorial")){
-        res = operandoComplesso.factorial();
-    }
-
-    QString textualRes = PolinomioInt::convertToQString(res);
-    display->setText(textualRes);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::unaryOperatorIntHelper(this,clickedOperator);
 }
 
 void KalkPolinomioInt::additiveOperatorClicked()
 {
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    PolinomioInt operand = PolinomioInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(PolinomioInt::convertToQString(factorSoFar));
-        operand = factorSoFar;
-        factorSoFar = PolinomioInt();
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(PolinomioInt::convertToQString(sumSoFar));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::additiveOperatorHelper(this,clickedOperator);
 }
 
 void KalkPolinomioInt::multiplicativeOperatorClicked()
@@ -132,73 +102,31 @@ void KalkPolinomioInt::multiplicativeOperatorClicked()
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    PolinomioInt operand = PolinomioInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(PolinomioInt::convertToQString(factorSoFar));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::multiplicativeOperatorHelper(this,clickedOperator);
 }
 
 void KalkPolinomioInt::equalClicked()
 {
-    PolinomioInt operand = PolinomioInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = PolinomioInt();
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(PolinomioInt::convertToQString(sumSoFar));
-    sumSoFar = PolinomioInt();
-    waitingForOperand = true;
+   GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::equalOperatorHelper(this);
 }
 
 
 void KalkPolinomioInt::backspaceClicked()
 {
-    QString text = display->text();
-    text.chop(1);
-    if (text.isEmpty()) {
-        text = "0";
-        waitingForOperand = true;
-    }
-    display->setText(text);
+   waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void KalkPolinomioInt::clear()
 {
-    display->setText("0");
-    waitingForOperand = true;
+    waitingForOperand = cleaner::cleanerClear(display);
 }
 
 void KalkPolinomioInt::clearAll()
 {
+    waitingForOperand = cleaner::cleanerCleanAll(display,pendingAdditiveOperator,pendingMultiplicativeOperator);
     sumSoFar = PolinomioInt();
     factorSoFar = PolinomioInt();
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
+
 }
 
 KalkButton* KalkPolinomioInt::createKalkButton(const QString &text, const char *member)

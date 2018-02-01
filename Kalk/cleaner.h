@@ -9,7 +9,7 @@ class cleaner
 public:
     static bool cleanerBackspace(QLineEdit *);
     static bool cleanerClear(QLineEdit *);
-    static bool cleanerCleanAll(QLineEdit *,QString,QString);
+    static bool cleanerCleanAll(QLineEdit *,QString&,QString&);
 };
 
 #endif // CLEANER_H

@@ -3,7 +3,9 @@
 
 
 #include "abstractkalk.h"
+#include "cleaner.h"
 #include "kalkbutton.h"
+#include "guitemplatehelper.h"
 #include "polinomioint.h"
 
 #include <QWidget>
@@ -12,6 +14,8 @@
 #include<QDialog>
 #include<QLabel>
 #include<QGridLayout>
+#include<QRegExpValidator>
+#include<QValidator>
 #include<QPushButton>
 
 #include <QDebug>
@@ -20,9 +24,11 @@ class KalkPolinomioInt : public AbstractKalk
 {
     Q_OBJECT
 
+    friend class GUITemplateHelper<KalkPolinomioInt,PolinomioInt>;
 public:
     KalkPolinomioInt(QWidget *parent = 0);
     virtual void setUpLayout(QGridLayout *);
+    bool calculate(const PolinomioInt&, const QString &);
 
 public slots:
 
@@ -37,7 +43,7 @@ public slots:
 
 private:
     KalkButton *createKalkButton(const QString &text, const char *member);
-    bool calculate(const PolinomioInt&, const QString &);
+
 
     PolinomioInt sumInMemory;
     PolinomioInt sumSoFar;

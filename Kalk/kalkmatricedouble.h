@@ -1,6 +1,7 @@
 #ifndef KALKMATRICEDOUBLE_H
 #define KALKMATRICEDOUBLE_H
 
+#include "cleaner.h"
 #include "kalkbutton.h"
 #include "matricedouble.h"
 #include "abstractkalk.h"
@@ -10,6 +11,8 @@
 #include <QDialog>
 #include <QLabel>
 #include <QGridLayout>
+#include <QRegExpValidator>
+#include<QValidator>
 #include <QPushButton>
 
 class KalkMatriceDouble : public AbstractKalk
@@ -18,6 +21,7 @@ class KalkMatriceDouble : public AbstractKalk
 public:
     explicit KalkMatriceDouble(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
     virtual void setUpLayout(QGridLayout *);
+    bool calculate(const MatriceDouble&, const QString &);
 
 public slots:
     void insertTypeClicked();
@@ -35,11 +39,13 @@ private:
     unsigned int colonneMatriceAttuale;
 
     KalkButton *createKalkButton(const QString &text, const char *member);
-    bool calculate(const MatriceDouble&, const QString &);
+
 
     void updateMatrixDimension(unsigned int ,unsigned int);
     MatriceDouble sumSoFar;
     MatriceDouble factorSoFar;
+
+
 
 };
 

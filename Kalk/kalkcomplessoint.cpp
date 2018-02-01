@@ -28,7 +28,7 @@ KalkComplessoInt::setUpLayout(QGridLayout * mainLayout){
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
 
-    KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
+    KalkButton *factorialKalkButton = createKalkButton(tr("factorial"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
 
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
@@ -54,8 +54,13 @@ void
 KalkComplessoInt::insertTypeClicked(){
 
     QDialog *insertComplex = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci complesso");
+    QLabel * helperText = new QLabel("inserisci complesso, separa reale da immaginaria con virgola");
     QLineEdit * line = new QLineEdit(this);
+
+    QRegExp rx("-?\\d{1,4},-?\\d{0,4}");
+    QValidator *validator = new QRegExpValidator(rx,insertComplex);
+    line->setValidator(validator);
+
     line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertComplex);
     ok->setText("ok");
@@ -72,6 +77,9 @@ KalkComplessoInt::insertTypeClicked(){
     insertComplex->setLayout(grid);
     if(insertComplex->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return;
+        }
         ComplessoInt toDisplay = ComplessoInt::parse(text);
         display->setText(ComplessoInt::convertToQString(toDisplay));
         waitingForOperand = true;
@@ -86,47 +94,14 @@ void KalkComplessoInt::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoComplessoParse = display->text();
-    ComplessoInt operandoComplesso = ComplessoInt::parse(operandoComplessoParse);
-
-    ComplessoInt res = ComplessoInt();
-
-    if(clickedOperator == tr("factorial")){
-        res = operandoComplesso.factorial();
-    }
-
-    QString textualRes = ComplessoInt::convertToQString(res);
-    display->setText(textualRes);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::unaryOperatorIntHelper(this,clickedOperator);
 }
 
 void KalkComplessoInt::additiveOperatorClicked()
 {
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    ComplessoInt operand = ComplessoInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(ComplessoInt::convertToQString(factorSoFar));
-        operand = factorSoFar;
-        factorSoFar = ComplessoInt(0,0);
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(ComplessoInt::convertToQString(sumSoFar));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::additiveOperatorHelper(this,clickedOperator);
 }
 
 void KalkComplessoInt::multiplicativeOperatorClicked()
@@ -134,45 +109,12 @@ void KalkComplessoInt::multiplicativeOperatorClicked()
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    ComplessoInt operand = ComplessoInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(ComplessoInt::convertToQString(factorSoFar));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::multiplicativeOperatorHelper(this,clickedOperator);
 }
 
 void KalkComplessoInt::equalClicked()
 {
-    ComplessoInt operand = ComplessoInt::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = ComplessoInt(0,0);
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(ComplessoInt::convertToQString(sumSoFar));
-    sumSoFar = ComplessoInt(0,0);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::equalOperatorHelper(this);
 }
 
 

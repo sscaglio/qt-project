@@ -69,6 +69,9 @@ KalkPolinomioDouble::insertTypeClicked(){
     insertPolynomial->setLayout(grid);
     if(insertPolynomial->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return;
+        }
         display->setText(text);
         waitingForOperand = true;
     };
@@ -173,29 +176,19 @@ void KalkPolinomioDouble::equalClicked()
 
 void KalkPolinomioDouble::backspaceClicked()
 {
-    QString text = display->text();
-    text.chop(1);
-    if (text.isEmpty()) {
-        text = "0";
-        waitingForOperand = true;
-    }
-    display->setText(text);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void KalkPolinomioDouble::clear()
 {
-    display->setText("0");
-    waitingForOperand = true;
+    waitingForOperand = cleaner::cleanerClear(display);
 }
 
 void KalkPolinomioDouble::clearAll()
 {
+    waitingForOperand = cleaner::cleanerCleanAll(display,pendingAdditiveOperator,pendingMultiplicativeOperator);
     sumSoFar = PolinomioDouble();
     factorSoFar = PolinomioDouble();
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
 }
 
 KalkButton* KalkPolinomioDouble::createKalkButton(const QString &text, const char *member)

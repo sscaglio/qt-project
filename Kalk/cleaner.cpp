@@ -19,7 +19,7 @@ cleaner::cleanerClear(QLineEdit * display){
 
 
 bool
-cleaner::cleanerCleanAll(QLineEdit * display,QString pendingAdditiveOperator,QString pendingMultiplicativeOperator){
+cleaner::cleanerCleanAll(QLineEdit * display,QString &pendingAdditiveOperator,QString &pendingMultiplicativeOperator){
     pendingAdditiveOperator.clear();
     pendingMultiplicativeOperator.clear();
     display->setText("0");

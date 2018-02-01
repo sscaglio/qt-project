@@ -25,6 +25,7 @@ public:
 
     static ComplessoDouble parse(const QString &);
     static QString convertToQString(const ComplessoDouble&);
+
 };
 
 #endif // COMPLESSODOUBLE_H

@@ -33,6 +33,8 @@ public:
 
     static MatriceInt parse(const QString&,unsigned int,unsigned int);
     static QString convertToQString(const MatriceInt&,const unsigned int ,const unsigned int);
+
+    static MatriceInt returnDefaultValue();
 };
 
 #endif // MATRICEINT_H

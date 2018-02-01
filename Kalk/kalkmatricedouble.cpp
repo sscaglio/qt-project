@@ -72,6 +72,9 @@ KalkMatriceDouble::insertTypeClicked(){
     insertMatrix->setLayout(grid);
     if(insertMatrix->exec() == QDialog::Accepted){
         QString text = line->text();
+        if(text.isEmpty()){
+            return;
+        }
         display->setText(text);
         waitingForOperand = true;
     };
@@ -206,29 +209,19 @@ KalkMatriceDouble::equalClicked(){
 
 void
 KalkMatriceDouble::backspaceClicked(){
-    QString text = display->text();
-    text.chop(1);
-    if (text.isEmpty()) {
-        text = "0";
-        waitingForOperand = true;
-    }
-    display->setText(text);
+   waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void
 KalkMatriceDouble::clear(){
-    display->setText("0");
-    waitingForOperand = true;
+    waitingForOperand = cleaner::cleanerClear(display);
 }
 
 void
 KalkMatriceDouble::clearAll(){
+    waitingForOperand = cleaner::cleanerCleanAll(display,pendingAdditiveOperator,pendingMultiplicativeOperator);
     sumSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
     factorSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-    pendingAdditiveOperator.clear();
-    pendingMultiplicativeOperator.clear();
-    display->setText("0");
-    waitingForOperand = true;
 }
 
 
