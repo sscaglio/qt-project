@@ -56,6 +56,9 @@ KalkMatriceDouble::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci matrice");
     QLineEdit * line = new QLineEdit(this);
+    QRegExp rx("-?\\d{1,4}\\.\\d{1,4}(,-?\\d{1,4}\\.\\d{1,4})*");
+    QValidator *validator = new QRegExpValidator(rx,insertMatrix);
+    line->setValidator(validator);
     line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertMatrix);
     ok->setText("ok");

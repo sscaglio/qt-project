@@ -55,6 +55,9 @@ KalkPolinomioInt::insertTypeClicked(){
     QDialog *insertPolynomial = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci polinomio");
     QLineEdit * line = new QLineEdit(this);
+    QRegExp rx("-?\\d{1,4}x\\^\\d{1,4}(,-?\\d{0,4}x\\^\\d{1,4})*");
+    QValidator *validator = new QRegExpValidator(rx,insertPolynomial);
+    line->setValidator(validator);
     line->setPlaceholderText("1,1");
     QPushButton *ok = new QPushButton(insertPolynomial);
     ok->setText("ok");
