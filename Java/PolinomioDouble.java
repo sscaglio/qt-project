@@ -48,9 +48,6 @@ public class PolinomioDouble
     extends AbstractPolynomial<MonomioDouble>
     implements ArithInterface<PolinomioDouble>{
 
-    Double upperBound = Double.MAX_VALUE;
-    Double lowerBound = (-1) * Double.MAX_VALUE;
-
     public PolinomioDouble(){
 	super(new ArrayList<MonomioDouble>());
     }
@@ -66,109 +63,6 @@ public class PolinomioDouble
 	return res;
     }
     
-    private Integer addConsistent(Integer lht,Integer rht)
-	throws ArithmeticException{
-	if(rht > 0 && (lht > (upperBound - rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	else if((rht < 0) && (lht < (lowerBound - rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	return lht + rht;
-    }
-	
-    private Integer subConsistent(Integer lht,Integer rht)
-	throws ArithmeticException{
-	if (rht > 0 && (lht < (lowerBound + rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	else if((rht < 0) && (lht > (upperBound + rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	return lht - rht;
-    }
-
-    private Integer mulConsistent(Integer lht,Integer rht){
-	if (lht > 0) {  /* lht is positive */
-	    if (rht > 0) {  /* lht and rht are positive */
-		if (lht > (upperBound / rht)) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro positivi");
-		}
-	    } else { /* lht positive, rht nonpositive */
-		if (rht < (lowerBound / lht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplicazione, termine sinistro positivo, destro negativo");
-		}
-	    } /* lht positive, rht nonpositive */
-	} else { /* lht is nonpositive */
-	    if (rht > 0) { /* lht is nonpositive, rht is positive */
-		if (lht < (lowerBound / rht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplcazione, termine sinistro negativo, destro positivo");
-		}
-	    } else { /* lht and rht are nonpositive */
-		if ( (lht != 0) && (rht < (upperBound / lht))) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro negativi");
-		}
-	    } /* End if lht and rht are nonpositive */
-	} /* End if lht is nonpositive */
-	return lht * rht;
-    }
-
-
-
-    // INIZIO OPERAZIONI CONSISTENZA PER DOUBLE
-
-private Double addConsistent(Double lht,Double rht)
-	throws ArithmeticException{
-	if(rht > 0 && (lht > (upperBound - rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	else if((rht < 0) && (lht < (lowerBound - rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	return lht + rht;
-    }
-	
-    private Double subConsistent(Double lht,Double rht)
-	throws ArithmeticException{
-	if (rht > 0 && (lht < (lowerBound + rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	else if((rht < 0) && (lht > (upperBound + rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	return lht - rht;
-    }
-
-    private Double mulConsistent(Double lht,Double rht){
-	if (lht > 0) {  /* lht is positive */
-	    if (rht > 0) {  /* lht and rht are positive */
-		if (lht > (upperBound / rht)) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro positivi");
-		}
-	    } else { /* lht positive, rht nonpositive */
-		if (rht < (lowerBound / lht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplicazione, termine sinistro positivo, destro negativo");
-		}
-	    } /* lht positive, rht nonpositive */
-	} else { /* lht is nonpositive */
-	    if (rht > 0) { /* lht is nonpositive, rht is positive */
-		if (lht < (lowerBound / rht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplcazione, termine sinistro negativo, destro positivo");
-		}
-	    } else { /* lht and rht are nonpositive */
-		if ( (lht != 0) && (rht < (upperBound / lht))) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro negativi");
-		}
-	    } /* End if lht and rht are nonpositive */
-	} /* End if lht is nonpositive */
-	return lht * rht;
-    }
-
-
-    // FINE OPERAZIONI DI CONSISTENZA PER DOUBLE
-
-    
-    
     public PolinomioDouble sum(PolinomioDouble rht){
 	int i = 0;
 	int j = 0;
@@ -177,7 +71,7 @@ private Double addConsistent(Double lht,Double rht)
 	    if(polinomio.get(i).getGrado().equals(rht.polinomio.get(j).getGrado())){
 		//somma consistente tra due monomi
 		Double coefficienteRisultante =
-		    addConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
+		    BoundCheckerDouble.addConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
 		if(coefficienteRisultante != 0){
 		    res.polinomio.add(new MonomioDouble(coefficienteRisultante,polinomio.get(i).getGrado()));
 		}
@@ -224,7 +118,7 @@ private Double addConsistent(Double lht,Double rht)
                 // gradi monomi uguali -> possibile differenza
                 //sottrazione consistente tra due monomi
                 Double coefficienteRisultante =
-		    subConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
+		    BoundCheckerDouble.subConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
                 if(coefficienteRisultante != 0){
                     res.polinomio.add(new MonomioDouble(coefficienteRisultante,polinomio.get(i).getGrado()));
                 }
@@ -274,11 +168,11 @@ private Double addConsistent(Double lht,Double rht)
                 // per ogni monomio appartenente a operando dx
                 // operazione di somma tra gradi e' consistente
                 Double coefficienteRisultante =
-		    mulConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
+		    BoundCheckerDouble.mulConsistent(polinomio.get(i).getCoefficiente(),rht.polinomio.get(j).getCoefficiente());
                 if(coefficienteRisultante != 0){
                    
                     // operazione di somma tra gradi e' consistente
-                    Integer gradoRisultante = addConsistent(polinomio.get(i).getGrado(),rht.polinomio.get(j).getGrado());
+                    Integer gradoRisultante = BoundCheckerInt.addConsistent(polinomio.get(i).getGrado(),rht.polinomio.get(j).getGrado());
                     bufferRes.polinomio.add(new MonomioDouble(coefficienteRisultante,gradoRisultante));
                 }
                 // ogni elemento di operando sx e' stato moltiplicato per operando dx
@@ -301,7 +195,7 @@ private Double addConsistent(Double lht,Double rht)
 		
 		// somma consistente tra coefficiente parziale e coefficiente da
 		// sommare
-		coeffGradiUguali = addConsistent(coeffGradiUguali,bufferRes.polinomio.get(j1).getCoefficiente());
+		coeffGradiUguali = BoundCheckerDouble.addConsistent(coeffGradiUguali,bufferRes.polinomio.get(j1).getCoefficiente());
 		++j1;
             }
             // monomio puntato da j ha grado diverso rispetto a

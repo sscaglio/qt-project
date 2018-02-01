@@ -75,26 +75,26 @@ public class ComplexInt
     }
 
     public ComplexInt sum(ComplexInt rht){
-	return new ComplexInt(addConsistent(reale,rht.reale),addConsistent(immaginaria,rht.immaginaria));
+	return new ComplexInt(BoundCheckerInt.addConsistent(reale,rht.reale),BoundCheckerInt.addConsistent(immaginaria,rht.immaginaria));
     }
 
     public ComplexInt difference(ComplexInt rht){
-	return new ComplexInt(subConsistent(reale,rht.reale),subConsistent(immaginaria,rht.immaginaria));
+	return new ComplexInt(BoundCheckerInt.subConsistent(reale,rht.reale),BoundCheckerInt.subConsistent(immaginaria,rht.immaginaria));
     }
     
     public ComplexInt product(ComplexInt rht){
          // prodotto tra 2 complessi descritto da relazione
         // i parte immaginaria()
         //(a + bi)*(c + di) = (ac - bd) + (bc + ad)i
-        Integer primoTermine = mulConsistent(reale,rht.reale);
-        Integer secondoTermine = mulConsistent(immaginaria,rht.immaginaria);
+        Integer primoTermine = BoundCheckerInt.mulConsistent(reale,rht.reale);
+        Integer secondoTermine = BoundCheckerInt.mulConsistent(immaginaria,rht.immaginaria);
         // ac e bd consistenti
-        Integer terzoTermine = mulConsistent(immaginaria,rht.reale);
-        Integer quartoTermine = mulConsistent(reale,rht.immaginaria);
+        Integer terzoTermine = BoundCheckerInt.mulConsistent(immaginaria,rht.reale);
+        Integer quartoTermine = BoundCheckerInt.mulConsistent(reale,rht.immaginaria);
         // bc e ad consistenti
-        Integer realeFinale = subConsistent(primoTermine,secondoTermine); 
+        Integer realeFinale = BoundCheckerInt.subConsistent(primoTermine,secondoTermine); 
         // ac - bd consistente;
-        Integer immaginariaFinale = addConsistent(terzoTermine,quartoTermine);
+        Integer immaginariaFinale = BoundCheckerInt.addConsistent(terzoTermine,quartoTermine);
         // bc + ad consistente
 
         // -> (ac - bd) - (bc + ad) consistente
@@ -107,26 +107,26 @@ public class ComplexInt
         // i parte immaginaria
         //(a + bi)/(c + di) = ((ac - bd)/(c*c + d*d))/((bc + ad)/(c*c + d*d))i
         
-        Integer primoTermine =mulConsistent(reale,rht.reale);
-        Integer secondoTermine = mulConsistent(immaginaria,rht.immaginaria);
+        Integer primoTermine =BoundCheckerInt.mulConsistent(reale,rht.reale);
+        Integer secondoTermine = BoundCheckerInt.mulConsistent(immaginaria,rht.immaginaria);
         // ac e bd consistenti
-        Integer terzoTermine =  mulConsistent(immaginaria,rht.reale);
-        Integer quartoTermine =  mulConsistent(reale,rht.immaginaria);
+        Integer terzoTermine =  BoundCheckerInt.mulConsistent(immaginaria,rht.reale);
+        Integer quartoTermine =  BoundCheckerInt.mulConsistent(reale,rht.immaginaria);
         // bc e ad consistenti 
         // ac + bd consistente;
-        Integer primoNumeratore = addConsistent(primoTermine,secondoTermine);;
+        Integer primoNumeratore = BoundCheckerInt.addConsistent(primoTermine,secondoTermine);;
         // bc - ad consistente
-        Integer secondoNumeratore = subConsistent(terzoTermine,quartoTermine);;
+        Integer secondoNumeratore = BoundCheckerInt.subConsistent(terzoTermine,quartoTermine);;
         
         // c al quadrato consistente
         // d al quadrato consistente
         // denominatore consistente
-        Integer denominatore = addConsistent(mulConsistent(rht.reale,rht.reale),mulConsistent(rht.immaginaria,rht.immaginaria)) ;
+        Integer denominatore = BoundCheckerInt.addConsistent(BoundCheckerInt.mulConsistent(rht.reale,rht.reale),BoundCheckerInt.mulConsistent(rht.immaginaria,rht.immaginaria)) ;
         
         // (ac + bd)/(c^2 + d^2) consistente
-        Integer parteReale = divConsistent(primoNumeratore,denominatore);
+        Integer parteReale = BoundCheckerInt.divConsistent(primoNumeratore,denominatore);
         // ->((bc - ad)/(c^2 + d^2)) consistente
-        Integer parteImmaginaria = divConsistent(secondoNumeratore,denominatore);;
+        Integer parteImmaginaria = BoundCheckerInt.divConsistent(secondoNumeratore,denominatore);
         // tutte le operazioni che compongono il risultante complesso sono
         // consistenti -> complesso tornato e' consistente
         return new ComplexInt(parteReale,parteImmaginaria);
@@ -140,12 +140,12 @@ public class ComplexInt
 	Integer daMultImg = facImg - 1;
 
 	while(daMultReal > 1){
-	    facReale = mulConsistent(facReale,daMultReal);
+	    facReale = BoundCheckerInt.mulConsistent(facReale,daMultReal);
 	    daMultReal = daMultReal - 1;
 	}
 
 	while(daMultImg > 1){
-	    facImg = mulConsistent(facImg,daMultImg);
+	    facImg = BoundCheckerInt.mulConsistent(facImg,daMultImg);
 	    daMultImg = daMultImg - 1;
 	}
 	
