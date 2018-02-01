@@ -53,12 +53,12 @@ void
 KalkPolinomioInt::insertTypeClicked(){
 
     QDialog *insertPolynomial = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci polinomio");
+    QLabel * helperText = new QLabel("inserisci polinomio, monomi separati da virgola");
     QLineEdit * line = new QLineEdit(this);
-    QRegExp rx("-?\\d{1,4}x\\^\\d{1,4}(,-?\\d{0,4}x\\^\\d{1,4})*");
+    QRegExp rx("-?\\d{1,4}x\\^\\d{1,4}(,-?\\d{0,4}x\\^\\d{1,4})*(,-?\\d{1,4}){0,1}");
     QValidator *validator = new QRegExpValidator(rx,insertPolynomial);
     line->setValidator(validator);
-    line->setPlaceholderText("1,1");
+    line->setPlaceholderText("1x^2,1x^1,1");
     QPushButton *ok = new QPushButton(insertPolynomial);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertPolynomial,SLOT(accept()));

@@ -54,7 +54,7 @@ KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
 void
 KalkMatriceDouble::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci matrice");
+    QLabel * helperText = new QLabel("inserisci matrice, elementi separati da virgola");
     QLineEdit * line = new QLineEdit(this);
     QRegExp rx("-?\\d{1,4}\\.\\d{1,4}(,-?\\d{1,4}\\.\\d{1,4})*");
     QValidator *validator = new QRegExpValidator(rx,insertMatrix);

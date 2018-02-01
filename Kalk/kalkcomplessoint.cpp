@@ -54,7 +54,7 @@ void
 KalkComplessoInt::insertTypeClicked(){
 
     QDialog *insertComplex = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci complesso, separa reale da immaginaria con virgola");
+    QLabel * helperText = new QLabel("inserisci complesso, separa reale da immaginaria con virgola, parte immaginaria non richiede carattere i");
     QLineEdit * line = new QLineEdit(this);
 
     QRegExp rx("-?\\d{1,4},-?\\d{0,4}");

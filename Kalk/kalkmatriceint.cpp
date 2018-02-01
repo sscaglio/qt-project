@@ -51,7 +51,7 @@ KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
 void
 KalkMatriceInt::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci matrice");
+    QLabel * helperText = new QLabel("inserisci matrice, valori elementi matrice separati da virgola");
     QLineEdit * line = new QLineEdit(this);
 
     QRegExp rx("(-?\\d{1,4})(,\\d{1,4})*");
