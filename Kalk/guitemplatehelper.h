@@ -4,9 +4,11 @@
 #include<QDialog>
 #include<QLabel>
 #include<QLineEdit>
+#include<QMessageBox>
 #include<QPushButton>
 #include<QGridLayout>
 #include<QString>
+#include<QValidator>
 
 
 template<typename T,typename U>
@@ -19,6 +21,8 @@ public:
     static void multiplicativeOperatorHelper(T*,QString);
     static void equalOperatorHelper(T*);
 
+    static void correctValueInsertedHelper(T*,QValidator*,QLineEdit*,QDialog*);
+
 };
 
 
@@ -27,7 +31,7 @@ public:
 template<typename T,typename U>
 void
 GUITemplateHelper<T,U>::unaryOperatorIntHelper(T * specificGui,
-                                          QString passedOperation){
+                                               QString passedOperation){
     QString operandoParse = specificGui->display->text();
     U operando = U::parse(operandoParse);
 
@@ -45,7 +49,7 @@ GUITemplateHelper<T,U>::unaryOperatorIntHelper(T * specificGui,
 template<typename T,typename U>
 void
 GUITemplateHelper<T,U>::unaryOperatorDoubleHelper(T * specificGui,
-                                          QString passedOperation){
+                                                  QString passedOperation){
     QString operandoParse = specificGui->display->text();
     U operando = U::parse(operandoParse);
 
@@ -134,5 +138,27 @@ GUITemplateHelper<T,U>::equalOperatorHelper(T * specificGui){
     specificGui->sumSoFar = U();
     specificGui->waitingForOperand = true;
 }
+
+
+template<typename T,typename U>
+void
+GUITemplateHelper<T,U>::correctValueInsertedHelper(T * specificGui, QValidator * validator,QLineEdit *line,QDialog *insertType){
+
+    if(insertType->exec() == QDialog::Accepted){
+        QString text = line->text();
+        int pos = 0;
+        if(validator->validate(text,pos) == QValidator::Acceptable){
+            U toDisplay = U::parse(text);
+            specificGui->display->setText(U::convertToQString(toDisplay));
+            specificGui->waitingForOperand = true;
+        }
+        else{
+            QMessageBox msg(insertType);
+            msg.setText("input non valido");
+            msg.exec();
+        }
+    }
+}
+
 #endif // GUITEMPLATEHELPER
 

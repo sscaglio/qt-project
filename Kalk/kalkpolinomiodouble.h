@@ -3,6 +3,7 @@
 
 #include "cleaner.h"
 #include "kalkbutton.h"
+#include "guitemplatehelper.h"
 #include "polinomiodouble.h"
 #include "abstractkalk.h"
 
@@ -20,6 +21,8 @@
 class KalkPolinomioDouble : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>;
 public:
     explicit KalkPolinomioDouble(QWidget *parent = 0);
     virtual void setUpLayout(QGridLayout *);

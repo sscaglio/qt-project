@@ -70,14 +70,7 @@ KalkPolinomioDouble::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertPolynomial->setLayout(grid);
-    if(insertPolynomial->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        display->setText(text);
-        waitingForOperand = true;
-    };
+    GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::correctValueInsertedHelper(this,validator,line,insertPolynomial);
 
 }
 
@@ -88,46 +81,18 @@ void KalkPolinomioDouble::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoComplessoParse = display->text();
-    qDebug() << operandoComplessoParse;
-    PolinomioDouble operandoComplesso = PolinomioDouble::parse(operandoComplessoParse);
-    PolinomioDouble res = PolinomioDouble();
-
-    if(clickedOperator == tr("sqrt")){
-        res = operandoComplesso.squareRoot();
+    try{
+        GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
     }
-    QString textualRes = PolinomioDouble::convertToQString(res);
-    display->setText(textualRes);
-    waitingForOperand = true;
 }
 
 void KalkPolinomioDouble::additiveOperatorClicked()
 {
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    PolinomioDouble operand = PolinomioDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(PolinomioDouble::convertToQString(factorSoFar));
-        operand = factorSoFar;
-        factorSoFar = PolinomioDouble();
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(PolinomioDouble::convertToQString(sumSoFar));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::additiveOperatorHelper(this,clickedOperator);
 }
 
 void KalkPolinomioDouble::multiplicativeOperatorClicked()
@@ -135,45 +100,12 @@ void KalkPolinomioDouble::multiplicativeOperatorClicked()
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    PolinomioDouble operand = PolinomioDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(PolinomioDouble::convertToQString(factorSoFar));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::multiplicativeOperatorHelper(this,clickedOperator);
 }
 
 void KalkPolinomioDouble::equalClicked()
 {
-    PolinomioDouble operand = PolinomioDouble::parse(display->text());
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = PolinomioDouble();
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(PolinomioDouble::convertToQString(sumSoFar));
-    sumSoFar = PolinomioDouble();
-    waitingForOperand = true;
+    GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::equalOperatorHelper(this);
 }
 
 
@@ -205,15 +137,16 @@ KalkButton* KalkPolinomioDouble::createKalkButton(const QString &text, const cha
 bool KalkPolinomioDouble::calculate(const PolinomioDouble& rightOperand, const QString &pendingOperator)
 {
     try{
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rightOperand;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rightOperand;
-    }
-    return true;
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rightOperand;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rightOperand;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rightOperand;
+        }
+        return true;
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
+    return false;
 }
