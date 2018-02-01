@@ -9,6 +9,7 @@
 
 #include"boundchecker.h"
 
+
 template<typename T,typename U>
 class ComplessoArithmeticExecutor{
 
@@ -37,6 +38,7 @@ ComplessoArithmeticExecutor<T,U>::add(const T& lht,const T& rht){
     }
     catch(runtime_error& e){
         std::cout << e.what() << std::endl;
+         throw e;
     }
     return T(0,0);
 }
@@ -53,6 +55,7 @@ ComplessoArithmeticExecutor<T,U>::sub(const T& lht,const T&rht){
     }
     catch(runtime_error& e){
         std::cout << e.what() << std::endl;
+         throw e;
     }
     return T(0,0);
 }
@@ -84,6 +87,7 @@ ComplessoArithmeticExecutor<T,U>::mul(const T& lht,const T& rht){
     }
     catch(runtime_error& e){
         std::cout << e.what() << std::endl;
+        throw e;
     }
     return T(0,0);
 }
@@ -131,6 +135,7 @@ ComplessoArithmeticExecutor<T,U>::div(const T& lht,const T& rht){
     }
     catch(runtime_error& e){
         std::cout << e.what() << std::endl;
+         throw e;
     }
     return T(0,0);
 }

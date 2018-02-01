@@ -90,7 +90,11 @@ void KalkComplessoDouble::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
+    try{
     GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
+    }catch(std::exception & e){
+        displayErrorMessage(this,e);
+    }
 }
 
 void KalkComplessoDouble::additiveOperatorClicked()
@@ -134,6 +138,7 @@ void KalkComplessoDouble::clearAll()
 
 bool KalkComplessoDouble::calculate(const ComplessoDouble& rightOperand, const QString &pendingOperator)
 {
+    try{
     if (pendingOperator == tr("+")) {
         sumSoFar = sumSoFar + rightOperand;
     } else if (pendingOperator == tr("-")) {
@@ -144,4 +149,7 @@ bool KalkComplessoDouble::calculate(const ComplessoDouble& rightOperand, const Q
         factorSoFar = factorSoFar / rightOperand;
     }
     return true;
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }

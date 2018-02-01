@@ -204,6 +204,7 @@ KalkButton* KalkPolinomioDouble::createKalkButton(const QString &text, const cha
 
 bool KalkPolinomioDouble::calculate(const PolinomioDouble& rightOperand, const QString &pendingOperator)
 {
+    try{
     if (pendingOperator == tr("+")) {
         sumSoFar = sumSoFar + rightOperand;
     } else if (pendingOperator == tr("-")) {
@@ -212,4 +213,7 @@ bool KalkPolinomioDouble::calculate(const PolinomioDouble& rightOperand, const Q
         factorSoFar = factorSoFar * rightOperand;
     }
     return true;
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }

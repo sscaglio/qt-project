@@ -90,7 +90,11 @@ void KalkPolinomioInt::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
+    try{
     GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::unaryOperatorIntHelper(this,clickedOperator);
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }
 
 void KalkPolinomioInt::additiveOperatorClicked()
@@ -142,6 +146,7 @@ KalkButton* KalkPolinomioInt::createKalkButton(const QString &text, const char *
 
 bool KalkPolinomioInt::calculate(const PolinomioInt& rightOperand, const QString &pendingOperator)
 {
+    try{
     if (pendingOperator == tr("+")) {
         sumSoFar = sumSoFar + rightOperand;
     } else if (pendingOperator == tr("-")) {
@@ -150,4 +155,7 @@ bool KalkPolinomioInt::calculate(const PolinomioInt& rightOperand, const QString
         factorSoFar = factorSoFar * rightOperand;
     }
     return true;
+    catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }

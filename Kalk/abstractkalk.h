@@ -26,6 +26,7 @@ public:
     KalkButton *createKalkButton(const QString &text, const char *member);
     virtual void setUpDisplay();
     virtual void setUpLayout(QGridLayout *) = 0;
+    virtual void displayErrorMessage(QWidget *,std::exception&);
 public slots:
 
    virtual void insertTypeClicked() = 0;

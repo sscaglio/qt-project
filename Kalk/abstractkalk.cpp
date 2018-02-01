@@ -25,3 +25,11 @@ AbstractKalk::setUpDisplay(){
     display->setFont(font);
 
 }
+
+void
+AbstractKalk::displayErrorMessage(QWidget* parent,std::exception &e){
+    QMessageBox msg(parent);
+    msg.setText(e.what());
+    msg.exec();
+    clearAll();
+}

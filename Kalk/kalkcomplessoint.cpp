@@ -94,7 +94,11 @@ void KalkComplessoInt::unaryOperatorClicked()
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
+    try{
     GUITemplateHelper<KalkComplessoInt,ComplessoInt>::unaryOperatorIntHelper(this,clickedOperator);
+    }catch(exception & e){
+        displayErrorMessage(this,e);
+    }
 }
 
 void KalkComplessoInt::additiveOperatorClicked()
@@ -151,10 +155,7 @@ bool KalkComplessoInt::calculate(const ComplessoInt& rightOperand, const QString
         }
         return true;
     }catch(std::exception &e){
-        //e.what();
-        QMessageBox msg(this);
-        msg.setText("error");
-        msg.exec();
+       displayErrorMessage(this,e);
     }
     return false;
 
