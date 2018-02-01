@@ -20,17 +20,6 @@ public:
 
     MatriceDouble squareRoot()const;
 
-    void printAll()const{
-        for(unsigned int i= 0 ; i< righe * colonne;++i){
-            std::cout << matrice[i] << " ";
-        }
-    }
-
-    //test fn
-    void insertValue(const double& val){
-        matrice.push_back(val);
-    }
-
     static MatriceDouble parse(const QString&,unsigned int,unsigned int);
     static QString convertToQString(const MatriceDouble&,const unsigned int ,const unsigned int);
 

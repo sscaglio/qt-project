@@ -139,14 +139,23 @@ void KalkComplessoInt::clearAll()
 
 bool KalkComplessoInt::calculate(const ComplessoInt& rightOperand, const QString &pendingOperator)
 {
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rightOperand;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rightOperand;
-    } else if (pendingOperator == tr("/")) {
-        factorSoFar = factorSoFar / rightOperand;
+    try{
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rightOperand;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rightOperand;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rightOperand;
+        } else if (pendingOperator == tr("/")) {
+            factorSoFar = factorSoFar / rightOperand;
+        }
+        return true;
+    }catch(std::exception &e){
+        //e.what();
+        QMessageBox msg(this);
+        msg.setText("error");
+        msg.exec();
     }
-    return true;
+    return false;
+
 }

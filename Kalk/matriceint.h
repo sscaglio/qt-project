@@ -20,16 +20,6 @@ public:
 
     MatriceInt factorial()const;
 
-    //test fn
-    void insertValue(const int& val){
-        matrice.push_back(val);
-    }
-
-    void printAll() const{
-        for(unsigned int i = 0 ; i < righe * colonne;++i){
-            std::cout << matrice[i] << " ";
-        }
-    }
 
     static MatriceInt parse(const QString&,unsigned int,unsigned int);
     static QString convertToQString(const MatriceInt&,const unsigned int ,const unsigned int);

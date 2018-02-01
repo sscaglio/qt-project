@@ -50,8 +50,13 @@ ComplessoInt::factorial()const{
 ComplessoInt
 ComplessoInt::parse(const QString & toBeParsed){
     QStringList res = toBeParsed.split(",",QString::SkipEmptyParts);
-    QString immaginaria = res.at(1);
-    return ComplessoInt(res.at(0).toInt(),immaginaria.remove('i').toInt());
+    if(res.size() == 1){
+        return ComplessoInt(res.at(0).toInt(),0);
+    }
+    else{
+        QString immaginaria = res.at(1);
+        return ComplessoInt(res.at(0).toInt(),immaginaria.remove('i').toInt());
+    }
 }
 
 QString

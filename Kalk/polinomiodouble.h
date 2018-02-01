@@ -19,10 +19,6 @@ public:
 
     PolinomioDouble squareRoot()const;
 
-    void printAll()const;
-
-    void testOperation()const;
-
     static PolinomioDouble parse(const QString&);
     static QString convertToQString(const PolinomioDouble&rht);
 };

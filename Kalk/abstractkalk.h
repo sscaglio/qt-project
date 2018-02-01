@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include<QString>
 #include <QWidget>
+#include<QMessageBox>
 
 class AbstractKalk : public QWidget
 {

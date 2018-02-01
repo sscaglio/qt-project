@@ -39,7 +39,7 @@ MatriceDouble::parse(const QString& rht,unsigned int r,unsigned int c){
     MatriceDouble res = MatriceDouble(r,c);
     QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
     for(unsigned int i = 0; i < r * c;++i){
-        res.insertValue(toBeParsed.at(i).toDouble());
+        res.matrice.push_back(toBeParsed.at(i).toDouble());
     }
     return res;
 }

@@ -19,9 +19,6 @@ public:
     PolinomioInt operator-(const PolinomioInt&)const;
     PolinomioInt operator*(const PolinomioInt&)const;
 
-    void testOperation()const;
-    void printAll()const;
-
     PolinomioInt factorial()const;
 
     static PolinomioInt parse(const QString&);

@@ -54,7 +54,7 @@ MatriceInt::parse(const QString & rht,const unsigned int r,const unsigned int c)
     MatriceInt res = MatriceInt(r,c);
     QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
     for(unsigned int i = 0; i < r * c;++i){
-        res.insertValue(toBeParsed.at(i).toInt());
+        res.matrice.push_back(toBeParsed.at(i).toInt());
     }
     return res;
 }
