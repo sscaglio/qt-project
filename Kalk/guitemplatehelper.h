@@ -20,9 +20,13 @@ public:
     static void additiveOperatorHelper(T*,QString);
     static void multiplicativeOperatorHelper(T*,QString);
     static void equalOperatorHelper(T*);
-
     static void correctValueInsertedHelper(T*,QValidator*,QLineEdit*,QDialog*);
 
+    static void unaryOperatorIntHelperMatrix(T*,QString);
+    static void unaryOperatorDoubleHelperMatrix(T*,QString);
+    static void additiveOperatorHelperMatrix(T*,QString);
+    static void multiplicativeOperatorHelperMatrix(T*,QString);
+    static void equalOperatorHelperMatrix(T*);
 };
 
 
@@ -158,6 +162,37 @@ GUITemplateHelper<T,U>::correctValueInsertedHelper(T * specificGui, QValidator *
             msg.exec();
         }
     }
+}
+
+
+//operazioni per matrici
+
+template<typename T,typename U>
+GUITemplateHelper<T,U>::additiveOperatorHelperMatrix(T * specificGui, QString passedOperation){
+
+    U operand = U::parse(specificGui->display->text(),specificGui->righeMatriceAttuale,specificGui->colonneMatriceAttuale);
+
+    if (!(specificGui->pendingMultiplicativeOperator.isEmpty())) {
+        if (!(specifiGui->calculate(operand,specificGui->pendingMultiplicativeOperator))) {
+            return;
+        }
+        specificGui->display->setText(U::convertToQString(specificGui->factorSoFar,specificGui->righeMatriceAttuale,specificGui->colonneMatriceAttuale));
+        operand = specificGui->factorSoFar;
+        specificGui->factorSoFar = U(specificGui->righeMatriceAttuale,specificGui->colonneMatriceAttuale);
+        specificGui->pendingMultiplicativeOperator.clear();
+    }
+
+    if (!(specificGui->pendingAdditiveOperator.isEmpty())) {
+        if (!(specificGui->calculate(operand, specificGui->pendingAdditiveOperator))) {
+            return;
+        }
+        specificGui->display->setText(U::convertToQString(specificGui->sumSoFar,specificGui->righeMatriceAttuale,specificGui->colonneMatriceAttuale));
+    } else {
+        specificGui->sumSoFar = operand;
+    }
+
+    specificGui->pendingAdditiveOperator = passedOperation;
+    specificGui->waitingForOperand = true;
 }
 
 #endif // GUITEMPLATEHELPER

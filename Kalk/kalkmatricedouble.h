@@ -5,6 +5,7 @@
 #include "kalkbutton.h"
 #include "matricedouble.h"
 #include "abstractkalk.h"
+#include "guitemplatehelper.h"
 
 #include <QWidget>
 #include <QLineEdit>
@@ -18,6 +19,8 @@
 class KalkMatriceDouble : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkMatriceDouble,MatriceDouble>;
 public:
     explicit KalkMatriceDouble(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
     virtual void setUpLayout(QGridLayout *);

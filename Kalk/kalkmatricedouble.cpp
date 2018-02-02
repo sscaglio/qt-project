@@ -73,14 +73,7 @@ KalkMatriceDouble::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrix->setLayout(grid);
-    if(insertMatrix->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        display->setText(text);
-        waitingForOperand = true;
-    };
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::correctValueInsertedHelper(this,validator,line,insertMatrix);
 }
 
 void

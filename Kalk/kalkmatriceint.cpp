@@ -72,14 +72,7 @@ KalkMatriceInt::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrix->setLayout(grid);
-    if(insertMatrix->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        display->setText(text);
-        waitingForOperand = true;
-    };
+    GUITemplateHelper<KalkMatriceInt,MatriceInt>::correctValueInsertedHelper(this,validator,line,insertMatrix);
 }
 
 void
@@ -138,29 +131,7 @@ void
 KalkMatriceInt::additiveOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceInt operand = MatriceInt::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
 
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceInt::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-        operand = factorSoFar;
-        factorSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(MatriceInt::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
 }
 
 
@@ -211,7 +182,7 @@ KalkMatriceInt::equalClicked(){
 
 void
 KalkMatriceInt::backspaceClicked(){
-  waitingForOperand = cleaner::cleanerBackspace(display);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void
