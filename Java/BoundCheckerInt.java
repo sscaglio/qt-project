@@ -50,7 +50,7 @@ public class BoundCheckerInt{
     
 
     public static Integer divConsistent(Integer rht,Integer lht) throws ArithmeticException{
-	if (!(rht.equals(0))){
+	if ((rht.equals(0))){
 	    throw new ArithmeticException("divide by zero error in operazione di divisione");
 	}
 	else if((lht.equals(lowerBound)) && (rht.equals(-1))) {

@@ -16,64 +16,6 @@ public class ComplexInt
     }
 
 
-    private Integer addConsistent(Integer lht,Integer rht)
-	throws ArithmeticException{
-	if((rht > 0) && (lht > (upperBound - rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	else if((rht < 0) && (lht < (lowerBound - rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	return lht + rht;
-    }
-	
-    private Integer subConsistent(Integer lht,Integer rht)
-	throws ArithmeticException{
-	if (rht > 0 && (lht < (lowerBound + rht))){
-	    throw new ArithmeticException("integer underflow");
-	}
-	else if((rht < 0) && (lht > (upperBound + rht))){
-	    throw new ArithmeticException("integer overflow");
-	}
-	return lht - rht;
-    }
-
-    private Integer mulConsistent(Integer lht,Integer rht){
-	if (lht > 0) {  /* lht is positive */
-	    if (rht > 0) {  /* lht and rht are positive */
-		if (lht > (upperBound / rht)) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro positivi");
-		}
-	    } else { /* lht positive, rht nonpositive */
-		if (rht < (lowerBound / lht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplicazione, termine sinistro positivo, destro negativo");
-		}
-	    } /* lht positive, rht nonpositive */
-	} else { /* lht is nonpositive */
-	    if (rht > 0) { /* lht is nonpositive, rht is positive */
-		if (lht < (lowerBound / rht)) {
-		    throw new ArithmeticException("underflow error in operazione di moltiplcazione, termine sinistro negativo, destro positivo");
-		}
-	    } else { /* lht and rht are nonpositive */
-		if ( (lht != 0) && (rht < (upperBound / lht))) {
-		    throw new ArithmeticException("overflow error in operazione di moltiplicazione, termine sinistro e destro negativi");
-		}
-	    } /* End if lht and rht are nonpositive */
-	} /* End if lht is nonpositive */
-	return lht * rht;
-    }
-    
-
-    private Integer divConsistent(Integer rht,Integer lht){
-	if (rht == 0){
-	    throw new ArithmeticException("divide by zero error in operazione di divisione");
-	}
-	else if((lht == lowerBound) && (rht == -1)) {
-	    throw new ArithmeticException("overflow error in operazione di divisione");
-	}
-	return lht / rht;
-    }
-
     public ComplexInt sum(ComplexInt rht){
 	return new ComplexInt(BoundCheckerInt.addConsistent(reale,rht.reale),BoundCheckerInt.addConsistent(immaginaria,rht.immaginaria));
     }
@@ -83,7 +25,7 @@ public class ComplexInt
     }
     
     public ComplexInt product(ComplexInt rht){
-         // prodotto tra 2 complessi descritto da relazione
+	// prodotto tra 2 complessi descritto da relazione
         // i parte immaginaria()
         //(a + bi)*(c + di) = (ac - bd) + (bc + ad)i
         Integer primoTermine = BoundCheckerInt.mulConsistent(reale,rht.reale);
@@ -103,7 +45,7 @@ public class ComplexInt
 
     public ComplexInt division(ComplexInt rht){
 
-          // prodotto tra 2 complessi descritto da relazione
+	// prodotto tra 2 complessi descritto da relazione
         // i parte immaginaria
         //(a + bi)/(c + di) = ((ac - bd)/(c*c + d*d))/((bc + ad)/(c*c + d*d))i
         
@@ -121,6 +63,7 @@ public class ComplexInt
         // c al quadrato consistente
         // d al quadrato consistente
         // denominatore consistente
+	System.out.println(rht.reale +" " +  rht.immaginaria);
         Integer denominatore = BoundCheckerInt.addConsistent(BoundCheckerInt.mulConsistent(rht.reale,rht.reale),BoundCheckerInt.mulConsistent(rht.immaginaria,rht.immaginaria)) ;
         
         // (ac + bd)/(c^2 + d^2) consistente
@@ -130,7 +73,7 @@ public class ComplexInt
         // tutte le operazioni che compongono il risultante complesso sono
         // consistenti -> complesso tornato e' consistente
         return new ComplexInt(parteReale,parteImmaginaria);
-     }
+    }
     
     public ComplexInt factorial(){
 	Integer facReale = reale;
@@ -152,7 +95,7 @@ public class ComplexInt
 	return new ComplexInt(facReale,facImg);
     }
 
-     public String toString(){
+    public String toString(){
 	String res = new String();
 	res+=reale.toString();
 	if(immaginaria > 0){
@@ -163,7 +106,7 @@ public class ComplexInt
     
     public static void testCompInt(){
 	ComplexInt x1 = new ComplexInt(6,5);
-	ComplexInt x2 = new ComplexInt(3,3);
+	ComplexInt x2 = new ComplexInt(4,4);
 
 	
 	System.out.println("COMPLESSI DI PARTENZA");
@@ -176,6 +119,8 @@ public class ComplexInt
 	System.out.println(x1.difference(x2));
 	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("DIVISION");
+	System.out.println(x1.division(x2));
 	System.out.println("FATTORIALE");
 	System.out.println(x1.factorial());
     }

@@ -102,6 +102,8 @@ public class ComplexDouble
 	System.out.println(x1.difference(x2));
 	System.out.println("PRODOTTO");
 	System.out.println(x1.product(x2));
+	System.out.println("DIVISION");
+	System.out.println(x1.division(x2));
 	System.out.println("SQUARE ROOT");
 	System.out.println(x1.squareRoot());    }
 }
