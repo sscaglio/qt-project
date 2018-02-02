@@ -72,7 +72,7 @@ KalkMatriceInt::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrix->setLayout(grid);
-    GUITemplateHelper<KalkMatriceInt,MatriceInt>::correctValueInsertedHelper(this,validator,line,insertMatrix);
+    GUITemplateHelper<KalkMatriceInt,MatriceInt>::correctValueInsertedHelperMatrix(this,validator,line,insertMatrix);
 }
 
 void
@@ -111,19 +111,12 @@ KalkMatriceInt::unaryOperatorClicked(){
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoMatriceParse = display->text();
-    MatriceInt operandoMatrice = MatriceInt::parse(operandoMatriceParse,righeMatriceAttuale,colonneMatriceAttuale);
-
-    MatriceInt res = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
-
-    if(clickedOperator == tr("factorial")){
-        res = operandoMatrice.factorial();
+    try{
+        GUITemplateHelper<KalkMatriceInt,MatriceInt>::unaryOperatorIntHelperMatrix(this,clickedOperator);
     }
-
-    QString textualRes = MatriceInt::convertToQString(res,righeMatriceAttuale,colonneMatriceAttuale);
-    display->setText(textualRes);
-    waitingForOperand = true;
-
+    catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }
 
 
@@ -131,7 +124,7 @@ void
 KalkMatriceInt::additiveOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-
+    GUITemplateHelper<KalkMatriceInt,MatriceInt>::additiveOperatorHelperMatrix(this,clickedOperator);
 }
 
 
@@ -139,45 +132,12 @@ void
 KalkMatriceInt::multiplicativeOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceInt operand = MatriceInt::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceInt::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceInt,MatriceInt>::multiplicativeOperatorHelperMatrix(this,clickedOperator);
 }
 
 void
 KalkMatriceInt::equalClicked(){
-    MatriceInt operand = MatriceInt::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(MatriceInt::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    sumSoFar = MatriceInt(righeMatriceAttuale,colonneMatriceAttuale);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceInt,MatriceInt>::equalOperatorHelperMatrix(this);
 }
 
 void
@@ -201,19 +161,22 @@ KalkMatriceInt::clearAll(){
 
 bool
 KalkMatriceInt::calculate(const MatriceInt & rht, const QString & pendingOperator){
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rht;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rht;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rht;
+    try{
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rht;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rht;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rht;
+        }
+        return true;
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
     }
-    return true;
+    return false;
 }
 
 void
 KalkMatriceInt::updateMatrixDimension(unsigned int r, unsigned int c){
-    clearAll();
-    sumSoFar = MatriceInt(r,c);
-    factorSoFar = MatriceInt(r,c);
+  GUITemplateHelper<KalkMatriceInt,MatriceInt>::updateMatrixDimensionHelper(this,r,c);
 }

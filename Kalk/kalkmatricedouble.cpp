@@ -73,7 +73,7 @@ KalkMatriceDouble::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrix->setLayout(grid);
-    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::correctValueInsertedHelper(this,validator,line,insertMatrix);
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::correctValueInsertedHelperMatrix(this,validator,line,insertMatrix);
 }
 
 void
@@ -112,19 +112,11 @@ KalkMatriceDouble::unaryOperatorClicked(){
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoMatriceParse = display->text();
-    MatriceDouble operandoMatrice = MatriceDouble::parse(operandoMatriceParse,righeMatriceAttuale,colonneMatriceAttuale);
-
-    MatriceDouble res = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-
-    if(clickedOperator == tr("sqrt")){
-        res = operandoMatrice.squareRoot();
+    try{
+        GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::unaryOperatorDoubleHelperMatrix(this,clickedOperator);
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
     }
-
-    QString textualRes = MatriceDouble::convertToQString(res,righeMatriceAttuale,colonneMatriceAttuale);
-    display->setText(textualRes);
-    waitingForOperand = true;
-
 }
 
 
@@ -132,29 +124,7 @@ void
 KalkMatriceDouble::additiveOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-        operand = factorSoFar;
-        factorSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::additiveOperatorHelperMatrix(this,clickedOperator);
 }
 
 
@@ -162,50 +132,17 @@ void
 KalkMatriceDouble::multiplicativeOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::multiplicativeOperatorHelperMatrix(this,clickedOperator);
 }
 
 void
 KalkMatriceDouble::equalClicked(){
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(MatriceDouble::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    sumSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::equalOperatorHelperMatrix(this);
 }
 
 void
 KalkMatriceDouble::backspaceClicked(){
-   waitingForOperand = cleaner::cleanerBackspace(display);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void
@@ -230,19 +167,22 @@ KalkMatriceDouble::createKalkButton(const QString &text, const char *member){
 
 bool
 KalkMatriceDouble::calculate(const MatriceDouble & rht, const QString & pendingOperator){
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rht;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rht;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rht;
+    try{
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rht;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rht;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rht;
+        }
+        return true;
+    }catch(std::exception& e){
+        displayErrorMessage(this,e);
     }
-    return true;
+    return false;
 }
 
 void
 KalkMatriceDouble::updateMatrixDimension(unsigned int r, unsigned int c){
-    clearAll();
-    sumSoFar = MatriceDouble(r,c);
-    factorSoFar = MatriceDouble(r,c);
+   GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::updateMatrixDimensionHelper(this,r,c);
 }
