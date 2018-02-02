@@ -13,7 +13,7 @@ public :
     static T add(const T&,const T&);
     static T sub(const T&,const T&);
     static T mul(const T&,const T&);
-    static T reduxEqual(T&);
+    static T reduxEqual(T);
 };
 
 template<typename T,typename U>
@@ -202,10 +202,11 @@ PolynomialArithmeticExecutor<T,U>::mul(const T& lht,const T& rht){
     return T();
 }
 
+#include<iostream>
 
 template<typename T,typename U>
 T
-PolynomialArithmeticExecutor<T,U>::reduxEqual(T& reduxPol){
+PolynomialArithmeticExecutor<T,U>::reduxEqual(T reduxPol){
     std::sort(reduxPol.pol.begin(),reduxPol.pol.end());
     // reduxPol e' ordinato -> posso semplificare monomi con grado ==
     T res = T();

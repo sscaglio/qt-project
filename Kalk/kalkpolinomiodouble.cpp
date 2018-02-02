@@ -169,10 +169,10 @@ void
 KalkPolinomioDouble::reduceAll(){
     try{
         if(!sumSoFar.polinomioNullo()){
-            PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(sumSoFar);
+            sumSoFar = PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(sumSoFar);
         }
         if(!factorSoFar.polinomioNullo()){
-            PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(factorSoFar);
+            factorSoFar = PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(factorSoFar);
         }
         if(display->text() != "0"){
             PolinomioDouble par =PolinomioDouble::parse(display->text());

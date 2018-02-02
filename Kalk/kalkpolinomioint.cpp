@@ -163,10 +163,10 @@ void
 KalkPolinomioInt::reduceAll(){
     try{
         if(!sumSoFar.polinomioNullo()){
-            PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(sumSoFar);
+            sumSoFar = PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(sumSoFar);
         }
         if(!factorSoFar.polinomioNullo()){
-            PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(factorSoFar);
+            factorSoFar = PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(factorSoFar);
         }
         if(display->text() != "0"){
             PolinomioInt par =PolinomioInt::parse(display->text());
