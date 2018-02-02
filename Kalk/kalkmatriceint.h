@@ -30,13 +30,13 @@ public:
 public slots:
     virtual void insertTypeClicked();
     virtual void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
-    void setMatrixDimension();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
+    virtual void setMatrixDimension();
 private:
 
     unsigned int righeMatriceAttuale;
@@ -47,6 +47,8 @@ private:
     MatriceInt sumSoFar;
     MatriceInt factorSoFar;
 
+signals:
+    void changeDimension();
 };
 
 

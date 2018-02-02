@@ -85,6 +85,9 @@ KalkMatriceDouble::setMatrixDimension(){
     QLabel *helperText = new QLabel("inserisci dimensione matrice");
     QLineEdit * line = new QLineEdit(this);
     line->setPlaceholderText("3,3");
+    QString regexp("[1-9],[1,9]");
+    QValidator *validator = new QRegExpValidator(regexp,insertMatrixDimension);
+    line->setValidator(validator);
     QPushButton *ok = new QPushButton(insertMatrixDimension);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertMatrixDimension,SLOT(accept()));
@@ -98,14 +101,22 @@ KalkMatriceDouble::setMatrixDimension(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrixDimension->setLayout(grid);
+    int pos = 0;
     if(insertMatrixDimension->exec() == QDialog::Accepted){
         QString text = line->text();
-        QStringList parsedText = text.split(",",QString::SkipEmptyParts);
-        clearAll();
-        righeMatriceAttuale = parsedText.at(0).toUInt();
-        colonneMatriceAttuale = parsedText.at(1).toUInt();
+        if(validator->validate(text,pos) == QValidator::Acceptable){
+            QStringList parsedText = text.split(",",QString::SkipEmptyParts);
+            clearAll();
+            righeMatriceAttuale = parsedText.at(0).toUInt();
+            colonneMatriceAttuale = parsedText.at(1).toUInt();
+        }
+        else{
+            QMessageBox msg(insertType);
+            msg.setText("input non valido");
+            msg.exec();
+        }
         waitingForOperand = true;
-    };
+    }
 }
 
 void
@@ -187,5 +198,5 @@ KalkMatriceDouble::calculate(const MatriceDouble & rht, const QString & pendingO
 
 void
 KalkMatriceDouble::updateMatrixDimension(unsigned int r, unsigned int c){
-   GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::updateMatrixDimensionHelper(this,r,c);
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::updateMatrixDimensionHelper(this,r,c);
 }

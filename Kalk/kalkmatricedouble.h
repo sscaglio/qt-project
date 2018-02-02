@@ -27,14 +27,14 @@ public:
     bool calculate(const MatriceDouble&, const QString &);
 
 public slots:
-    void insertTypeClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
+    virtual void insertTypeClicked();
+    virtual void unaryOperatorClicked();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
     void setMatrixDimension();
 private:
 
@@ -48,7 +48,8 @@ private:
     MatriceDouble sumSoFar;
     MatriceDouble factorSoFar;
 
-
+signals:
+    void dimensionChange();
 
 };
 
