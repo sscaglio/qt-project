@@ -38,9 +38,11 @@ MatrixArithmeticExecutor<T,U>::add(const T& lht,const T& rht){
     }
     catch(runtime_error & e){// errori overflow, underflow etc
         std::cout << e.what() << std::endl;
+        throw e;
     }
     catch(logic_error & e){// errore dimensioni non compatibili(da rimuovere in futuro)
         std::cout << e.what() << std::endl;
+        throw e;
     }
     return T(0,0);// ritorna puntatore nullo in caso sia stata sollevata almeno 1 delle precedenti eccezioni
 }
@@ -64,9 +66,11 @@ MatrixArithmeticExecutor<T,U>::sub(const T& lht,const T&rht){
     }
     catch(runtime_error & e){// errori overflow, underflow etc
         std::cout << e.what() << std::endl;
+        throw e;
     }
     catch(logic_error & e){// errore dimensioni non compatibili(da rimuovere in futuro)
         std::cout << e.what() << std::endl;
+        throw e;
     }
     return T(0,0);// ritorna puntatore nullo in caso sia stata sollevata almeno 1 delle precedenti eccezioni
 }
@@ -97,9 +101,11 @@ MatrixArithmeticExecutor<T,U>::mul(const T& lht,const T&rht){
     }
     catch(runtime_error & e){// errori overflow, underflow etc
         std::cout << e.what() << std::endl;
+        throw e;
     }
     catch(logic_error & e){// errore dimensioni non compatibili(da rimuovere in futuro)
         std::cout << e.what() << std::endl;
+        throw e;
     }
     return T(0,0);
 }

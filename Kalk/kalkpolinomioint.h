@@ -40,14 +40,17 @@ public slots:
     virtual void backspaceClicked();
     virtual void clear();
     virtual void clearAll();
+    virtual void reduceAll();
 
 private:
     KalkButton *createKalkButton(const QString &text, const char *member);
 
-
-    PolinomioInt sumInMemory;
     PolinomioInt sumSoFar;
     PolinomioInt factorSoFar;
+
+signals:
+    void reducePolinomial();
+
 };
 
 #endif // KALKPOLINOMIOINT_H

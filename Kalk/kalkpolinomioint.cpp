@@ -6,6 +6,7 @@ KalkPolinomioInt::KalkPolinomioInt(QWidget *parent) : AbstractKalk(parent)
     factorSoFar = PolinomioInt();
     waitingForOperand = true;
 
+    connect(this,SIGNAL(reducePolinomial()),this,SLOT(reduceAll()));
     setUpDisplay();
 
     QGridLayout *mainLayout = new QGridLayout;
@@ -73,6 +74,7 @@ KalkPolinomioInt::insertTypeClicked(){
     grid->addWidget(cancel);
     insertPolynomial->setLayout(grid);
     GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::correctValueInsertedHelper(this,validator,line,insertPolynomial);
+    emit reducePolinomial();
 }
 
 void KalkPolinomioInt::unaryOperatorClicked()
@@ -84,6 +86,7 @@ void KalkPolinomioInt::unaryOperatorClicked()
     QString clickedOperator = clickedButton->text();
     try{
         GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::unaryOperatorIntHelper(this,clickedOperator);
+        emit reducePolinomial();
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
@@ -107,6 +110,7 @@ void KalkPolinomioInt::multiplicativeOperatorClicked()
 void KalkPolinomioInt::equalClicked()
 {
     GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::equalOperatorHelper(this);
+    emit reducePolinomial();
 }
 
 
@@ -146,10 +150,31 @@ bool KalkPolinomioInt::calculate(const PolinomioInt& rightOperand, const QString
         } else if (pendingOperator == tr("*")) {
             factorSoFar = factorSoFar * rightOperand;
         }
+        emit reducePolinomial();
         return true;
     }
     catch(std::exception &e){
         displayErrorMessage(this,e);
     }
     return false;
+}
+
+void
+KalkPolinomioInt::reduceAll(){
+    try{
+        if(!sumSoFar.polinomioNullo()){
+            PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(sumSoFar);
+        }
+        if(!factorSoFar.polinomioNullo()){
+            PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(factorSoFar);
+        }
+        if(display->text() != "0"){
+            PolinomioInt par =PolinomioInt::parse(display->text());
+            PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(par);
+            QString Poltext = PolinomioInt::convertToQString(par);
+            display->setText(Poltext);
+        }
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }

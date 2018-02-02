@@ -40,7 +40,6 @@ public slots:
 private:
 
 
-    ComplessoInt sumInMemory;
     ComplessoInt sumSoFar;
     ComplessoInt factorSoFar;
 };

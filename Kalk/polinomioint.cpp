@@ -71,8 +71,19 @@ PolinomioInt::parse(const QString& rht){
 QString
 PolinomioInt::convertToQString(const PolinomioInt & rht){
     QString res = QString();
-    int i = 0;
-    for(; i < (rht.pol.size() - 1);++i){
+    if(!rht.polinomioNullo()){
+        int i = 0;
+        for(; i < (rht.pol.size() - 1);++i){
+            int coeff = rht.pol[i].getCoefficiente();
+            int grad = rht.pol[i].getGrado();
+            if(coeff != 0){
+                res+=(QString::number(coeff));
+            }
+            if(grad != 0){
+                res+=("x^" + QString::number(grad));
+            }
+            res+=",";
+        }
         int coeff = rht.pol[i].getCoefficiente();
         int grad = rht.pol[i].getGrado();
         if(coeff != 0){
@@ -81,15 +92,12 @@ PolinomioInt::convertToQString(const PolinomioInt & rht){
         if(grad != 0){
             res+=("x^" + QString::number(grad));
         }
-        res+=",";
+        return res;
     }
-    int coeff = rht.pol[i].getCoefficiente();
-    int grad = rht.pol[i].getGrado();
-    if(coeff != 0){
-        res+=(QString::number(coeff));
-    }
-    if(grad != 0){
-        res+=("x^" + QString::number(grad));
-    }
-    return res;
+    return QString("0");
+}
+
+PolinomioInt
+PolinomioInt::reduceEqual(PolinomioInt & reduxElt){
+    return PolynomialArithmeticExecutor<PolinomioInt,int>::reduxEqual(reduxElt);
 }

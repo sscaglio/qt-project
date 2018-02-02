@@ -91,7 +91,7 @@ void KalkComplessoDouble::unaryOperatorClicked()
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     try{
-    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
+        GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
     }catch(std::exception & e){
         displayErrorMessage(this,e);
     }
@@ -99,22 +99,46 @@ void KalkComplessoDouble::unaryOperatorClicked()
 
 void KalkComplessoDouble::additiveOperatorClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::additiveOperatorHelper(this,clickedOperator);
+    try{
+        GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::additiveOperatorHelper(this,clickedOperator);
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }
+
 
 void KalkComplessoDouble::multiplicativeOperatorClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::multiplicativeOperatorHelper(this,clickedOperator);
+    try{
+        GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::multiplicativeOperatorHelper(this,clickedOperator);
+    }
+    catch(std::exception& e){
+        displayErrorMessage(this,e);
+    }
 }
 
 void KalkComplessoDouble::equalClicked()
 {
-   GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::equalOperatorHelper(this);
+    if(display->text() == "0"){
+        return ;
+    }
+    try{
+        GUITemplateHelper<KalkComplessoDouble,ComplessoDouble>::equalOperatorHelper(this);
+    }
+    catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }
 
 
@@ -139,16 +163,16 @@ void KalkComplessoDouble::clearAll()
 bool KalkComplessoDouble::calculate(const ComplessoDouble& rightOperand, const QString &pendingOperator)
 {
     try{
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rightOperand;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rightOperand;
-    } else if (pendingOperator == tr("/")) {
-        factorSoFar = factorSoFar / rightOperand;
-    }
-    return true;
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rightOperand;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rightOperand;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rightOperand;
+        } else if (pendingOperator == tr("/")) {
+            factorSoFar = factorSoFar / rightOperand;
+        }
+        return true;
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }

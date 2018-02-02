@@ -38,8 +38,6 @@ public slots:
 
 private:
 
-
-    ComplessoDouble sumInMemory;
     ComplessoDouble sumSoFar;
     ComplessoDouble factorSoFar;
 };

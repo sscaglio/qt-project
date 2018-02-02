@@ -138,6 +138,9 @@ KalkMatriceDouble::unaryOperatorClicked(){
 
 void
 KalkMatriceDouble::additiveOperatorClicked(){
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::additiveOperatorHelperMatrix(this,clickedOperator);
@@ -146,6 +149,9 @@ KalkMatriceDouble::additiveOperatorClicked(){
 
 void
 KalkMatriceDouble::multiplicativeOperatorClicked(){
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::multiplicativeOperatorHelperMatrix(this,clickedOperator);

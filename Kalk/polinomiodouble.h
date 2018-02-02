@@ -21,6 +21,7 @@ public:
 
     static PolinomioDouble parse(const QString&);
     static QString convertToQString(const PolinomioDouble&rht);
+    static PolinomioDouble reduceEqual(const PolinomioDouble&);
 };
 
 #endif // POLINOMIODOUBLE_H

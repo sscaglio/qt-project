@@ -23,6 +23,7 @@ public:
 
     static PolinomioInt parse(const QString&);
     static QString convertToQString(const PolinomioInt&);
+    static PolinomioInt reduceEqual(PolinomioInt&);
 };
 
 #endif // POLINOMIOINT_H

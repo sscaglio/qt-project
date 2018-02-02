@@ -8,6 +8,8 @@ KalkPolinomioDouble::KalkPolinomioDouble(QWidget *parent) : AbstractKalk(parent)
 
     setUpDisplay();
 
+    connect(this,SIGNAL(reducePolinomial()),this,SLOT(reduceAll()));
+
     QGridLayout *mainLayout = new QGridLayout;
     setUpLayout(mainLayout);
 
@@ -71,7 +73,7 @@ KalkPolinomioDouble::insertTypeClicked(){
     grid->addWidget(cancel);
     insertPolynomial->setLayout(grid);
     GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::correctValueInsertedHelper(this,validator,line,insertPolynomial);
-
+    emit reducePolinomial();
 }
 
 void KalkPolinomioDouble::unaryOperatorClicked()
@@ -83,6 +85,7 @@ void KalkPolinomioDouble::unaryOperatorClicked()
     QString clickedOperator = clickedButton->text();
     try{
         GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::unaryOperatorDoubleHelper(this,clickedOperator);
+        reducePolinomial();
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
@@ -90,6 +93,9 @@ void KalkPolinomioDouble::unaryOperatorClicked()
 
 void KalkPolinomioDouble::additiveOperatorClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::additiveOperatorHelper(this,clickedOperator);
@@ -97,6 +103,9 @@ void KalkPolinomioDouble::additiveOperatorClicked()
 
 void KalkPolinomioDouble::multiplicativeOperatorClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
 
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
@@ -105,6 +114,9 @@ void KalkPolinomioDouble::multiplicativeOperatorClicked()
 
 void KalkPolinomioDouble::equalClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
     GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>::equalOperatorHelper(this);
 }
 
@@ -144,9 +156,31 @@ bool KalkPolinomioDouble::calculate(const PolinomioDouble& rightOperand, const Q
         } else if (pendingOperator == tr("*")) {
             factorSoFar = factorSoFar * rightOperand;
         }
+        emit reducePolinomial();
         return true;
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
     return false;
+}
+
+
+void
+KalkPolinomioDouble::reduceAll(){
+    try{
+        if(!sumSoFar.polinomioNullo()){
+            PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(sumSoFar);
+        }
+        if(!factorSoFar.polinomioNullo()){
+            PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(factorSoFar);
+        }
+        if(display->text() != "0"){
+            PolinomioDouble par =PolinomioDouble::parse(display->text());
+            PolynomialArithmeticExecutor<PolinomioDouble,double>::reduxEqual(par);
+            QString Poltext = PolinomioDouble::convertToQString(par);
+            display->setText(Poltext);
+        }
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
+    }
 }

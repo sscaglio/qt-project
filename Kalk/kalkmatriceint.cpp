@@ -29,7 +29,7 @@ KalkMatriceInt::setUpLayout(QGridLayout * mainLayout){
     KalkButton *minusKalkButton = createKalkButton(tr("-"), SLOT(additiveOperatorClicked()));
     KalkButton *plusKalkButton = createKalkButton(tr("+"), SLOT(additiveOperatorClicked()));
 
-    KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
+    KalkButton *factorialKalkButton = createKalkButton(tr("factorial"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
 
     KalkButton *setMatrixDimensionButton = createKalkButton(tr("update dim"),SLOT(setMatrixDimension()));
@@ -139,6 +139,9 @@ KalkMatriceInt::unaryOperatorClicked(){
 
 void
 KalkMatriceInt::additiveOperatorClicked(){
+    if(display->text() == "0"){
+        return;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkMatriceInt,MatriceInt>::additiveOperatorHelperMatrix(this,clickedOperator);
@@ -147,6 +150,9 @@ KalkMatriceInt::additiveOperatorClicked(){
 
 void
 KalkMatriceInt::multiplicativeOperatorClicked(){
+    if(display->text() == "0"){
+        return;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkMatriceInt,MatriceInt>::multiplicativeOperatorHelperMatrix(this,clickedOperator);
@@ -154,6 +160,9 @@ KalkMatriceInt::multiplicativeOperatorClicked(){
 
 void
 KalkMatriceInt::equalClicked(){
+    if(display->text() == "0"){
+        return;
+    }
     GUITemplateHelper<KalkMatriceInt,MatriceInt>::equalOperatorHelperMatrix(this);
 }
 

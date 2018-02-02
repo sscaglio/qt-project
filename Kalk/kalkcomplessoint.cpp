@@ -98,6 +98,9 @@ void KalkComplessoInt::unaryOperatorClicked()
 
 void KalkComplessoInt::additiveOperatorClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkComplessoInt,ComplessoInt>::additiveOperatorHelper(this,clickedOperator);
@@ -105,7 +108,9 @@ void KalkComplessoInt::additiveOperatorClicked()
 
 void KalkComplessoInt::multiplicativeOperatorClicked()
 {
-
+    if(display->text() == "0"){
+        return ;
+    }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     GUITemplateHelper<KalkComplessoInt,ComplessoInt>::multiplicativeOperatorHelper(this,clickedOperator);
@@ -113,6 +118,9 @@ void KalkComplessoInt::multiplicativeOperatorClicked()
 
 void KalkComplessoInt::equalClicked()
 {
+    if(display->text() == "0"){
+        return ;
+    }
     GUITemplateHelper<KalkComplessoInt,ComplessoInt>::equalOperatorHelper(this);
 }
 

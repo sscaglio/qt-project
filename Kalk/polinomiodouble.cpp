@@ -54,9 +54,20 @@ PolinomioDouble::parse(const QString & rht){
 QString
 PolinomioDouble::convertToQString(const PolinomioDouble & rht){
     QString res = QString();
-    int i = 0;
-    for(; i < (rht.pol.size() - 1);++i){
-        double coeff = rht.pol[i].getCoefficiente();
+    if(!rht.polinomioNullo()){
+        int i = 0;
+        for(; i < (rht.pol.size() - 1);++i){
+            double coeff = rht.pol[i].getCoefficiente();
+            int grad = rht.pol[i].getGrado();
+            if(coeff != 0){
+                res+=(QString::number(coeff));
+            }
+            if(grad != 0){
+                res+=("x^" + QString::number(grad));
+            }
+            res+=",";
+        }
+        double coeff= rht.pol[i].getCoefficiente();
         int grad = rht.pol[i].getGrado();
         if(coeff != 0){
             res+=(QString::number(coeff));
@@ -64,15 +75,8 @@ PolinomioDouble::convertToQString(const PolinomioDouble & rht){
         if(grad != 0){
             res+=("x^" + QString::number(grad));
         }
-        res+=",";
+        return res;
     }
-    double coeff= rht.pol[i].getCoefficiente();
-    int grad = rht.pol[i].getGrado();
-    if(coeff != 0){
-        res+=(QString::number(coeff));
-    }
-    if(grad != 0){
-        res+=("x^" + QString::number(grad));
-    }
-    return res;
+    return QString("0");
+
 }

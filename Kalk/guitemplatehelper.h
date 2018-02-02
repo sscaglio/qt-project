@@ -71,9 +71,15 @@ GUITemplateHelper<T,U>::unaryOperatorDoubleHelper(T * specificGui,
     specificGui->waitingForOperand = true;
 }
 
+#include<QDebug>
+
 template<typename T,typename U>
 void
 GUITemplateHelper<T,U>::additiveOperatorHelper(T* specificGui, QString passedOperation){
+
+    qDebug() << "error";
+    qDebug() << specificGui->display->text();
+    qDebug() << "error";
     U operand = U::parse(specificGui->display->text());
 
     if (!specificGui->pendingMultiplicativeOperator.isEmpty()) {

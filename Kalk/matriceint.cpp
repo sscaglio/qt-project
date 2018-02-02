@@ -51,10 +51,14 @@ MatriceInt::factorial()const{
 MatriceInt
 MatriceInt::parse(const QString & rht,const unsigned int r,const unsigned int c){
 
+
+
     MatriceInt res = MatriceInt(r,c);
-    QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
-    for(unsigned int i = 0; i < r * c;++i){
-        res.matrice.push_back(toBeParsed.at(i).toInt());
+    if(!(rht == "0" || rht.isEmpty())){
+        QStringList toBeParsed = rht.split(",",QString::SkipEmptyParts);
+        for(unsigned int i = 0; i < r * c;++i){
+            res.matrice.push_back(toBeParsed.at(i).toInt());
+        }
     }
     return res;
 }
@@ -62,10 +66,13 @@ MatriceInt::parse(const QString & rht,const unsigned int r,const unsigned int c)
 QString
 MatriceInt::convertToQString(const MatriceInt & rht,const unsigned int r,const unsigned int c){
     QString res = QString();
-    unsigned int i = 0;
-    for(; i < (r * c - 1)  ;++i){
-        res +=(QString::number(rht.matrice[i]) + ",");
+    if(!rht.matriceNulla()){
+        unsigned int i = 0;
+        for(; i < (r * c - 1)  ;++i){
+            res +=(QString::number(rht.matrice[i]) + ",");
+        }
+        res+=(QString::number(rht.matrice[i]));
+        return res;
     }
-    res+=(QString::number(rht.matrice[i]));
-    return res;
+    return QString();
 }

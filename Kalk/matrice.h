@@ -27,6 +27,7 @@ protected:
 
 public:
     Matrice(const unsigned int = 0,const unsigned int = 0);
+    bool matriceNulla()const;
 
 };
 
@@ -40,6 +41,11 @@ Matrice<T>::Matrice(const unsigned int r,const unsigned int c)
     :matrice(QVector<T>()),righe(r),colonne(c)
 {}
 
+template<typename T>
+bool
+Matrice<T>::matriceNulla()const{
+    return matrice.size() == 0;
+}
 
 #endif // MATRICE
 
