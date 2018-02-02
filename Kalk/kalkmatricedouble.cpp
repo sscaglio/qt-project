@@ -33,7 +33,7 @@ KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
 
     KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
-
+    KalkButton *setMatrixDimensionButton = createKalkButton(tr("update dim"),SLOT(setMatrixDimension()));
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
@@ -47,6 +47,7 @@ KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
     mainLayout->addWidget(equalKalkButton, 4, 0);
+    mainLayout->addWidget(setMatrixDimensionButton,4,1);
     setLayout(mainLayout);
 }
 
@@ -85,7 +86,8 @@ KalkMatriceDouble::setMatrixDimension(){
     QLabel *helperText = new QLabel("inserisci dimensione matrice");
     QLineEdit * line = new QLineEdit(this);
     line->setPlaceholderText("3,3");
-    QString regexp("[1-9],[1,9]");
+    QString rgxp("[1-9],[1-9]");
+    QRegExp regexp(rgxp);
     QValidator *validator = new QRegExpValidator(regexp,insertMatrixDimension);
     line->setValidator(validator);
     QPushButton *ok = new QPushButton(insertMatrixDimension);
@@ -111,7 +113,7 @@ KalkMatriceDouble::setMatrixDimension(){
             colonneMatriceAttuale = parsedText.at(1).toUInt();
         }
         else{
-            QMessageBox msg(insertType);
+            QMessageBox msg(insertMatrixDimension);
             msg.setText("input non valido");
             msg.exec();
         }
