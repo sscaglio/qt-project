@@ -48,6 +48,8 @@ private:
     MatriceDouble sumSoFar;
     MatriceDouble factorSoFar;
 
+    QLabel * dimensioniMatrice;
+
 signals:
     void dimensionChange();
 

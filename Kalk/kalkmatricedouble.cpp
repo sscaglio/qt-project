@@ -84,6 +84,7 @@ void
 KalkMatriceDouble::setMatrixDimension(){
     QDialog *insertMatrixDimension = new QDialog(this);
     QLabel *helperText = new QLabel("inserisci dimensione matrice");
+     QLabel * dimAttuali = new QLabel("dim attuali:" + QString::number(righeMatriceAttuale) + "x" + QString::number(colonneMatriceAttuale));
     QLineEdit * line = new QLineEdit(this);
     line->setPlaceholderText("3,3");
     QString rgxp("[1-9],[1-9]");
@@ -99,6 +100,7 @@ KalkMatriceDouble::setMatrixDimension(){
     connect(cancel,SIGNAL(clicked()),insertMatrixDimension,SLOT(reject()));
     QGridLayout *grid = new QGridLayout;
     grid->addWidget(helperText);
+    grid->addWidget(dimAttuali);
     grid->addWidget(line);
     grid->addWidget(ok);
     grid->addWidget(cancel);

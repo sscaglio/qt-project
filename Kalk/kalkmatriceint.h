@@ -47,8 +47,6 @@ private:
     MatriceInt sumSoFar;
     MatriceInt factorSoFar;
 
-signals:
-    void changeDimension();
 };
 
 
