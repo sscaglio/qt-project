@@ -54,7 +54,9 @@ KalkMatriceInt::insertTypeClicked(){
     QLabel * helperText = new QLabel("inserisci matrice, valori elementi matrice separati da virgola");
     QLineEdit * line = new QLineEdit(this);
 
-    QRegExp rx("(-?\\d{1,4})(,\\d{1,4})*");
+    unsigned int eltTotali = righeMatriceAttuale * colonneMatriceAttuale - 1;
+    QString regexp = QString(QString("(-?\\d{1,4}){1}(,-?\\d{1,4})") + QString("{") + QRegExp::escape(QString::number(eltTotali)) + QString("}"));
+    QRegExp rx(regexp);
     QValidator *validator = new QRegExpValidator(rx,insertMatrix);
     line->setValidator(validator);
 
