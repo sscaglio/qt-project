@@ -33,7 +33,7 @@ KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
 
     KalkButton *factorialKalkButton = createKalkButton(tr("sqrt"), SLOT(unaryOperatorClicked()));
     KalkButton *equalKalkButton = createKalkButton(tr("="), SLOT(equalClicked()));
-
+    KalkButton *setMatrixDimensionButton = createKalkButton(tr("update dim"),SLOT(setMatrixDimension()));
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     mainLayout->addWidget(display, 0, 0, 1, 6);
     mainLayout->addWidget(backspaceKalkButton, 1, 0, 1, 2);
@@ -47,6 +47,7 @@ KalkMatriceDouble::setUpLayout(QGridLayout * mainLayout){
     mainLayout->addWidget(minusKalkButton, 3, 1);
     mainLayout->addWidget(plusKalkButton, 3, 0);
     mainLayout->addWidget(equalKalkButton, 4, 0);
+    mainLayout->addWidget(setMatrixDimensionButton,4,1);
     setLayout(mainLayout);
 }
 
@@ -56,7 +57,10 @@ KalkMatriceDouble::insertTypeClicked(){
     QDialog *insertMatrix = new QDialog(this);
     QLabel * helperText = new QLabel("inserisci matrice, elementi separati da virgola");
     QLineEdit * line = new QLineEdit(this);
-    QRegExp rx("-?\\d{1,4}\\.\\d{1,4}(,-?\\d{1,4}\\.\\d{1,4})*");
+
+    unsigned int eltTotali = righeMatriceAttuale * colonneMatriceAttuale - 1;
+    QString regexp = QString(QString("(-?\\d{1,4}\\.\\d{1,4}){1}(,-?\\d{1,4}\\.\\d{1,4})") + QString("{") + QRegExp::escape(QString::number(eltTotali)) + QString("}"));
+    QRegExp rx(regexp);
     QValidator *validator = new QRegExpValidator(rx,insertMatrix);
     line->setValidator(validator);
     line->setPlaceholderText("1,1");
@@ -73,14 +77,7 @@ KalkMatriceDouble::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrix->setLayout(grid);
-    if(insertMatrix->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        display->setText(text);
-        waitingForOperand = true;
-    };
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::correctValueInsertedHelperMatrix(this,validator,line,insertMatrix);
 }
 
 void
@@ -89,6 +86,10 @@ KalkMatriceDouble::setMatrixDimension(){
     QLabel *helperText = new QLabel("inserisci dimensione matrice");
     QLineEdit * line = new QLineEdit(this);
     line->setPlaceholderText("3,3");
+    QString rgxp("[1-9],[1-9]");
+    QRegExp regexp(rgxp);
+    QValidator *validator = new QRegExpValidator(regexp,insertMatrixDimension);
+    line->setValidator(validator);
     QPushButton *ok = new QPushButton(insertMatrixDimension);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertMatrixDimension,SLOT(accept()));
@@ -102,14 +103,22 @@ KalkMatriceDouble::setMatrixDimension(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertMatrixDimension->setLayout(grid);
+    int pos = 0;
     if(insertMatrixDimension->exec() == QDialog::Accepted){
         QString text = line->text();
-        QStringList parsedText = text.split(",",QString::SkipEmptyParts);
-        clearAll();
-        righeMatriceAttuale = parsedText.at(0).toUInt();
-        colonneMatriceAttuale = parsedText.at(1).toUInt();
+        if(validator->validate(text,pos) == QValidator::Acceptable){
+            QStringList parsedText = text.split(",",QString::SkipEmptyParts);
+            clearAll();
+            righeMatriceAttuale = parsedText.at(0).toUInt();
+            colonneMatriceAttuale = parsedText.at(1).toUInt();
+        }
+        else{
+            QMessageBox msg(insertMatrixDimension);
+            msg.setText("input non valido");
+            msg.exec();
+        }
         waitingForOperand = true;
-    };
+    }
 }
 
 void
@@ -119,19 +128,11 @@ KalkMatriceDouble::unaryOperatorClicked(){
     }
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    QString operandoMatriceParse = display->text();
-    MatriceDouble operandoMatrice = MatriceDouble::parse(operandoMatriceParse,righeMatriceAttuale,colonneMatriceAttuale);
-
-    MatriceDouble res = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-
-    if(clickedOperator == tr("sqrt")){
-        res = operandoMatrice.squareRoot();
+    try{
+        GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::unaryOperatorDoubleHelperMatrix(this,clickedOperator);
+    }catch(std::exception &e){
+        displayErrorMessage(this,e);
     }
-
-    QString textualRes = MatriceDouble::convertToQString(res,righeMatriceAttuale,colonneMatriceAttuale);
-    display->setText(textualRes);
-    waitingForOperand = true;
-
 }
 
 
@@ -139,29 +140,7 @@ void
 KalkMatriceDouble::additiveOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-        operand = factorSoFar;
-        factorSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        sumSoFar = operand;
-    }
-
-    pendingAdditiveOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::additiveOperatorHelperMatrix(this,clickedOperator);
 }
 
 
@@ -169,50 +148,17 @@ void
 KalkMatriceDouble::multiplicativeOperatorClicked(){
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        display->setText(MatriceDouble::convertToQString(factorSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    } else {
-        factorSoFar = operand;
-    }
-
-    pendingMultiplicativeOperator = clickedOperator;
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::multiplicativeOperatorHelperMatrix(this,clickedOperator);
 }
 
 void
 KalkMatriceDouble::equalClicked(){
-    MatriceDouble operand = MatriceDouble::parse(display->text(),righeMatriceAttuale,colonneMatriceAttuale);
-
-    if (!pendingMultiplicativeOperator.isEmpty()) {
-        if (!calculate(operand, pendingMultiplicativeOperator)) {
-            return;
-        }
-        operand = factorSoFar;
-        factorSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-        pendingMultiplicativeOperator.clear();
-    }
-    if (!pendingAdditiveOperator.isEmpty()) {
-        if (!calculate(operand, pendingAdditiveOperator)) {
-            return;
-        }
-        pendingAdditiveOperator.clear();
-    } else {
-        sumSoFar = operand;
-    }
-
-    display->setText(MatriceDouble::convertToQString(sumSoFar,righeMatriceAttuale,colonneMatriceAttuale));
-    sumSoFar = MatriceDouble(righeMatriceAttuale,colonneMatriceAttuale);
-    waitingForOperand = true;
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::equalOperatorHelperMatrix(this);
 }
 
 void
 KalkMatriceDouble::backspaceClicked(){
-   waitingForOperand = cleaner::cleanerBackspace(display);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void
@@ -237,19 +183,22 @@ KalkMatriceDouble::createKalkButton(const QString &text, const char *member){
 
 bool
 KalkMatriceDouble::calculate(const MatriceDouble & rht, const QString & pendingOperator){
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rht;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rht;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rht;
+    try{
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rht;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rht;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rht;
+        }
+        return true;
+    }catch(std::exception& e){
+        displayErrorMessage(this,e);
     }
-    return true;
+    return false;
 }
 
 void
 KalkMatriceDouble::updateMatrixDimension(unsigned int r, unsigned int c){
-    clearAll();
-    sumSoFar = MatriceDouble(r,c);
-    factorSoFar = MatriceDouble(r,c);
+    GUITemplateHelper<KalkMatriceDouble,MatriceDouble>::updateMatrixDimensionHelper(this,r,c);
 }

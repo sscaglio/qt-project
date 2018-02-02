@@ -52,16 +52,16 @@ KalkComplessoInt::setUpLayout(QGridLayout * mainLayout){
 
 void
 KalkComplessoInt::insertTypeClicked(){
+    QLineEdit * line = new QLineEdit(this);
+    QRegExp rx("-?\\d{1,4},-?\\d{0,4}");
 
     QDialog *insertComplex = new QDialog(this);
-    QLabel * helperText = new QLabel("inserisci complesso, separa reale da immaginaria con virgola, parte immaginaria non richiede carattere i");
-    QLineEdit * line = new QLineEdit(this);
 
-    QRegExp rx("-?\\d{1,4},-?\\d{0,4}");
     QValidator *validator = new QRegExpValidator(rx,insertComplex);
     line->setValidator(validator);
-
     line->setPlaceholderText("1,1");
+
+
     QPushButton *ok = new QPushButton(insertComplex);
     ok->setText("ok");
     connect(ok,SIGNAL(clicked()),insertComplex,SLOT(accept()));
@@ -69,21 +69,16 @@ KalkComplessoInt::insertTypeClicked(){
     QPushButton *cancel = new QPushButton(insertComplex);
     cancel->setText("cancel");
     connect(cancel,SIGNAL(clicked()),insertComplex,SLOT(reject()));
+    QLabel * helperText = new QLabel("inserisci complesso, separa reale da immaginaria con virgola, parte immaginaria non richiede carattere i");
     QGridLayout *grid = new QGridLayout;
     grid->addWidget(helperText);
     grid->addWidget(line);
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertComplex->setLayout(grid);
-    if(insertComplex->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        ComplessoInt toDisplay = ComplessoInt::parse(text);
-        display->setText(ComplessoInt::convertToQString(toDisplay));
-        waitingForOperand = true;
-    };
+
+    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::correctValueInsertedHelper(this,validator,line,insertComplex);
+
 
 }
 
@@ -95,7 +90,7 @@ void KalkComplessoInt::unaryOperatorClicked()
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     try{
-    GUITemplateHelper<KalkComplessoInt,ComplessoInt>::unaryOperatorIntHelper(this,clickedOperator);
+        GUITemplateHelper<KalkComplessoInt,ComplessoInt>::unaryOperatorIntHelper(this,clickedOperator);
     }catch(exception & e){
         displayErrorMessage(this,e);
     }
@@ -155,7 +150,7 @@ bool KalkComplessoInt::calculate(const ComplessoInt& rightOperand, const QString
         }
         return true;
     }catch(std::exception &e){
-       displayErrorMessage(this,e);
+        displayErrorMessage(this,e);
     }
     return false;
 

@@ -6,6 +6,7 @@
 #include "abstractkalk.h"
 #include "cleaner.h"
 #include "kalkbutton.h"
+#include "guitemplatehelper.h"
 
 #include <QWidget>
 #include<QLineEdit>
@@ -19,6 +20,8 @@
 class KalkMatriceInt : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkMatriceInt,MatriceInt>;
 public:
     explicit KalkMatriceInt(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
      bool calculate(const MatriceInt&, const QString &);
@@ -27,13 +30,13 @@ public:
 public slots:
     virtual void insertTypeClicked();
     virtual void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
-    void setMatrixDimension();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
+    virtual void setMatrixDimension();
 private:
 
     unsigned int righeMatriceAttuale;
@@ -44,6 +47,8 @@ private:
     MatriceInt sumSoFar;
     MatriceInt factorSoFar;
 
+signals:
+    void changeDimension();
 };
 
 

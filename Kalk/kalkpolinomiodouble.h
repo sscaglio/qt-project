@@ -3,6 +3,7 @@
 
 #include "cleaner.h"
 #include "kalkbutton.h"
+#include "guitemplatehelper.h"
 #include "polinomiodouble.h"
 #include "abstractkalk.h"
 
@@ -20,20 +21,22 @@
 class KalkPolinomioDouble : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkPolinomioDouble,PolinomioDouble>;
 public:
     explicit KalkPolinomioDouble(QWidget *parent = 0);
     virtual void setUpLayout(QGridLayout *);
      bool calculate(const PolinomioDouble&, const QString &);
 
 public slots:
-    void insertTypeClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
+    virtual void insertTypeClicked();
+    virtual void unaryOperatorClicked();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
 
 
 private:

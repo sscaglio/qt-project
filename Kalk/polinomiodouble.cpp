@@ -34,20 +34,17 @@ PolinomioDouble::parse(const QString & rht){
     QStringList res = rht.split(",",QString::SkipEmptyParts);
     PolinomioDouble val = PolinomioDouble();
     for(int i= 0 ; i < res.size();++i){
-        if(res[i] != "s"){// se res[i] = 's' -> salta inserimento simbolo
-            if(res[i].contains("x^")){// esiste grado
-                QStringList tmp = res[i].split("x^",QString::SkipEmptyParts);
-                if(tmp.size() == 2){
-                val.pol.append(Monomio<double>(tmp.at(0).toInt(),(tmp.at(1)).toInt()));
-                }
-                else{
-                    val.pol.append(Monomio<double>(1,tmp.at(0).toInt()));
-                }
+        if(res[i].contains("x^")){// esiste grado
+            QStringList tmp = res[i].split("x^",QString::SkipEmptyParts);
+            if(tmp.size() == 2){
+                val.pol.append(Monomio<double>(tmp.at(0).toDouble(),(tmp.at(1)).toInt()));
             }
-            else{// non esiste grado
-
-                val.pol.append(Monomio<double>(res[i].toInt(),0));
+            else{
+                val.pol.append(Monomio<double>(1,tmp.at(0).toDouble()));
             }
+        }
+        else{// non esiste grado
+            val.pol.append(Monomio<double>(res[i].toDouble(),0));
         }
     }
     std::sort(val.pol.begin(),val.pol.end());

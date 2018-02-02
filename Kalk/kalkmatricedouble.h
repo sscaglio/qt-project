@@ -5,6 +5,7 @@
 #include "kalkbutton.h"
 #include "matricedouble.h"
 #include "abstractkalk.h"
+#include "guitemplatehelper.h"
 
 #include <QWidget>
 #include <QLineEdit>
@@ -18,20 +19,22 @@
 class KalkMatriceDouble : public AbstractKalk
 {
     Q_OBJECT
+
+    friend class GUITemplateHelper<KalkMatriceDouble,MatriceDouble>;
 public:
     explicit KalkMatriceDouble(QWidget *parent = 0,const unsigned int = 2,const unsigned int = 2);
     virtual void setUpLayout(QGridLayout *);
     bool calculate(const MatriceDouble&, const QString &);
 
 public slots:
-    void insertTypeClicked();
-    void unaryOperatorClicked();
-    void additiveOperatorClicked();
-    void multiplicativeOperatorClicked();
-    void equalClicked();
-    void backspaceClicked();
-    void clear();
-    void clearAll();
+    virtual void insertTypeClicked();
+    virtual void unaryOperatorClicked();
+    virtual void additiveOperatorClicked();
+    virtual void multiplicativeOperatorClicked();
+    virtual void equalClicked();
+    virtual void backspaceClicked();
+    virtual void clear();
+    virtual void clearAll();
     void setMatrixDimension();
 private:
 
@@ -45,7 +48,8 @@ private:
     MatriceDouble sumSoFar;
     MatriceDouble factorSoFar;
 
-
+signals:
+    void dimensionChange();
 
 };
 

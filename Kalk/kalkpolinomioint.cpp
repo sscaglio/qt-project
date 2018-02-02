@@ -72,15 +72,7 @@ KalkPolinomioInt::insertTypeClicked(){
     grid->addWidget(ok);
     grid->addWidget(cancel);
     insertPolynomial->setLayout(grid);
-    if(insertPolynomial->exec() == QDialog::Accepted){
-        QString text = line->text();
-        if(text.isEmpty()){
-            return;
-        }
-        display->setText(text);
-        waitingForOperand = true;
-    };
-
+    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::correctValueInsertedHelper(this,validator,line,insertPolynomial);
 }
 
 void KalkPolinomioInt::unaryOperatorClicked()
@@ -91,7 +83,7 @@ void KalkPolinomioInt::unaryOperatorClicked()
     KalkButton *clickedButton = qobject_cast<KalkButton *>(sender());
     QString clickedOperator = clickedButton->text();
     try{
-    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::unaryOperatorIntHelper(this,clickedOperator);
+        GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::unaryOperatorIntHelper(this,clickedOperator);
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
@@ -114,13 +106,13 @@ void KalkPolinomioInt::multiplicativeOperatorClicked()
 
 void KalkPolinomioInt::equalClicked()
 {
-   GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::equalOperatorHelper(this);
+    GUITemplateHelper<KalkPolinomioInt,PolinomioInt>::equalOperatorHelper(this);
 }
 
 
 void KalkPolinomioInt::backspaceClicked()
 {
-   waitingForOperand = cleaner::cleanerBackspace(display);
+    waitingForOperand = cleaner::cleanerBackspace(display);
 }
 
 void KalkPolinomioInt::clear()
@@ -147,15 +139,17 @@ KalkButton* KalkPolinomioInt::createKalkButton(const QString &text, const char *
 bool KalkPolinomioInt::calculate(const PolinomioInt& rightOperand, const QString &pendingOperator)
 {
     try{
-    if (pendingOperator == tr("+")) {
-        sumSoFar = sumSoFar + rightOperand;
-    } else if (pendingOperator == tr("-")) {
-        sumSoFar = sumSoFar - rightOperand;
-    } else if (pendingOperator == tr("*")) {
-        factorSoFar = factorSoFar * rightOperand;
+        if (pendingOperator == tr("+")) {
+            sumSoFar = sumSoFar + rightOperand;
+        } else if (pendingOperator == tr("-")) {
+            sumSoFar = sumSoFar - rightOperand;
+        } else if (pendingOperator == tr("*")) {
+            factorSoFar = factorSoFar * rightOperand;
+        }
+        return true;
     }
-    return true;
     catch(std::exception &e){
         displayErrorMessage(this,e);
     }
+    return false;
 }

@@ -152,4 +152,5 @@ bool KalkComplessoDouble::calculate(const ComplessoDouble& rightOperand, const Q
     }catch(std::exception &e){
         displayErrorMessage(this,e);
     }
+    return false;
 }
